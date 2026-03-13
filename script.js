@@ -1,6 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================================
+       0. Page Transitions
+       ========================================= */
+    document.body.classList.add('is-loaded');
+
+    document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') return;
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            document.body.classList.remove('is-loaded');
+            setTimeout(() => { window.location = href; }, 350);
+        });
+    });
+
+    /* =========================================
        1. Reading Progress (Visual Only)
        ========================================= */
     const scrollbar = document.querySelector('.progress-scrollbar');
@@ -88,9 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-}); // <-- THIS is the bracket that was missing!
-
 
 
     /* =========================================
@@ -206,3 +218,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+}); // end DOMContentLoaded

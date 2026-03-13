@@ -30,6 +30,18 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* =========================================
+   Page Transitions
+   ========================================= */
+body {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+body.is-loaded {
+    opacity: 1;
+}
+
 html {
     font-size: 16px; 
     font-family: 'Inter', sans-serif;
@@ -57,7 +69,7 @@ a { color: inherit; text-decoration: none; }
 
 section { margin-top: 8rem; }
 
-p {font-weight: 420px;}
+p {font-weight: 420;}
 
 .name, .job-title, .section-title, .card-title, .writing-title {
     color: var(--text-main);
@@ -466,8 +478,8 @@ font-size: 16px;
 
 .case-study-content p {
     font-size: var(--text-16);
-    margin-bottom: 1.5rem; 
-    font-weight: 440px;
+    margin-bottom: 1.5rem;
+    font-weight: 440;
 }
 
 /* =========================================
@@ -475,8 +487,8 @@ font-size: 16px;
    ========================================= */
 .divider {
     border: none;
-    border-top: 1px solid var(--border-color); /
-    margin: 3rem 0; 
+    border-top: 1px solid var(--border-color);
+    margin: 3rem 0;
 }
 
 /* =========================================
@@ -604,7 +616,7 @@ font-size: 16px;
     font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--text-muted)
+    color: var(--text-muted);
     text-decoration: none;
     margin: 0 4px; 
     padding: 0 6px;
