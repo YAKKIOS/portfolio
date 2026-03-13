@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', e => {
             e.preventDefault();
             document.body.classList.add('is-leaving');
-            setTimeout(() => { window.location = href; }, 300);
+            setTimeout(() => { window.location = href; }, 220);
         });
     });
 

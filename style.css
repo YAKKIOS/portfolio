@@ -35,19 +35,26 @@
    ========================================= */
 body {
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.45s ease, transform 0.45s ease;
+    transition: opacity 0.35s ease;
 }
 
 body.is-loaded {
     opacity: 1;
-    transform: translateY(0);
 }
 
 body.is-leaving {
     opacity: 0;
+    transition: opacity 0.22s ease;
+}
+
+/* Slide-up on enter — kept off body so position:fixed children aren't broken */
+.container {
+    transform: translateY(10px);
+    transition: transform 0.38s ease;
+}
+
+body.is-loaded .container {
     transform: translateY(0);
-    transition: opacity 0.3s ease;
 }
 
 html {
