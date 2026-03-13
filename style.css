@@ -774,9 +774,9 @@ font-size: 16px;
     color: #ffffff;
     
     /* THE FIX: Generous, clean padding matching image_8.png's style */
-    padding: 0.5rem 1rem; 
+    padding: 0.25rem 0.875rem; 
     
-    border-radius: 6px; /* A clean, slightly rounded shape */
+    border-radius: 100px; /* A clean, slightly rounded shape */
     font-size: var(--text-12);
     pointer-events: none;
     opacity: 0;
