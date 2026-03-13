@@ -3,15 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================
        0. Page Transitions
        ========================================= */
-    document.body.classList.add('is-loaded');
+    // Double rAF ensures the browser has painted opacity:0 before we transition in
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            document.body.classList.add('is-loaded');
+        });
+    });
 
     document.querySelectorAll('a[href]').forEach(link => {
         const href = link.getAttribute('href');
         if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') return;
         link.addEventListener('click', e => {
             e.preventDefault();
-            document.body.classList.remove('is-loaded');
-            setTimeout(() => { window.location = href; }, 350);
+            document.body.classList.add('is-leaving');
+            setTimeout(() => { window.location = href; }, 300);
         });
     });
 
