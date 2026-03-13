@@ -1,0 +1,257 @@
+/* =========================================
+   CSS Reset & Variables
+   ========================================= */
+:root {
+    /* Strict 3-tier Font Size System (16px base) */
+    --text-16: 1rem;       /* 16px */
+    --text-14: 0.875rem;   /* 14px */
+    --text-12: 0.75rem;    /* 12px */
+    
+    /* Mathematically perfect 24px line height (1.5 * 16px) */
+    --lh-base: 1.5;        
+    
+    /* Layout */
+    --container-width: 40rem;
+    --container-padding: 1.5rem;
+    
+    /* Colors */
+    --text-main: #111111; 
+    --text-body: #333333; 
+    --text-muted: #666666;
+    /* NOTE: We removed --bg-main here because the html background handles it now */
+    --bg-hover: #f4f4f5;
+    --border-color: #e5e7eb;
+    --blue-primary: #3b82f6;
+    --placeholder-grey: #c4c4c4;
+    --dotted-grey: #a3a3a3;
+    
+    /* Default ambient glow (will be updated by JS) */
+    --ambient-glow: transparent;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================================
+   Base HTML 
+   ========================================= */
+html {
+    font-size: 16px; 
+    font-family: 'Inter', sans-serif;
+    color: var(--text-body);
+    background-color: #ffffff; /* Keep the root strictly white */
+    line-height: var(--lh-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.011em; 
+}
+
+body {
+    font-size: var(--text-16); 
+    position: relative; 
+    z-index: 1;
+    overflow-x: hidden; /* Add this to prevent any horizontal scrolling */
+}
+
+/* NEW: The fixed ambient background layer */
+.ambient-background {
+    position: fixed;
+    inset: 0; /* shorthand for top:0; right:0; bottom:0; left:0; */
+    z-index: -1; /* Puts it behind everything */
+    pointer-events: none; /* Ensures you can click through it */
+    /* Fades from solid white at the top to the dynamic color at the bottom */
+    background: linear-gradient(to bottom, #ffffff 20%, var(--ambient-glow));
+    transition: background 2s ease; /* Smooth color transitions */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================================
+   Layout & Container
+   ========================================= */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+section {
+    margin-top: 8rem;
+}
+
+/* =========================================
+   Typography & Links (Unchanged)
+   ========================================= */
+.name, .job-title, .section-title, .card-title, .writing-title {
+    color: var(--text-main);
+}
+.name, .job-title { font-weight: 460; } /* Using variable font weight */
+
+.inline-link {
+    text-decoration: underline dotted var(--dotted-grey);
+    text-underline-offset: 4px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.inline-link:hover {
+    color: var(--text-main);
+    text-decoration-color: var(--text-main);
+}
+
+/* =========================================
+   Hero Section (Unchanged)
+   ========================================= */
+.hero { margin-top: 12rem; }
+.identity { margin-bottom: 2rem; }
+.name, .job-title { font-size: var(--text-16); }
+.job-title { color: var(--text-muted); }
+.bio { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem; }
+.bio p { margin: 0; }
+
+/* =========================================
+   Buttons & Avatar
+   ========================================= */
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    /* Adjusted gap for both icons and avatars to look balanced */
+    gap: 0.5rem; 
+    padding: 0.4rem 0.875rem;
+    border-radius: 9999px;
+    font-size: var(--text-14);
+    font-weight: 480; /* Using variable font weight */
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    will-change: transform;
+}
+
+.btn:hover { transform: scale(1.02); opacity: 0.95; }
+.btn:active { transform: scale(0.98); opacity: 1; }
+
+.btn-primary { background-color: var(--blue-primary); color: #ffffff; }
+.btn-secondary { background-color: #ffffff; border: 1px solid var(--border-color); }
+
+/* Material Icon Rules */
+.btn .material-symbols-rounded {
+    font-size: 20px;
+    line-height: 1;
+    font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20; 
+}
+
+/* NEW: Avatar Image Rules */
+.btn-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; /* Makes it a circle */
+    object-fit: cover; /* Ensures the image doesn't stretch */
+    display: block; /* Fixes vertical alignment issues with inline images */
+}
+
+/* =========================================
+   Featured Work Grid (Unchanged)
+   ========================================= */
+.section-title { font-size: var(--text-14); font-weight: 500; margin-bottom: 2rem; }
+.section-title.center { text-align: center; }
+.work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; }
+.work-card { border: 1px solid var(--border-color); border-radius: 1rem; padding: 0.5rem; background-color: #ffffff; display: flex; flex-direction: column; }
+.card-image-placeholder { width: 100%; aspect-ratio: 4 / 3; background-color: var(--placeholder-grey); border-radius: 0.75rem; }
+.card-content { padding: 1rem 0.5rem 0.5rem 0.5rem; }
+.card-title { font-size: var(--text-14); font-weight: 500; margin-bottom: 0.25rem; }
+.card-desc { font-size: var(--text-14); color: var(--text-muted); }
+
+/* =========================================
+   Writing List (Unchanged)
+   ========================================= */
+.writing-list { list-style: none; display: flex; flex-direction: column; }
+.writing-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; margin: 0 -1rem; border-radius: 0.5rem; font-size: var(--text-16); transition: background-color 0.2s ease; }
+.writing-item:hover { background-color: var(--bg-hover); }
+.writing-date { color: var(--text-muted); }
+
+/* =========================================
+   Contact & Footer
+   ========================================= */
+.site-footer {
+    margin-top: 8rem;
+    margin-bottom: 4rem;
+    font-size: var(--text-12); 
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.footer-time-wrapper { display: flex; align-items: center; gap: 0.375rem; }
+.time-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: var(--placeholder-grey); transition: background-color 1s ease, box-shadow 1s ease; }
+.footer-tagline { font-style: italic; color: #999999; }
+
+/* =========================================
+   Odometer Clock Effect
+   ========================================= */
+.footer-time {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-variant-numeric: tabular-nums; 
+}
+
+.time-display {
+    display: inline-flex;
+    align-items: center;
+}
+
+.colon {
+    margin-bottom: 0.1em; 
+}
+
+/* The masking window */
+.minute-window {
+    display: inline-block;
+    height: 1em; 
+    line-height: 1;
+    overflow: hidden;
+    position: relative;
+    vertical-align: bottom;
+}
+
+/* The track (defaults to an instant snap back without transitions) */
+.minute-track {
+    display: flex;
+    flex-direction: column;
+    will-change: transform; 
+    transform: translateY(0);
+}
+
+.time-digit {
+    height: 1em;
+    line-height: 1;
+    /* Removed the transition from here so it snaps instantly on reset */
+}
+
+/* When the JS adds this class, the slide AND fade happen simultaneously */
+.minute-track.is-rolling {
+    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+    transform: translateY(-100%);
+}
+
+.minute-track.is-rolling .time-digit {
+    transition: opacity 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+/* Base states: Top number is visible, bottom is hidden */
+#minute-current { opacity: 1; }
+#minute-next { opacity: 0; }
+
+/* Rolling states: Top fades out as it goes up, bottom fades in as it comes up */
+.minute-track.is-rolling #minute-current { opacity: 0; }
+.minute-track.is-rolling #minute-next { opacity: 1; }

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Alpha | Jack Johnson</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,500,0,0" rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="mobile-progress-bar" aria-hidden="true"></div>
+    
+<div class="progress-scrollbar" aria-hidden="true">
+    <div class="progress-track">
+        <div class="progress-fill"></div>
+    </div>
+</div>
+
+    <div class="container">
+<header class="case-study-header">
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="../index.html" class="inline-link">Home</a>
+            
+            <span class="material-symbols-rounded separator">chevron_right</span>
+            
+            <a href="../work.html" class="inline-link">Work</a>
+            
+            <span class="material-symbols-rounded separator">chevron_right</span>
+            
+            <span class="current" aria-current="page">Appointedd event management</span>
+
+        </nav>
+
+
+            
+            <h1 class="case-study-title">Appointedd</h1>
+            <p class="case-study-description">Improved event check in features to attract new clients</p>
+
+        </header>
+
+        <main>
+<figure class="case-study-image video-container">
+    <iframe 
+        src="https://share.descript.com/embed/tWFPxNGbGSo" 
+        width="100%" 
+        height="100%" 
+        frameborder="0" 
+        allowfullscreen>
+    </iframe>
+</figure>
+
+            <article class="case-study-content">
+
+            <h3 class="section-title">Don't have time to read it all?</h3>
+                <p>
+                    I led the design lifecycle, from initial discovery to implementation for Appointedd’s new ticket generation and attendee check-in features<sup class="footnote-ref"><a href="#fn:1" id="fnref:1">1</a></sup>. With unique QR-coded tickets, attendees can be quickly verified and checked in, helping to reduce wait times and keep event entry smooth and efficient.
+                </p>
+
+<ul class="case-study-list">
+    <li>Business Value: We became a much bigger competitor and viable option to Eventbrite.
+</li>
+    <li>Pilot Success: <span class="rn-circle">37%</span> of identified clients had adopted the functionality within the first month. </li>
+    <li>Client adoption: Enterprise clients including Harrods, Liberty London and Victoria’s Secret had expressed eagerness of using the new features for all upcoming events. 
+</li>
+</ul>
+                
+                <h3 class="section-title">Context & objective</h3>
+                <p>
+                    Appointedd is an enterprise online booking and scheduling platform. <a href="https://www.mva.org.uk/news/eventbrite-pricing-changes-and-a-look-at-alternative-event-platforms-autumn-2023" class="inline-link" target="_blank">In late 2023 Eventbrite removed the ability to host events for free. </a>, which created a market gap. 
+                    
+                    We wanted to capitalize on this shift by improving Appointedd’s core event functionality to capture enterprise clients looking to move. 
+
+                </p>
+                
+                
+
+                <h3 class="section-title">The problem
+</h3>
+                <p>
+                    For clients hosting events through Appointedd, checking in attendees relied on a couple of different methods:
+</p>
+<p>
+                    Manual platform searches: To successfully log an attendee on Appointedd, organisers had to manually search the system for their name and change their status to 'arrived'. During busy events, they frequently skipped this step and just checked confirmation emails at the door, artificially inflating "no show" metrics and rendering the event data completely unreliable.
+                </p>
+
+
+                <p>
+                    Printed sheets: Exported lists from Appointedd were printed and kept at the door. This was inefficient and, more importantly, a poor brand experience for clients like Harrods or Liberty London.
+                </p>
+
+<figure class="case-study-figure">
+
+<div class="case-study-image">
+        <img src="../assets/images/projects/Appointedd/appointedd-old.png" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">Event manager in Appointedd</figcaption>
+    
+</figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <h3 class="section-title">Project kick off</h3>
+                <p>
+                    I led the project kick-off with the core project team, C-Suite, and Customer Success Managers (CSMs). CSMs often set up events on behalf of enterprise clients, their product knowledge was invaluable for helping us define initial requirements.</span>
+                </p>
+    
+    <div class="case-study-image">
+        <img src="../assets/images/projects/Appointedd/appointedd-kickoff.png" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+
+                <h3 class="section-title">Analysing the competitors</h3>
+
+                <p>
+                    I analysed the leading competitors in the sector including Eventbrite, AllEvents, Ticketmaster, Luma and many more. I also completed a SWOT analysis of each one and began to understand their strengths and weaknesses. 
+
+                </p>
+
+                                <h3 class="section-title">Speaking to the experts</h3>
+
+                <p>
+                    We began speaking with clients who currently host events through Appointedd. I then held moderated user interviews with companies across retail, luxury, and finance including AND Agency, Society Matters, Holyrood Communications, White and Mackay, Harrods, Charlotte Tilbury, and others to map their workflows and frustrations. Their insights shaped a lot of the requirements:
+
+                </p>
+
+                <ul class="case-study-list">
+    <li>They wanted to verify ticket info and manually confirm check ins</li>
+    <li>They needed to be able to log in to the Appointedd platform and start scanning immediately</li>
+    <li>Employees could use personal devices if needed to access the ticket scanner</li>
+        </ul>
+
+                <h3 class="section-title">Researching ticket designs</h3>
+
+                <p>
+                    I looked beyond the event space to rail and air travel for inspiration, borrowing established design patterns to ensure tickets felt familiar. To test legibility, <span class="rn-highlight">I ran rapid mobile tests</span> by emailing PDF prototypes to various devices, identifying any display issues before they moved to production.
+                </p>
+
+
+
+                <h3 class="section-title">Navigating technical constraints</h3>
+
+                <p>
+                    Appointedd is built on quite a complex foundation of legacy code. The primary challenge our developers had to navigate was discovering how straightforward it would be to hook automated ticket scanning into the existing event management tools.
+                </p>
+
+                <p>
+                    To mitigate any potential risk, <span class="rn-underline">I established a regular meeting cadence with the team.</span> These meetings included ticket refinements, open design feedback and daily check-ins. This ensured alignment between the design vision and technical feasibility. 
+                </p>
+
+                    <h3 class="section-title">Introducing digital ticket and scanning</h3>
+
+                <p>
+                    Clients could now issue automatic tickets directly via Appointedd. With unique QR-coded tickets, attendees can be quickly verified and checked in, helping to reduce wait times and keep entry smooth and efficient.
+
+
+                </p>
+
+
+<figure class="case-study-figure">
+    
+    <div class="case-study-image">
+        <img src="../assets/images/projects/Appointedd/appointedd-01.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">Ticket scanner on desktop</figcaption>
+    
+</figure>
+
+
+
+<figure class="case-study-figure">
+    
+    <div class="case-study-image">
+        <img src="../assets/images/projects/Appointedd/appointedd-06.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">Ticket booking found successfully </figcaption>
+    
+</figure>
+
+                <p>
+                    Clients could now issue automatic tickets directly via Appointedd. With unique QR-coded tickets, attendees can be quickly verified and checked in, helping to reduce wait times and keep entry smooth and efficient.
+
+
+                </p>
+
+
+    
+    <div class="case-study-image">
+        <img src="../assets/images/projects/Appointedd/appointedd-02.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+
+
+                <p>
+                    Clients could now issue automatic tickets directly via Appointedd. With unique QR-coded tickets, attendees can be quickly verified and checked in, helping to reduce wait times and keep entry smooth and efficient.
+
+
+                </p>
+
+                
+<figure class="case-study-figure">
+    
+    <div class="case-study-image">
+        <img src="../assets/images/projects/Appointedd/appointedd-03.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">Booking found and successfully checked in</figcaption>
+    
+</figure>
+
+                <h3 class="section-title">Timecode anxiety and local time</h3>
+
+                <p>
+                    I maintained the platform's standard Europe/London (GMT) formatting for the digital tickets. This kept the ticket information consistent with confirmation emails. Those emails also feature an "Add to Calendar" integration which adds the event time to your device and handles the automatic local time conversion. This approach provided a static source of truth on the ticket without losing the convenience of local scheduling for attendees. 
+                </p>
+
+<figure class="case-study-figure">
+    
+    <div class="case-study-image">
+        <img src="../assets/images/projects/Appointedd/appointedd-04.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">Phase 1 ticket design</figcaption>
+    
+</figure>
+
+
+
+
+                <h3 class="section-title">Strategic roadmap and scoping</h3>
+
+                <p>
+                    Speed was of the utmost importance to capitalize on the Eventbrite market shift. By inserting this new functionality directly into the current event creation journey, we achieved a much shorter release timeline.
+                </p>
+
+                <p>
+                    To ensure we were stayed on track for the launch date, I consciously deferred features like custom ticket design and digital wallet integration to Phase 2, trading 'nice to have' features for project quickness.
+                </p>
+
+<figure class="case-study-figure">
+    
+    <div class="case-study-image">
+        <img src="../assets/images/projects/Appointedd/appointedd-05.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">Phase 2 ticket design</figcaption>
+    
+</figure>
+
+
+                <p>
+                    To ensure we were stayed on track for the launch date, I consciously deferred features like custom ticket design and digital wallet integration to Phase 2, trading 'nice to have' features for project quickness.
+                </p>
+
+                
+
+
+            </article>
+
+            <div class="footnotes">
+                <hr class="footnotes-sep">
+<ol>
+                <li id="fn:1" class="footnote-item">
+                    <a href="#fnref:1" class="footnote-block-link">
+                        Based on quantitative data captured via Mixpanel between Q1 and Q2 of the previous fiscal year. ↩
+                    </a>
+                </li>
+            </ol>
+            </div>
+        </main>
+
+<footer class="site-footer">
+    <div class="footer-time-wrapper">
+        <p class="footer-time">
+            <span id="local-time">--:--</span>, <span id="local-weather">--°C</span> in Gateshead, England
+        </p>
+    </div>
+    <p class="footer-tagline">Good wine and good design</p>
+</footer>
+    </div>
+    <script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
+    <script src="../script.js" defer></script>
+
+<div class="lightbox-modal" aria-hidden="true">
+    <img class="lightbox-content" src="" alt="Expanded view">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Alpha | Jack Johnson</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,500,0,0" rel="stylesheet" />
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="mobile-progress-bar" aria-hidden="true"></div>
+    
+<div class="progress-scrollbar" aria-hidden="true">
+    <div class="progress-track">
+        <div class="progress-fill"></div>
+    </div>
+</div>
+
+    <div class="container">
+<header class="case-study-header">
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="../index.html" class="inline-link">Home</a>
+            
+            <span class="material-symbols-rounded separator">chevron_right</span>
+            
+            <a href="../work.html" class="inline-link">Work</a>
+            
+            <span class="material-symbols-rounded separator">chevron_right</span>
+            
+            <span class="current" aria-current="page">PSR eligiblity checker</span>
+
+        </nav>
+
+
+            
+            <h1 class="case-study-title">National Grid</h1>
+            <p class="case-study-description">Helping vulnerable customers find relevant support</p>
+
+        </header>
+
+        <main>
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-01.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+
+            <article class="case-study-content">
+
+            <h3 class="section-title">Don't have time to read it all?</h3>
+                <p>
+                    I led the design lifecycle, from initial discovery to implementation for Appointedd’s new ticket generation and attendee check-in features<sup class="footnote-ref"><a href="#fn:1" id="fnref:1">1</a></sup>. With unique QR-coded tickets, attendees can be quickly verified and checked in, helping to reduce wait times and keep event entry smooth and efficient.
+                </p>
+                
+                
+                
+                <h3 class="section-title">Context and problem</h3>
+                <p>
+                    There are around <span class="rn-underline">16 million</span> people in the UK living with a disability. The PSR (Priority Services Register) exists to make sure the most vulnerable energy customers get extra support from their electric or water company when they need it most.</p>
+
+<p><span class="rn-highlight">Nearly 72,000 PSR applications were submitted online to National Grid</span> in a single year, but we didn't know how many more eligible customers weren't applying. </p>
+
+<p>National Grid's current PSR form wasn’t helping. It was vague about who actually qualified, and that vagueness was contributing to eligible customers choosing not to apply. </p>
+
+<figure class="case-study-figure">
+
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-07.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">The current National Grid priority services register application form</figcaption>
+    
+</figure>
+
+                <h3 class="section-title">Changing health landscape</h3>
+                <p>
+                    The older population in England is getting larger. In the last 40 years, the number of people  aged 65 and over has increased by over 3.5 million (a 52% increase). 
+</p>
+                <p>
+                    In the 10 years since 2013/14, the estimated number of disabled people has increased by 4.9 million (+41%).
+ 
+</p>
+
+                <p>
+                    These statistics show with an ever ageing population, and disability prevalence rising, it's important to provide the correct support to those who need it.  
+
+ 
+</p>
+
+
+                <h3 class="section-title">The approach</h3>
+                <p>
+                    Ofgem had been pushing energy companies to find more innovative ways to increase PSR sign-ups. Rather than redesigning the full application form, we proposed something lighter. An eligibility checker that answers one question fast: do I qualify for PSR?</p>
+
+
+                    <h3 class="section-title">Structuring the flow</h3>
+<p>National Grid's existing form split PSR criteria into two categories: electrical medical equipment and all other health needs. That wasn't the right shape for a tool designed to reassure people quickly.</p>
+
+<p>Rather than presenting every option at once, I reorganised the flow into a metaphorical funnel. The tool leads with broad and generalist questions first (age, life circumstances), because these cast the widest net and would provide most people with the fastest answer. Medical needs came next, then communication needs and lastly temporary needs. The idea was simple, lead with options most likely to apply and work inward from there.</p>
+
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-02.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+
+<p>A customer may well have 5 options apply to them but this tool was designed to supply them with an answer fastest by selecting the first option that applies. The more detailed form can capture those other health needs later in the process.</p>
+
+
+                    <h3 class="section-title">Unsure if you qualify?</h3>
+<p>A huge aspect of this tool was to try and encourage customers who are unsure if they are eligible, to apply anyway. For those caught in between a definite yes and no, we wanted to reassure them and advise them to apply. 
+</p>
+
+<p>Early iterations of the tool included an "unsure" option alongside the other choices in each category. A customer who is unsure if their medical need is covered in one category might be a definite yes in another.</p>
+
+<figure class="case-study-figure">
+
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-03.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">Previous iteration showing unsure sitting amongst the other options</figcaption>
+    
+</figure>
+
+<p>However, "unsure" sitting amongst the health conditions felt like it didn’t truly fit. It was essentially a help option dressed up as a choice, and I didn’t want somebody to feel they have to be unsure about one specific category.</p>
+
+<p>I chose to move "unsure" out of the options entirely and, instead, made it a permanent help link anchored at the bottom. This way it was always visible, and never in the way of the other PSR options.</p> 
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-04.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+
+<p>This decision also simplified the back-end logic. Reducing the decision tree by 50%. That was because selecting unsure created a split in the decision tree where the system had to understand if the user moving on has flagged unsure at any point which would eventually lead them to a ‘you may be eligible’ screen.</p>
+
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-08.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+
+                    <h3 class="section-title">Softening the visuals</h3>
+<p>The users coming to this tool may be managing chronic illness, caring for a vulnerable relative, or dealing with a difficult diagnosis. The design had to feel approachable without feeling patronising.</p>
+
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-05.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+
+
+<p>National Grid's palette is predominantly blue and white which often portrays a functional and corporate feeling. I reached into their extended palette and used lilac and purple instead. A custom set of icons were also created, helping contribute to the approachable feeling.</p>
+
+<p>I worked within National Grid's existing component library, updating and refreshing where needed. It kept the build extremely lean whilst also providing us with exactly what we needed it to do.</p>
+
+                    <h3 class="section-title">Tone of voice</h3>
+<p>I worked closely with our content designer to manage expectations clearly. National Grid flagged early that customers often assumed PSR offered more than it does, and with high anticipated usage, that expectation needed addressing in the content.</p>
+
+<p>The tool reflected the PSR form of being able to submit a claim for yourself or on behalf of somebody else. The language reflected that to ensure there was no confusion about the journey taken by customers.</p>
+
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-06.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+
+                    <h3 class="section-title">Project outcomes</h3>
+<p>Most users can find out if they are eligible for PSR within two clicks. Given that the old experience required completing an entire form before finding out if you even qualified. This felt like a meaningful shift towards Ofgems goal of getting more customers, who are eligible, onto the register. </p>
+
+<p>We defined a successful conversion not just as a 'you are eligible' result, but as the user then navigating through to the PSR application form. We wanted to see if reducing the up front complexiy increased the completion rate of the PSR form.</p>
+
+
+            </article>
+
+            <div class="footnotes">
+                <hr class="footnotes-sep">
+<ol>
+                <li id="fn:1" class="footnote-item">
+                    <a href="#fnref:1" class="footnote-block-link">
+                        Based on quantitative data captured via Mixpanel between Q1 and Q2 of the previous fiscal year. ↩
+                    </a>
+                </li>
+            </ol>
+            </div>
+        </main>
+
+<footer class="site-footer">
+    <div class="footer-time-wrapper">
+        <p class="footer-time">
+            <span id="local-time">--:--</span>, <span id="local-weather">--°C</span> in Gateshead, England
+        </p>
+    </div>
+    <p class="footer-tagline">Good wine and good design</p>
+</footer>
+    </div>
+    <script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
+    <script src="../script.js" defer></script>
+
+<div class="lightbox-modal" aria-hidden="true">
+    <img class="lightbox-content" src="" alt="Expanded view">
+</div>
+
+</body>
+</html>

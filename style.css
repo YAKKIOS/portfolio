@@ -1,0 +1,797 @@
+/* =========================================
+   CSS Reset & Variables
+   ========================================= */
+:root {
+    /* Strict 3-tier Font Size System (16px base) */
+    --text-16: 1rem;       
+    --text-14: 0.875rem;   
+    --text-12: 0.75rem;   
+    --highlight-underline: var(--blue-primary);
+    --highlight-circle: #f59e0b; /* Orange */
+    --highlight-box: #ef4444;    /* Red */ 
+    
+    /* Mathematically perfect 24px line height (1.5 * 16px) */
+    --lh-base: 1.625rem;        
+    
+    /* Layout */
+    --container-width: 40rem;
+    --container-padding: 1.5rem;
+    
+    /* Colors */
+    --text-main: #111111; 
+    --text-body: #333333; 
+    --text-muted: #666666;
+    --bg-hover: #f4f4f5;
+    --border-color: #e5e7eb;
+    --blue-primary: #3b82f6;
+    --placeholder-grey: #f0f0f0; 
+    --dotted-grey: #a3a3a3;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+    font-size: 16px; 
+    font-family: 'Inter', sans-serif;
+    color: var(--text-body);
+    background-color: #ffffff;
+    line-height: var(--lh-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.011em; 
+    scroll-behavior: smooth; /* Essential for footnotes */
+}
+
+body { font-size: var(--text-16); }
+a { color: inherit; text-decoration: none; }
+
+/* =========================================
+   Layout & Typography
+   ========================================= */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+section { margin-top: 8rem; }
+
+p {font-weight: 420px;}
+
+.name, .job-title, .section-title, .card-title, .writing-title {
+    color: var(--text-main);
+}
+
+.name, .job-title { font-weight: 500; } /* Variable font weight */
+
+.inline-link {
+    text-decoration: underline dotted var(--dotted-grey);
+    text-underline-offset: 4px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.inline-link:hover {
+    color: var(--text-main);
+    text-decoration-color: var(--text-main);
+}
+
+/* Editorial Inline Italic */
+.editorial-italic {
+    font-family: 'Times new', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.15em; /* Bumps the size slightly to match Inter's height */
+    letter-spacing: 0.02em;
+    color: var(--text-main);
+}
+
+/* =========================================
+   Hero Section
+   ========================================= */
+.hero { margin-top: 12rem; }
+.identity { margin-bottom: 2rem; }
+.name, .job-title { font-size: var(--text-16); }
+.job-title { color: var(--text-muted); }
+
+.bio { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1.5rem; /* Matches 24px line height */
+    margin-bottom: 2rem; 
+}
+.bio p { margin: 0; }
+
+/* Buttons */
+.hero-actions { display: flex; gap: 1rem; }
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem; 
+    padding: 0.25rem 0.875rem;
+    border-radius: 9999px;
+    font-size: var(--text-14);
+    font-weight: 480; 
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    will-change: transform;
+}
+
+.btn:hover { transform: scale(1.02);}
+.btn:active { transform: scale(0.98);}
+
+.btn-primary { background: linear-gradient(#1994FF, #157CFF); color: #ffffff; }
+.btn-secondary { background-color: #ffffff; border: 1px solid var(--border-color); }
+
+.btn .material-symbols-rounded {
+    font-size: 20px;
+    line-height: 1;
+    font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20; 
+}
+
+.btn-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+/* =========================================
+   Featured Work Grid (Premium Shadows)
+   ========================================= */
+.section-title { font-size: var(--text-16); font-weight: 500; margin-bottom: 2rem; }
+.section-title.center { text-align: center; }
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.5rem;
+}
+
+.work-card {
+    /*border: 1px solid rgba(229, 231, 235, 0.6); 
+    border-radius: 1rem;
+    padding: 0.5rem;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    Soft Double-Layer Shadow
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.02), 
+        0 10px 15px -3px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;*/
+}
+
+
+.card-image-wrapper {
+    background-color: #ffffff;
+    border: 1px solid var(--border-color); /* Mirrors the case study border */
+    border-radius: 12px; /* Mirrors the case study radius */
+    aspect-ratio: 4 / 3; /* Locks in the uniform grid size */
+    overflow: hidden; /* Slices the corners of the image cleanly */
+    display: block;
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block; 
+    transition: transform 0.4s ease; /* THE NEW LINE: Smooths out the animation */
+}
+
+
+/* THE NEW RULE: Zooms the image slightly when the mouse enters the card */
+.work-card:hover .card-image-wrapper img {
+    transform: scale(1.03); 
+}
+
+.card-content { padding: 1rem 0rem 0rem 0rem; }
+.card-title { font-size: var(--text-16); font-weight: 400; margin-bottom: 0.25rem; }
+.card-desc { font-size: var(--text-16); color: var(--text-muted); }
+
+/* =========================================
+   Writing List
+   ========================================= */
+.writing-list { 
+    list-style: none; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.writing-item { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0.75rem 1rem; 
+    margin: 0 -1rem; 
+    border-radius: 0.5rem; 
+    font-size: var(--text-16); 
+    transition: background-color 0.2s ease; 
+}
+
+.writing-item:hover { 
+    background-color: var(--bg-hover); 
+}
+
+.title-group { 
+    color: var(--text-main);
+    /* Smooth slide effect, color transition removed */
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+}
+
+/* On hover, just slide the title right 
+.writing-item:hover .title-group {
+    transform: translateX(2px);
+}*/
+
+.writing-date { 
+    color: var(--text-muted);
+}
+
+.external-icon {
+font-size: 16px;
+    color: #aaaaaa;
+    line-height: 1;
+}
+
+.title-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* The exact space between the word and the arrow */
+}
+
+
+/* =========================================
+   Experience List
+   ========================================= */
+.experience-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.experience-item {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.85rem; /* Slightly more padding to accommodate the two lines */
+
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.experience-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem; /* Tight, clean gap between the two lines of text */
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+}
+
+
+.experience-company {
+    color: var(--text-main);
+    font-size: var(--text-16);
+    /* Optional: Uncomment the next line to make the company name slightly bolder */
+    /* font-weight: 500; */ 
+}
+
+.experience-role {
+    color: var(--text-muted);
+    font-size: var(--text-16); /* Steps the size down to act as secondary text */
+}
+
+.experience-date {
+    color: var(--text-muted);
+    font-size: var(--text-16);
+}
+
+/* =========================================
+   Footnote System (Ready for Case Studies)
+   ========================================= */
+/* Superscript number in text */
+.footnote-ref a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: var(--blue-primary);
+    text-decoration: none;
+    margin-left: 2px;
+    font-weight: 500;
+    vertical-align: super;
+    background-color: #f4f4f5; /* Light grey */
+}
+
+/* Scroll margin prevents text being hidden behind top edge */
+.footnote-item, .footnote-ref, .footnote-ref a { 
+    scroll-margin-top: 6rem; 
+}
+
+.footnote-ref {
+    line-height: 0; /* Completely neutralizes the row expansion */
+    font-size: 0; /* Kills any phantom HTML spaces inside the sup tag */
+}
+
+.footnotes {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    font-size: var(--text-14);
+    color: var(--text-muted);
+}
+
+.footnotes-sep {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.footnotes ol { padding-left: 1.5rem; }
+.footnote-item { margin-bottom: 0.75rem; line-height: 1.5; }
+
+/* =========================================
+   Clickable Footnote Block (Clean)
+   ========================================= */
+.footnote-block-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+
+}
+
+/* No grey boxes, just a clean text color shift */
+.footnote-block-link:hover {
+    color: var(--text-main);
+        transition: color 0.2s ease, text-decoration-color 0.2s ease;
+
+}
+
+/* Flash effect when jumping */
+.footnote-item:target, .footnote-ref a:target {
+    background-color: rgba(245, 158, 11, 0.1);
+    border-radius: 4px;
+    animation: highlight-fade 2s ease-out forwards;
+}
+
+@keyframes highlight-fade {
+    0% { background-color: rgba(245, 158, 11, 0.2); }
+    100% { background-color: transparent; }
+}
+
+/* =========================================
+   Quote Block
+   ========================================= */
+.case-study-quote {
+    margin: 3rem 0;
+    padding-left: 1.5rem;
+    border-left: 2px dotted var(--border-color); 
+    font-family: 'Times new roman', serif; /* Triggers your premium serif font */
+    font-size: 2rem; /* Noticeably larger than standard text */
+    font-style: italic;
+    color: var(--text-main);
+    line-height: 1.2;
+}
+
+.case-study-quote p {
+    margin: 0; /* Overrides default paragraph margins to keep it perfectly aligned */
+}
+
+/* =========================================
+   Case Study Lists
+   ========================================= */
+.case-study-content ul.case-study-list {
+    list-style: none; /* Hides the ugly default browser bullets */
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+}
+
+.case-study-content ul.case-study-list li {
+    font-size: var(--text-16);
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-left: 1.5rem; /* Creates the perfect gap between the bullet and the text */
+    line-height: var(--lh-base);
+}
+
+/* The custom light-grey bullet */
+.case-study-content ul.case-study-list li::before {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.65rem; /* Aligns the dot perfectly with the middle of the first line of text */
+    width: 6px;
+    height: 6px;
+    background-color: #cccccc; /* Matches the subtle grey from your mockup */
+    border-radius: 50%;
+}
+
+/* =========================================
+   Footer
+   ========================================= */
+.site-footer {
+    margin-top: 8rem;
+    margin-bottom: 4rem;
+    font-size: var(--text-14); 
+    color: var(--text-muted);
+    font-weight: 470;
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+}
+
+.footer-time-wrapper { display: flex; align-items: center; gap: 0.375rem; }
+
+#local-time {
+    font-variant-numeric: tabular-nums; /* Forces numbers to be equal width */
+    display: inline-block;
+}
+
+.footer-tagline { font-style: italic; color: #999999; }
+
+/* =========================================
+   Case Study Layout
+   ========================================= */
+.case-study-header {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.case-study-title {
+    font-size: var(--text-16); 
+    font-weight: 500;
+    line-height: var(--lh-base);
+    color: var(--text-main);
+}
+
+
+.case-study-description {
+    font-size: inherit; /* Slightly larger than standard body text */
+    color: var(--text-muted); /* Keeps it secondary to the Title */
+    margin-bottom: 4rem; /* Creates breathing room before the meta-data */
+    line-height: 1.4;
+    max-width: 60ch; /* Prevents the line from getting too wide on huge monitors */
+}
+
+.case-study-content {
+    margin-bottom: 6rem;
+}
+
+
+.case-study-content .section-title {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem; 
+}
+
+
+.case-study-content p {
+    font-size: var(--text-16);
+    margin-bottom: 1.5rem; 
+    font-weight: 440px;
+}
+
+/* =========================================
+   Dotted Divider
+   ========================================= */
+.divider {
+    border: none;
+    border-top: 1px solid var(--border-color); /
+    margin: 3rem 0; 
+}
+
+/* =========================================
+   Responsive Video Embeds (Bulletproof)
+   ========================================= */
+.video-container {
+    position: relative; /* Acts as the anchor for the iframe */
+    display: block;
+    width: 100%; /* Forces the container to span the full column */
+    aspect-ratio: 16 / 9; /* Creates the perfect widescreen box */
+    overflow: hidden;
+    padding: 0; /* Ensures no rogue padding throws off the math */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important; /* The !important forces stubborn embeds to comply */
+    height: 100% !important;
+    border: none;
+    border-radius: inherit;
+    max-width: 100%;
+}
+
+/* =========================================
+   Case Study Image Frame
+   ========================================= */
+.case-study-image {
+    background-color: #ffffff; 
+    /* Removed padding to make the image flush */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin: 2rem 0; /* Keeps the spacing above and below the whole block */
+    display: flex;
+    overflow: hidden; /* THE FIX: Clips the sharp corners of the image */
+}
+
+.case-study-image img {
+    width: 100%; /* Forces the image to fill the entire container */
+    height: auto;
+    display: block; /* Removes the tiny native gap beneath images */
+    cursor: pointer; 
+    transition: opacity 0.2s ease;
+    /* Removed the inner border-radius, as the parent handles it now */
+}
+
+.case-study-image img:hover {
+    opacity: 0.9;
+}
+
+/* =========================================
+   Image Captions
+   ========================================= */
+.case-study-figure {
+    margin: 2.5rem 0; /* Controls the spacing for the whole image+caption block */
+}
+
+/* Ensure your existing .case-study-image margins are reset so the caption sits flush */
+.case-study-figure .case-study-image {
+    margin: 0 0 0.75rem 0; 
+}
+
+.image-caption {
+    font-size: 0.85rem; /* Keeps it strictly secondary to body text */
+    color: var(--text-muted);
+    text-align: center; /* Centers the text perfectly under the image */
+    line-height: 1.4;
+}
+
+/* =========================================
+   Lightbox Modal (Instant)
+   ========================================= */
+.lightbox-modal {
+    display: none; /* JS will toggle this to flex instantly */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    /* No scale, no opacity, no transitions. Just the box. */
+}
+
+/* =========================================
+   Breadcrumbs
+   ========================================= */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 4rem;
+    font-size: var(--text-14);
+    color: var(--text-muted);
+}
+
+.breadcrumbs .separator {
+    color: var(--border-color);
+    font-size: 16px; /* Scales the icon down to match the text */
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumbs .current {
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+/* =========================================
+   Footnote Hit Area Upgrade (Badge Style)
+   ========================================= */
+.footnote-ref a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted)
+    text-decoration: none;
+    margin: 0 4px; 
+    padding: 0 6px;
+    height: 1.1rem;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.footnote-ref a:hover {
+    background-color: var(--text-main);
+}
+
+/* =========================================
+   Footnote Animations (Target flashes)
+   ========================================= */
+/* 1. The Badge Flash: Fades back to dark grey */
+.footnote-ref a:target {
+    animation: badge-flash 2s ease-out forwards;
+}
+
+/* 2. The Text Flash: Fades back to transparent */
+.footnote-item:target {
+    border-radius: 4px;
+    animation: text-flash 2s ease-out forwards;
+}
+
+@keyframes badge-flash {
+    0% { background-color: #f59e0b; color: #fff; transform: scale(1.1); }
+    100% { background-color: var(--text-muted); color: #fff; transform: scale(1); }
+}
+
+@keyframes text-flash {
+    0% { background-color: rgba(245, 158, 11, 0.2); }
+    100% { background-color: transparent; }
+}
+
+/* =========================================
+   Progress Indicator (Purely Visual)
+   ========================================= */
+.progress-scrollbar {
+    position: fixed;
+    left: 1.5rem; 
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    opacity: 0; 
+    transition: opacity 0.3s ease;
+    /* This makes it "invisible" to mouse clicks */
+    pointer-events: none; 
+}
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+    .progress-scrollbar { display: none !important; }
+}
+
+.progress-track {
+    width: 6px; /* Back to the thinner, subtle width */
+    height: 48px; /* Reduced height as requested */
+    background-color: var(--placeholder-grey);
+    border-radius: 999px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%; /* JS controlled */
+    background-color: var(--text-main);
+    border-radius: 999px;
+}
+
+/* =========================================
+   Mobile View: Picture Stack
+   ========================================= */
+@media (max-width: 768px) {
+    .picture-stack {
+        height: 220px; /* Reduces the overall container height */
+    }
+
+    .stacked-pic {
+        width: 120px; /* Shrinks the cards */
+        height: 120px;
+        border-radius: 16px;
+    }
+
+    /* Tightens the fan to fit inside a standard phone width */
+    .stacked-pic:nth-child(1) { transform: translateX(-100px) rotate(-4deg); }
+    .stacked-pic:nth-child(2) { transform: translateX(-35px) rotate(2deg); }
+    .stacked-pic:nth-child(3) { transform: translateX(35px) rotate(-2deg); }
+    .stacked-pic:nth-child(4) { transform: translateX(100px) rotate(4deg); }
+
+    /* Adjusts the hover targets to match the new tighter spread */
+    .picture-stack .stacked-pic:nth-child(1):hover { transform: translateX(-100px) translateY(-6px) rotate(0deg) scale(1.02); }
+    .picture-stack .stacked-pic:nth-child(2):hover { transform: translateX(-35px) translateY(-6px) rotate(0deg) scale(1.02); }
+    .picture-stack .stacked-pic:nth-child(3):hover { transform: translateX(35px) translateY(-6px) rotate(0deg) scale(1.02); }
+    .picture-stack .stacked-pic:nth-child(4):hover { transform: translateX(100px) translateY(-6px) rotate(0deg) scale(1.02); }
+}
+
+/* =========================================
+   About Page: Interactive Picture Stack
+   ========================================= */
+.about-pictures {
+    margin: 6rem 0;
+}
+
+.picture-stack {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Gives plenty of room for the cards to lift up */
+    margin-top: 2rem;
+}
+
+.stacked-pic {
+    position: absolute;
+    width: 180px; /* Roughly square, like your screenshot */
+    height: 180px;
+    border-radius: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    /* Smooth transition for the lift, instant transition for z-index */
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0s, opacity 0.3s ease;
+    overflow: hidden;
+    background-color: var(--placeholder-grey);
+}
+
+.stacked-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none; /* Prevents the image from interfering with the hover */
+}
+
+/* Fanning them out wider to naturally fill the column width */
+.stacked-pic:nth-child(1) { transform: translateX(-180px) rotate(-4deg); z-index: 1; }
+.stacked-pic:nth-child(2) { transform: translateX(-60px) rotate(2deg); z-index: 2; }
+.stacked-pic:nth-child(3) { transform: translateX(60px) rotate(-2deg); z-index: 3; }
+.stacked-pic:nth-child(4) { transform: translateX(180px) rotate(4deg); z-index: 4; }
+
+/* The Hover Interactions */
+.picture-stack:hover .stacked-pic {
+    opacity: 0.6; /* Slightly less dimming so the contrast isn't as harsh */
+}
+
+/* A much subtler, gentler lift to the front */
+.picture-stack .stacked-pic:nth-child(1):hover { transform: translateX(-180px) translateY(-8px) rotate(0deg) scale(1.02); opacity: 1; z-index: 10; box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1); }
+.picture-stack .stacked-pic:nth-child(2):hover { transform: translateX(-60px) translateY(-8px) rotate(0deg) scale(1.02); opacity: 1; z-index: 10; box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1); }
+.picture-stack .stacked-pic:nth-child(3):hover { transform: translateX(60px) translateY(-8px) rotate(0deg) scale(1.02); opacity: 1; z-index: 10; box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1); }
+.picture-stack .stacked-pic:nth-child(4):hover { transform: translateX(180px) translateY(-8px) rotate(0deg) scale(1.02); opacity: 1; z-index: 10; box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1); }
+
+/* The Tooltip UI */
+.picture-tooltip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--text-main); /* Keeping your dark grey as instructed */
+    color: #ffffff;
+    
+    /* THE FIX: Generous, clean padding matching image_8.png's style */
+    padding: 0.5rem 1rem; 
+    
+    border-radius: 6px; /* A clean, slightly rounded shape */
+    font-size: var(--text-12);
+    pointer-events: none;
+    opacity: 0;
+    
+    /* Anchors the tooltip by its bottom edge, starting slightly lower for the fade-in */
+    transform: translate(-50%, calc(-100% + 10px)); 
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 9999;
+    
+    /* THE FIX: Prevents text from wrapping on a single card */
+    white-space: nowrap; 
+}
+
+.picture-tooltip.is-visible {
+    opacity: 1;
+    /* Glides up so the bottom of the tooltip rests where the JS tells it to */
+    transform: translate(-50%, -100%); 
+}

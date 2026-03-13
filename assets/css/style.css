@@ -1,0 +1,415 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+:root {
+  --bg-page: #000000;
+  --bg-container: #181818;
+  --border-stroke: #2d2d2d;
+  --text-primary: #F3F5F7;
+  --text-secondary: #777777;
+  --accent-red: #FF3040;
+  --hover-bg: #1E1E1E;
+  --link-blue: #0095F6;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden; 
+}
+
+/* --- Navbar --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.9); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.logo-container {
+  position: absolute;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  /* Ensures the container itself clips anything spilling out */
+  border-radius: 50%; 
+  overflow: hidden;
+}
+
+.site-logo {
+  width: 32px;
+  height: 32px;
+  filter: invert(1);
+  /* The Fix: Forces the image into a circle */
+  border-radius: 50%;
+  /* Ensures image fills the circle without stretching/squishing */
+  object-fit: cover; 
+  display: block;
+}
+.page-title {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.contact-btn {
+  position: absolute;
+  right: 20px;
+  background-color: white;
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 15px;       
+  padding: 8px 12px;     
+  border-radius: 12px;
+  transition: transform 0.1s; /* Smooth scale transition */
+}
+
+/* Click Animation: Scale down */
+.contact-btn:active {
+  transform: scale(0.97);
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex; 
+  flex-direction: column;
+  gap: 16px;
+  z-index: 900;
+}
+
+.bottom-nav {
+  display: none; 
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.9); 
+  border-top: 1px solid var(--border-stroke);
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+}
+
+.nav-item-wrapper {
+  position: relative;
+  width: 60px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  transition: background-color 0.2s, transform 0.1s; /* Added transform transition */
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Click Animation: Scale down */
+.nav-item-wrapper:active {
+  transform: scale(0.97);
+}
+
+.nav-item-wrapper:hover { background-color: var(--hover-bg); }
+.nav-item-wrapper.highlighted { background-color: rgba(255, 255, 255, 0.08); }
+
+.nav-icon {
+  color: #4d4d4d;
+  font-size: 24px;
+  transition: color 0.2s;
+}
+
+.nav-item-wrapper.active-page .nav-icon,
+.nav-item-wrapper.highlighted .nav-icon {
+  color: var(--text-primary);
+}
+
+.tooltip {
+  position: absolute;
+  left: 60px;
+  background-color: #333;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in;
+  transition-delay: 0s;
+  white-space: nowrap;
+}
+.nav-item-wrapper:hover .tooltip { opacity: 1; transition-delay: 1s; }
+
+/* --- Main Feed --- */
+.main-wrapper {
+  margin-top: 80px;
+  width: 100%;
+  max-width: 660px; 
+  padding-bottom: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.feed-container {
+  background-color: var(--bg-container);
+  border: 1px solid var(--border-stroke);
+  border-radius: 32px;
+  padding: 12px 0;
+  min-height: 80vh;
+  overflow: hidden; 
+  width: 100%;
+}
+
+/* --- Thread Blocks --- */
+.thread-block {
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border-stroke);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  cursor: default;
+}
+
+.thread-block.clickable {
+  cursor: pointer;
+}
+
+.thread-block.hero { display: block; cursor: default; }
+
+.hero-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.hero-content { padding-left: 0; }
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #444;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; 
+}
+
+.header-row { display: flex; align-items: center; margin-bottom: 4px; }
+.name { font-size: 15px; font-weight: 500; line-height: 21px; margin-right: 2px; }
+.verified-icon { color: var(--link-blue); font-size: 16px !important; margin-right: 2px; margin-left: 2px; }
+.timestamp { color: var(--text-secondary); font-size: 14px; font-weight: 400; margin-left: 6px}
+.post-text { font-size: 15px; line-height: 21px; color: var(--text-primary); margin-bottom: 8px; word-wrap: break-word; }
+.blue-link { color: var(--link-blue); text-decoration: none; }
+.blue-link:hover { text-decoration: underline; }
+
+.post-text p {
+  margin-bottom: 12px; /* Adjust this number to make the gap bigger/smaller */
+  margin-top: 0;
+  line-height: 1.5; /* Good readability */
+}
+
+.post-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- New Chevron Icon Style --- */
+.context-arrow-icon {
+  color: var(--text-secondary);
+  font-size: 18px !important; /* Slightly larger than 16px to visual match the badge weight */
+  margin: 0 2px 0 0px; /* Tighter spacing */
+  display: flex;
+  align-items: center;
+  top: 1px; /* Micro-adjustment: pushes it down 1px if it sits too high */
+}
+
+/* --- Images & Carousel --- */
+
+/* 1. The Container */
+.post-image-container {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-stroke);
+  margin-top: 8px;
+  margin-bottom: 8px;
+  
+  /* Hand Cursor */
+  cursor: pointer;
+  
+  /* Smooth transition for the container */
+  transition: transform 0.1s ease-out;
+  
+  /* Stop the browser from selecting the container as text */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 2. The Active State (Shrink the Container) */
+.post-image-container:active {
+  transform: scale(0.98);
+  opacity: 0.95;
+}
+
+/* 3. The Image Itself */
+.post-image,
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  
+  /* Prevent 'Ghost' Dragging */
+  -webkit-user-drag: none;
+  
+  /* DELETED: pointer-events: none; <--- This was the culprit! */
+  
+  /* Ensure the image itself shows the hand cursor */
+  cursor: pointer; 
+}
+
+/* --- Carousel Specifics --- */
+.carousel-item {
+  min-width: 280px;
+  height: 200px;
+  border-radius: 12px;
+  border: 1px solid var(--border-stroke);
+  overflow: hidden;
+  flex-shrink: 0;
+  
+  transition: transform 0.1s ease-out;
+  cursor: pointer;
+}
+
+.carousel-item:active {
+  transform: scale(0.98);
+  opacity: 0.95;
+}
+
+/* Container Layout */
+.carousel-container {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  max-width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.carousel-container::-webkit-scrollbar { display: none; }
+
+/* --- Actions --- */
+.actions-row { display: flex; align-items: center; gap: 4px; margin-top: 0px; margin-left: -8px;}
+.action-btn { background: transparent; border: none; cursor: pointer; height: 36px; border-radius: 18px; padding: 0 8px; display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--text-primary); transition: background-color 0.2s; min-width: 36px; }
+.action-btn:hover { background-color: rgba(255, 255, 255, 0.1); }
+.action-icon-img { font-size: 20px !important; display: block; }
+.like-count { font-size: 13px; color: var(--text-secondary); display: none; }
+.action-btn.liked .action-icon-img { color: var(--accent-red); font-variation-settings: 'FILL' 1; }
+.action-btn.liked .like-count { display: block; color: var(--accent-red); }
+.action-btn.liked .material-icons-round {
+  /* Run the bounce animation once, for 0.3 seconds */
+  animation: heart-bounce 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+}
+
+@keyframes heart-bounce {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.2); } /* Grow 40% bigger */
+  100% { transform: scale(1); }   /* Snap back to normal */
+}
+
+/* --- Context --- */
+.context-arrow { color: var(--text-secondary); font-size: 14px; margin: 0 6px; }
+.context-text { font-weight: 500; color: var(--text-primary); margin-bottom: 2px; text-decoration: none;}
+.context-text:hover {text-decoration: underline; /* Adds underline only on hover */}
+
+/* --- Lightbox --- */
+.lightbox-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); align-items: center; justify-content: center; cursor: zoom-out; }
+.lightbox-content { max-width: 90%; max-height: 80vh; object-fit: contain; border-radius: 8px; }
+.lightbox-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.1); border: none; color: white; padding: 12px; border-radius: 50%; cursor: pointer; z-index: 10000; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.lightbox-nav-btn:hover { background: rgba(255, 255, 255, 0.2); }
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+.lightbox-modal.single-image .lightbox-nav-btn { display: none; }
+
+/* --- Lightbox Caption --- */
+.lightbox-caption {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #F3F5F7;
+  font-size: 15px;
+  font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); /* readable on bright images */
+  padding: 0 40px; /* prevent text hitting edges */
+  box-sizing: border-box;
+  pointer-events: none; /* allows clicks to pass through */
+  z-index: 10001; /* sits above everything */
+}
+
+/**@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .bottom-nav { display: flex; }
+  .main-wrapper { margin-top: 70px; padding-bottom: 80px; padding-left: 20px; padding-right: 20px; }
+  .logo-container { left: 20px; }
+}
+
+
+/* --- MEDIA QUERIES (Mobile) --- */
+@media (max-width: 768px) {
+  
+  /* 1. Hide Desktop Sidebar / Show Mobile Nav */
+  .sidebar { display: none; }
+  .bottom-nav { display: flex; }
+
+  /* 2. Logo Adjustment */
+  .logo-container { left: 16px; } /* Match content padding */
+
+  /* 3. FULL BLEED FEED CONTAINER */
+  .main-wrapper {
+    margin-top: 60px;
+    padding-bottom: 80px;
+    /* Remove wrapper padding so container hits edges */
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+  }
+
+  .feed-container {
+    /* Remove borders and radius for mobile look */
+    border: none;
+    border-radius: 0;
+    background-color: #181818; 
+    padding: 0; /* Remove container vertical padding if desired */
+  }
+  
+  /* 4. CONTENT PADDING (The Fix) */
+  /* This ensures text doesn't touch the screen edge */
+  .thread-block {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
