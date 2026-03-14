@@ -34,15 +34,15 @@
    Page Transitions
    ========================================= */
 
-/* Slide-up on content enter — applied to container, not body,
-   so position:fixed elements (progress bar) are never affected */
+/* Subtle fade-in on container content — no transform anywhere, so
+   position:fixed elements (progress bar) are guaranteed unaffected */
 .container {
-    transform: translateY(10px);
-    transition: transform 0.4s ease;
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
 body.is-loaded .container {
-    transform: translateY(0);
+    opacity: 1;
 }
 
 html {
