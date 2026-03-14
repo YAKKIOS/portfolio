@@ -3,13 +3,25 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================
        0. Page Transitions
        ========================================= */
-    // Double rAF ensures the browser has painted opacity:0 before we transition in
+    // A fixed white overlay handles the fade so body opacity is never
+    // touched — body opacity breaks position:fixed on all descendants.
+    const overlay = document.createElement('div');
+    overlay.style.cssText = [
+        'position:fixed', 'inset:0', 'background:#fff',
+        'z-index:99999', 'pointer-events:none',
+        'opacity:1', 'transition:opacity 0.35s ease'
+    ].join(';');
+    document.body.appendChild(overlay);
+
+    // Fade the overlay out (page enter)
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-            document.body.classList.add('is-loaded');
+            overlay.style.opacity = '0';
+            document.body.classList.add('is-loaded'); // triggers container slide-up
         });
     });
 
+    // Fade the overlay in then navigate (page leave)
     document.querySelectorAll('a[href]').forEach(link => {
         const href = link.getAttribute('href');
         if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') return;

@@ -55,10 +55,11 @@ body.is-leaving {
     transition: opacity 0.22s ease;
 }
 
-/* Slide-up on enter — kept off body so position:fixed children aren't broken */
+/* Slide-up on content enter — applied to container, not body,
+   so position:fixed elements (progress bar) are never affected */
 .container {
     transform: translateY(10px);
-    transition: transform 0.38s ease;
+    transition: transform 0.4s ease;
 }
 
 body.is-loaded .container {
