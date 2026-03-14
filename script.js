@@ -26,8 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') return;
         link.addEventListener('click', e => {
             e.preventDefault();
-            document.body.classList.add('is-leaving');
-            setTimeout(() => { window.location = href; }, 300);
+            overlay.style.transition = 'opacity 0.22s ease';
+            overlay.style.opacity = '1';
+            setTimeout(() => { window.location = href; }, 220);
         });
     });
 
