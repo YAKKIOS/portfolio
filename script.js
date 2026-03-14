@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
             overlay.style.opacity = '0';
-            document.body.classList.add('is-loaded'); // triggers container slide-up
         });
     });
 
