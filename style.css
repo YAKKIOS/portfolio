@@ -31,9 +31,22 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* =========================================
-   Page Transitions — handled entirely by JS overlay div.
-   No opacity/transform on body or any ancestor of position:fixed elements.
+   Page Transitions — overlay div handles the white cover (JS).
+   Slide-up is on .container only — progress bar is outside .container
+   so position:fixed is never broken.
    ========================================= */
+.container {
+    animation: container-enter 0.45s ease both;
+}
+
+@keyframes container-enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .container { animation: none; }
+}
 
 html {
     font-size: 16px; 
