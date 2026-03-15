@@ -20,6 +20,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Safari bfcache: hitting Back restores the page without firing DOMContentLoaded,
+    // leaving the overlay stuck at opacity:1. pageshow fires instead with e.persisted=true.
+    window.addEventListener('pageshow', e => {
+        if (e.persisted) {
+            overlay.style.transition = 'opacity 0.35s ease';
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => { overlay.style.opacity = '0'; });
+            });
+        }
+    });
+
     // Fade the overlay in then navigate (page leave)
     document.querySelectorAll('a[href]').forEach(link => {
         const href = link.getAttribute('href');
@@ -233,6 +244,39 @@ document.addEventListener('DOMContentLoaded', () => {
             pic.addEventListener('mouseleave', () => {
                 tooltip.classList.remove('is-visible');
             });
+        });
+
+        // Mobile: tap photo to reveal tooltip + lift
+        stackedPics.forEach(pic => {
+            pic.addEventListener('touchstart', e => {
+                e.preventDefault(); // suppress ghost click
+
+                const wasActive = pic.classList.contains('is-active');
+
+                // Dismiss any currently active card
+                stackedPics.forEach(p => p.classList.remove('is-active'));
+                tooltip.classList.remove('is-visible');
+
+                if (!wasActive) {
+                    pic.classList.add('is-active');
+                    // Wait for the CSS lift transition (0.4s) before positioning tooltip
+                    setTimeout(() => {
+                        tooltip.textContent = pic.getAttribute('data-tooltip');
+                        const rect = pic.getBoundingClientRect();
+                        tooltip.style.top  = `${rect.top - 16}px`;
+                        tooltip.style.left = `${rect.left + rect.width / 2}px`;
+                        tooltip.classList.add('is-visible');
+                    }, 400);
+                }
+            }, { passive: false });
+        });
+
+        // Dismiss on tap outside the stack
+        document.addEventListener('touchstart', e => {
+            if (!e.target.closest('.stacked-pic')) {
+                stackedPics.forEach(p => p.classList.remove('is-active'));
+                tooltip.classList.remove('is-visible');
+            }
         });
     }
 
