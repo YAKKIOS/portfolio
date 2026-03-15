@@ -219,59 +219,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const tooltip = document.getElementById('picture-tooltip');
 
     if (stackedPics.length > 0 && tooltip) {
+        const positionTooltip = (pic) => {
+            const rect = pic.getBoundingClientRect();
+            tooltip.style.top  = `${rect.top - 16}px`;
+            tooltip.style.left = `${rect.left + rect.width / 2}px`;
+        };
+
         stackedPics.forEach(pic => {
+            // Desktop: show on enter, track live as card lifts via transition
             pic.addEventListener('mouseenter', () => {
-                // 1. Pull the text from the HTML and put it in the tooltip
                 tooltip.textContent = pic.getAttribute('data-tooltip');
-                
-                // 2. Find exactly where the picture is on the screen right now
-                const rect = pic.getBoundingClientRect();
-                
-                // 3. Calculate the center point above the picture
-                // We subtract 45px from the top so the tooltip hovers clearly above the lifted image
-                const top = rect.top - 16; 
-                const left = rect.left + (rect.width / 2);
-                
-                // 4. Move the tooltip to those exact coordinates
-                tooltip.style.top = `${top}px`;
-                tooltip.style.left = `${left}px`;
-                
-                // 5. Fade it in
+                positionTooltip(pic);
                 tooltip.classList.add('is-visible');
             });
+            pic.addEventListener('mousemove', () => positionTooltip(pic));
+            pic.addEventListener('mouseleave', () => tooltip.classList.remove('is-visible'));
 
-            // Hide the tooltip when the mouse leaves the picture
-            pic.addEventListener('mouseleave', () => {
-                tooltip.classList.remove('is-visible');
-            });
-        });
-
-        // Mobile: tap photo to reveal tooltip + lift
-        stackedPics.forEach(pic => {
+            // Mobile: tap to lift + show tooltip
             pic.addEventListener('touchstart', e => {
-                e.preventDefault(); // suppress ghost click
-
+                e.preventDefault();
                 const wasActive = pic.classList.contains('is-active');
-
-                // Dismiss any currently active card
                 stackedPics.forEach(p => p.classList.remove('is-active'));
                 tooltip.classList.remove('is-visible');
 
                 if (!wasActive) {
+                    // Capture position before lift; offset by the 6px translateY + 16px gap
+                    const rect = pic.getBoundingClientRect();
+                    tooltip.textContent = pic.getAttribute('data-tooltip');
+                    tooltip.style.top  = `${rect.top - 6 - 16}px`;
+                    tooltip.style.left = `${rect.left + rect.width / 2}px`;
                     pic.classList.add('is-active');
-                    // Wait for the CSS lift transition (0.4s) before positioning tooltip
-                    setTimeout(() => {
-                        tooltip.textContent = pic.getAttribute('data-tooltip');
-                        const rect = pic.getBoundingClientRect();
-                        tooltip.style.top  = `${rect.top - 16}px`;
-                        tooltip.style.left = `${rect.left + rect.width / 2}px`;
-                        tooltip.classList.add('is-visible');
-                    }, 400);
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => tooltip.classList.add('is-visible'));
+                    });
                 }
             }, { passive: false });
         });
 
-        // Dismiss on tap outside the stack
+        // Dismiss tooltip on tap outside the stack
         document.addEventListener('touchstart', e => {
             if (!e.target.closest('.stacked-pic')) {
                 stackedPics.forEach(p => p.classList.remove('is-active'));
