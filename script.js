@@ -136,6 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================
        4. Rough Notation (Scroll-Triggered, Multi-Element)
        ========================================= */
+    // Defer until the container slide-up animation ends so getBoundingClientRect()
+    // returns correct coordinates (a live transform shifts them off-screen).
+    const _rnContainer = document.querySelector('.container');
+    const _initRoughNotation = () => {
     if (typeof RoughNotation !== 'undefined') {
         const annotate = RoughNotation.annotate;
         
@@ -180,6 +184,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.observe(el);
             });
         });
+    }
+    }; // end _initRoughNotation
+
+    if (_rnContainer) {
+        _rnContainer.addEventListener('animationend', _initRoughNotation, { once: true });
+    } else {
+        _initRoughNotation();
     }
 
     /* =========================================
