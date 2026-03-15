@@ -36,12 +36,12 @@
    so position:fixed is never broken.
    ========================================= */
 .container {
-    animation: container-enter 0.45s ease both;
+    animation: container-enter 0.45s ease backwards;
 }
 
 @keyframes container-enter {
     from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
