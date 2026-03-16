@@ -107,47 +107,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         triggers.forEach(trigger => {
             trigger.addEventListener('click', () => {
-                const thumbRect = trigger.getBoundingClientRect();
-                const thumbCx = thumbRect.left + thumbRect.width / 2;
-                const thumbCy = thumbRect.top + thumbRect.height / 2;
-
                 modal.classList.remove('is-open', 'is-closing');
                 modalImg.src = trigger.src;
                 modalImg.alt = trigger.alt || 'Expanded case study image';
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-
-                // Once the image has rendered dimensions, set the transform-origin
-                // to the thumbnail's centre so the scale animation radiates from there.
-                const open = () => {
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            const imgRect = modalImg.getBoundingClientRect();
-                            modalImg.style.transformOrigin =
-                                `${thumbCx - imgRect.left}px ${thumbCy - imgRect.top}px`;
-                            modal.classList.add('is-open');
-                        });
-                    });
-                };
-
-                if (modalImg.complete && modalImg.naturalWidth > 0) {
-                    open();
-                } else {
-                    modalImg.onload = open;
-                }
+                // Double rAF lets the browser paint the hidden state before transitioning in
+                requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('is-open')));
             });
         });
 
         const closeLightbox = () => {
             modal.classList.remove('is-open');
             modal.classList.add('is-closing');
-            // Wait for the close transitions (0.18s content + 0.28s backdrop) to finish
             setTimeout(() => {
                 modal.style.display = 'none';
                 modal.classList.remove('is-closing');
                 modalImg.src = '';
                 document.body.style.overflow = '';
-            }, 300);
+            }, 200);
         };
 
         modal.addEventListener('click', closeLightbox);
