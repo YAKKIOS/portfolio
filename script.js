@@ -108,12 +108,22 @@ document.addEventListener('DOMContentLoaded', () => {
         triggers.forEach(trigger => {
             trigger.addEventListener('click', () => {
                 modal.classList.remove('is-open', 'is-closing');
-                modalImg.src = trigger.src;
-                modalImg.alt = trigger.alt || 'Expanded case study image';
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-                // Double rAF lets the browser paint the hidden state before transitioning in
-                requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('is-open')));
+
+                const reveal = () => requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('is-open')));
+
+                // Wait for the image to load before animating in so the backdrop
+                // and image appear together, not backdrop-then-image.
+                modalImg.onload = reveal;
+                modalImg.src = trigger.src;
+                modalImg.alt = trigger.alt || 'Expanded case study image';
+
+                // If already cached, onload won't fire — check immediately
+                if (modalImg.complete && modalImg.naturalWidth > 0) {
+                    modalImg.onload = null;
+                    reveal();
+                }
             });
         });
 
