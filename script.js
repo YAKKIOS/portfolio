@@ -97,34 +97,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================================
-       3. Image Lightbox (Instant)
+       3. Image Lightbox
        ========================================= */
     const modal = document.querySelector('.lightbox-modal');
     const modalImg = document.querySelector('.lightbox-content');
     const triggers = document.querySelectorAll('.lightbox-trigger');
 
     if (modal && modalImg && triggers.length > 0) {
-        
+
         triggers.forEach(trigger => {
             trigger.addEventListener('click', () => {
+                const thumbRect = trigger.getBoundingClientRect();
+                const thumbCx = thumbRect.left + thumbRect.width / 2;
+                const thumbCy = thumbRect.top + thumbRect.height / 2;
+
+                modal.classList.remove('is-open', 'is-closing');
                 modalImg.src = trigger.src;
                 modalImg.alt = trigger.alt || 'Expanded case study image';
-
-                // Instantly display it
                 modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden'; 
+                document.body.style.overflow = 'hidden';
+
+                // Once the image has rendered dimensions, set the transform-origin
+                // to the thumbnail's centre so the scale animation radiates from there.
+                const open = () => {
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            const imgRect = modalImg.getBoundingClientRect();
+                            modalImg.style.transformOrigin =
+                                `${thumbCx - imgRect.left}px ${thumbCy - imgRect.top}px`;
+                            modal.classList.add('is-open');
+                        });
+                    });
+                };
+
+                if (modalImg.complete && modalImg.naturalWidth > 0) {
+                    open();
+                } else {
+                    modalImg.onload = open;
+                }
             });
         });
 
         const closeLightbox = () => {
-            // Instantly hide it and clear the image
-            modal.style.display = 'none';
-            modalImg.src = ''; 
-            document.body.style.overflow = ''; 
+            modal.classList.remove('is-open');
+            modal.classList.add('is-closing');
+            // Wait for the close transitions (0.18s content + 0.28s backdrop) to finish
+            setTimeout(() => {
+                modal.style.display = 'none';
+                modal.classList.remove('is-closing');
+                modalImg.src = '';
+                document.body.style.overflow = '';
+            }, 300);
         };
 
         modal.addEventListener('click', closeLightbox);
-        
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 closeLightbox();

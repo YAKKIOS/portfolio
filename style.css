@@ -569,17 +569,22 @@ font-size: 16px;
    Lightbox Modal (Instant)
    ========================================= */
 .lightbox-modal {
-    display: none; /* JS will toggle this to flex instantly */
+    display: none;
     position: fixed;
     z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: transparent;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: background-color 0.28s ease;
+}
+
+.lightbox-modal.is-open {
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .lightbox-content {
@@ -587,7 +592,25 @@ font-size: 16px;
     max-height: 90vh;
     border-radius: 8px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    /* No scale, no opacity, no transitions. Just the box. */
+    opacity: 0;
+    transform: scale(0.08);
+    /* Spring easing gives that app-launch slight overshoot */
+    transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.22s ease;
+    will-change: transform, opacity;
+}
+
+.lightbox-modal.is-open .lightbox-content {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Closing: quick ease-in collapse, no spring */
+.lightbox-modal.is-closing .lightbox-content {
+    opacity: 0;
+    transform: scale(0.88);
+    transition: transform 0.18s ease-in,
+                opacity 0.18s ease-in;
 }
 
 /* =========================================
