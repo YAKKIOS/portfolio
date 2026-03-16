@@ -107,35 +107,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         triggers.forEach(trigger => {
             trigger.addEventListener('click', () => {
-                modal.classList.remove('is-open', 'is-closing');
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-
-                const reveal = () => requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('is-open')));
-
-                // Wait for the image to load before animating in so the backdrop
-                // and image appear together, not backdrop-then-image.
-                modalImg.onload = reveal;
                 modalImg.src = trigger.src;
                 modalImg.alt = trigger.alt || 'Expanded case study image';
-
-                // If already cached, onload won't fire — check immediately
-                if (modalImg.complete && modalImg.naturalWidth > 0) {
-                    modalImg.onload = null;
-                    reveal();
-                }
+                modal.classList.add('is-open');
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
             });
         });
 
         const closeLightbox = () => {
+            modal.style.display = 'none';
             modal.classList.remove('is-open');
-            modal.classList.add('is-closing');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                modal.classList.remove('is-closing');
-                modalImg.src = '';
-                document.body.style.overflow = '';
-            }, 200);
+            modalImg.src = '';
+            document.body.style.overflow = '';
         };
 
         modal.addEventListener('click', closeLightbox);
