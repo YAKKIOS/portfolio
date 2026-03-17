@@ -601,8 +601,6 @@ font-size: 16px;
 /* =========================================
    Random Lore
    ========================================= */
-.lore-section { margin-top: 3rem; }
-
 .lore-card {
     background-color: #ffffff;
     border: 1px solid var(--border-color);
@@ -617,6 +615,9 @@ font-size: 16px;
     text-align: center;
     gap: 1.5rem;
     padding: 2.5rem 3rem;
+    /* Locked to 3-line max so the card never jumps height */
+    min-height: 14rem;
+    justify-content: center;
 }
 
 .lore-dice {

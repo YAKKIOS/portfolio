@@ -207,12 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const loreDiceIcons = [
-        'assets/icons/dice-1.svg',
-        'assets/icons/dice-2.svg',
-        'assets/icons/dice-3.svg',
-        'assets/icons/dice-4.svg',
-        'assets/icons/dice-5.svg',
-        'assets/icons/dice-6.svg',
+        'assets/icons/dice_one.png',
+        'assets/icons/dice_two.svg',
+        'assets/icons/dice_three.svg',
+        'assets/icons/dice_four.svg',
+        'assets/icons/dice_five.svg',
+        'assets/icons/dice_six.svg',
     ];
 
     const loreBtn  = document.getElementById('lore-btn');
