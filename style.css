@@ -129,6 +129,7 @@ p {font-weight: 420;}
     gap: 0.5rem;
     padding: 0.25rem 0.875rem;
     border-radius: 9999px;
+    font: inherit;
     font-size: var(--text-14);
     font-weight: 480;
     transition: transform 0.15s ease, opacity 0.15s ease;
