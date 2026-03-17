@@ -126,13 +126,15 @@ p {font-weight: 420;}
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem; 
+    gap: 0.5rem;
     padding: 0.25rem 0.875rem;
     border-radius: 9999px;
     font-size: var(--text-14);
-    font-weight: 480; 
+    font-weight: 480;
     transition: transform 0.15s ease, opacity 0.15s ease;
     will-change: transform;
+    cursor: pointer;
+    appearance: none;
 }
 
 .btn:hover { transform: scale(1.02);}
@@ -621,36 +623,27 @@ font-size: 16px;
 }
 
 .lore-dice {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     display: block;
     flex-shrink: 0;
 }
 
-/* Blur-in / blur-out on the whole card body */
-@keyframes lore-blur {
-    0%   { filter: blur(0px); }
-    45%  { filter: blur(5px); }
-    55%  { filter: blur(5px); }
-    100% { filter: blur(0px); }
-}
-
-/* Wobble on the dice icon */
-@keyframes dice-shake {
-    0%   { transform: rotate(0deg); }
-    25%  { transform: rotate(-14deg); }
-    50%  { transform: rotate(12deg); }
-    75%  { transform: rotate(-8deg); }
-    100% { transform: rotate(0deg); }
+/* Shake + blur on the dice icon only */
+@keyframes dice-roll {
+    0%   { transform: rotate(0deg);   filter: blur(0px); }
+    25%  { transform: rotate(-14deg); filter: blur(2px); }
+    50%  { transform: rotate(12deg);  filter: blur(4px); }
+    75%  { transform: rotate(-8deg);  filter: blur(2px); }
+    100% { transform: rotate(0deg);   filter: blur(0px); }
 }
 
 .lore-body.is-rolling {
-    animation: lore-blur 0.3s ease both;
     pointer-events: none;
 }
 
 .lore-body.is-rolling .lore-dice {
-    animation: dice-shake 0.3s ease both;
+    animation: dice-roll 0.3s ease both;
 }
 
 /* =========================================
