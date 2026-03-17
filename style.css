@@ -599,6 +599,60 @@ font-size: 16px;
 }
 
 /* =========================================
+   Random Lore
+   ========================================= */
+.lore-section { margin-top: 3rem; }
+
+.lore-card {
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.lore-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 2.5rem 3rem;
+}
+
+.lore-dice {
+    width: 16px;
+    height: 16px;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Blur-in / blur-out on the whole card body */
+@keyframes lore-blur {
+    0%   { filter: blur(0px); }
+    45%  { filter: blur(5px); }
+    55%  { filter: blur(5px); }
+    100% { filter: blur(0px); }
+}
+
+/* Wobble on the dice icon */
+@keyframes dice-shake {
+    0%   { transform: rotate(0deg); }
+    25%  { transform: rotate(-14deg); }
+    50%  { transform: rotate(12deg); }
+    75%  { transform: rotate(-8deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.lore-body.is-rolling {
+    animation: lore-blur 0.3s ease both;
+    pointer-events: none;
+}
+
+.lore-body.is-rolling .lore-dice {
+    animation: dice-shake 0.3s ease both;
+}
+
+/* =========================================
    Breadcrumbs
    ========================================= */
 .breadcrumbs {

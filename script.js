@@ -193,7 +193,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================================
-       5. Live Weather (Gateshead, UK)
+       5. Random Lore
+       ========================================= */
+    const loreFacts = [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula libero nec sapien fermentum, at tincidunt risus gravida.",
+        "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vel purus at risus fermentum.",
+        "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec pharetra, magna vestibulum aliquet ultrices.",
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.",
+        "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem.",
+        "Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus.",
+        "Maecenas sed diam eget risus varius blandit sit amet non magna. Donec ullamcorper nulla non metus auctor fringilla.",
+    ];
+
+    const loreDiceIcons = [
+        'assets/icons/dice-1.svg',
+        'assets/icons/dice-2.svg',
+        'assets/icons/dice-3.svg',
+        'assets/icons/dice-4.svg',
+        'assets/icons/dice-5.svg',
+        'assets/icons/dice-6.svg',
+    ];
+
+    const loreBtn  = document.getElementById('lore-btn');
+    const loreBody = document.getElementById('lore-body');
+    const loreText = document.getElementById('lore-text');
+    const loreDice = document.getElementById('lore-dice');
+
+    if (loreBtn) {
+        let currentLoreIndex = 0;
+        let currentDiceIndex = 0;
+
+        loreBtn.addEventListener('click', () => {
+            loreBody.classList.add('is-rolling');
+
+            // Swap content at peak blur (halfway through the 300ms animation)
+            setTimeout(() => {
+                // Pick a different fact and a random dice
+                let nextLore = currentLoreIndex;
+                while (nextLore === currentLoreIndex) {
+                    nextLore = Math.floor(Math.random() * loreFacts.length);
+                }
+                let nextDice = currentDiceIndex;
+                while (nextDice === currentDiceIndex) {
+                    nextDice = Math.floor(Math.random() * loreDiceIcons.length);
+                }
+                currentLoreIndex = nextLore;
+                currentDiceIndex = nextDice;
+                loreText.textContent = loreFacts[currentLoreIndex];
+                loreDice.src = loreDiceIcons[currentDiceIndex];
+            }, 150);
+
+            setTimeout(() => loreBody.classList.remove('is-rolling'), 300);
+        });
+    }
+
+    /* =========================================
+       6. Live Weather (Gateshead, UK)
        ========================================= */
     const weatherDisplay = document.querySelector('#local-weather');
     
