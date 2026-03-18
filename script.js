@@ -201,9 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "I met and spoke with Jeremy Corbyn (British politician) on a street in Newcastle after bottomless brunch with my wife 🥂",
         "I used to play with tiger cubs as a child because my best friends dad was the head tiger keeper at Port Port Lympne zoo in Kent 🐅",
         "I used to play competitive division 1 volleyball for Hartlepool 🏐",
-        "I was featured in The Chronicle newspaper over a pedestrian crossing because I've almost been hit there 4 times",
-        "Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus.",
-        "Maecenas sed diam eget risus varius blandit sit amet non magna. Donec ullamcorper nulla non metus auctor fringilla.",
+        "I was featured in a news article for The Chronicle over a pedestrian crossing because I've almost been hit there 4 times... I can send the article upon request 🚗",
+        "My dad was the mayor of Hawkinge from 2023-2024, which is a small town in Kent 🤴🏻",
+        "I used to work as a car mechanic for fun when whilst I studied at college 🔧",
     ];
 
     const loreDiceIcons = [
