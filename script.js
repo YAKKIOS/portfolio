@@ -196,11 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
        5. Random Lore
        ========================================= */
     const loreFacts = [
-        "I was once choked in a pub by a Newcastle fan after mistaking me for a Sunderland supporter (I'm a Chelsea fan)",
+        "I was once choked in a pub by a Newcastle fan after mistaking me for a Sunderland supporter (I'm a Chelsea fan) 👀",
         "I was featured in Sketch's best designs of 2022 ✏️",
-        "I met Jeremy Corbyn (British politician) on a street in Newcastle after bottomless brunch with my wife",
+        "I met and spoke with Jeremy Corbyn (British politician) on a street in Newcastle after bottomless brunch with my wife 🥂",
         "I used to play with tiger cubs as a child because my best friends dad was the head tiger keeper at Port Port Lympne zoo in Kent 🐅",
-        "I used to play competitive division 1 volleyball for Hartlepool",
+        "I used to play competitive division 1 volleyball for Hartlepool 🏐",
         "I was featured in The Chronicle newspaper over a pedestrian crossing because I've almost been hit there 4 times",
         "Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus.",
         "Maecenas sed diam eget risus varius blandit sit amet non magna. Donec ullamcorper nulla non metus auctor fringilla.",
