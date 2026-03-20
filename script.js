@@ -204,6 +204,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "I was featured in a news article for The Chronicle over a pedestrian crossing because I've almost been hit there 4 times 🚗",
         "My dad was the mayor of Hawkinge from 2023-2024, which is a small town in Kent 🤴🏻",
         "I used to work as a car mechanic for fun whilst I studied at college 🔧",
+        "I was featured in Sketch's best designs of 2022 ✏️",
+        "I was an avid horse rider until my sister was thrown from her horse and broke her shoulder... I promptly gave up the sport 🐎";
+
+        
     ];
 
     const loreDiceIcons = [
