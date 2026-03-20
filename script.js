@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loreBtn) {
         let currentLoreIndex = 0;
-        let currentDiceIndex = 0;
+        let currentDiceIndex = 2;
 
         loreBtn.addEventListener('click', () => {
             loreBody.classList.add('is-rolling');
