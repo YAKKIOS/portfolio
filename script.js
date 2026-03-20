@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
 
     /* =========================================
        0. Page Transitions
@@ -335,4 +335,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); // end DOMContentLoaded
+} // end init
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
