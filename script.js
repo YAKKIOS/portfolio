@@ -206,7 +206,7 @@ function init() {
         "I used to work as a car mechanic for fun whilst I studied at college 🔧",
         "I was featured in Sketch's best designs of 2022 ✏️",
         "I was an avid horse rider until my sister was thrown from her horse and broke her shoulder... I promptly gave up the sport 🐎",
-
+        "I setup an Onlyfans page for margaritas called Onlymargs and has since been deprecated 🍸",
         
     ];
 
