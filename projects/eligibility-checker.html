@@ -57,8 +57,8 @@
                 </p>
                 
                                 <ul class="case-study-list">
-    <li>Role: Lead designer</li>
-    <li>Team: 1 Content Designer, 1 PM and 1 Engineer</li>
+    <li>Point 1</li>
+    <li>Point 2</li>
 </ul>
 
 
@@ -86,7 +86,7 @@
 <figure class="case-study-figure">
 
 <div class="case-study-image">
-        <img src="../assets/images/projects/NGED/PSR-07.webp" class="lightbox-trigger" alt="National Grid's legacy priority services register application form">
+        <img src="../assets/images/projects/NGED/psr-10.webp" class="lightbox-trigger" alt="National Grid's legacy priority services register application form">
     </div>
     
     <figcaption class="image-caption">The current National Grid priority services register application form</figcaption>
@@ -150,15 +150,55 @@
 
 <p>This decision also simplified the back-end logic. Reducing the decision tree by 50%. That was because selecting unsure created a split in the decision tree where the system had to understand if the user moving on has flagged unsure at any point which would eventually lead them to a ‘you may be eligible’ screen.</p>
 
+    <h3 class="section-title">Design validation</h3>
+<p>
+    Ideally, a tool designed for vulnerable customers would undergo extensive external testing, but a tight timeline meant we had to be strategic. I leaned heavily into the existing NGED design system and built 90% of the experience using established NGED design system patterns. We could skip testing the basic UI and focus our internal sessions entirely on the flow and tone of voice.
+
+</p>
+
+<p>
+    To validate the UX, I ran sessions with colleagues from across the business, specifically including those who were already on a PSR themselves. Their feedback was incredibly consistent and helped us quickly pinpoint the main friction points while saving significant time and budget.
+</p>
+
+<ul class="case-study-list">
+    <li>Many participants completely missed the "unsure" help provider.</li>
+    <li>The introductory page didn't clearly explain what the Priority Services Register actually is.</li>
+    <li>Inline tooltips were overlooked by all participants.</li>
+    <li>Clicking "None of the above" was ambiguous and users didn't realise it would lead them to a subsequent category of needs.</li>
+</ul>
+
+<figure class="case-study-figure">
+
 <div class="case-study-image">
-        <img src="../assets/images/projects/NGED/PSR-08.webp" class="lightbox-trigger" alt="UI Design">
+        <img src="../assets/images/projects/NGED/PSR-05.webp" class="lightbox-trigger" alt="UI Design">
     </div>
+    
+    <figcaption class="image-caption">Updated design based on testing feedback</figcaption>
+    
+</figure>
+
+<figure class="case-study-figure">
+
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-06.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">Unsure instead became a precursor to the 'you aren't eligible' result</figcaption>
+    
+</figure>
+
+    <h3 class="section-title">Technical feasbility</h3>
+
+<p>
+    I needed to prove the technical feasibility of the design. While we reused a significant amount of existing components, the new flow required some custom elements and styling. We built and deployed the tool in a pre-prod environment, which was a critical step. It gave us a 1:1 understanding of exactly what backend logic changes were required to seamlessly align our new flow with National Grid’s existing architecture before pushing to production.
+</p>
+
 
                     <h3 class="section-title">Softening the visuals</h3>
 <p>The users coming to this tool may be managing chronic illness, caring for a vulnerable relative, or dealing with a difficult diagnosis. The design had to feel approachable without feeling patronising.</p>
 
 <div class="case-study-image">
-        <img src="../assets/images/projects/NGED/PSR-05.webp" class="lightbox-trigger" alt="UI Design">
+        <img src="../assets/images/projects/NGED/PSR-07.webp" class="lightbox-trigger" alt="UI Design">
     </div>
 
 
@@ -172,22 +212,25 @@
 <p>The tool reflected the PSR form of being able to submit a claim for yourself or on behalf of somebody else. The language reflected that to ensure there was no confusion about the journey taken by customers.</p>
 
 <div class="case-study-image">
-        <img src="../assets/images/projects/NGED/PSR-06.webp" class="lightbox-trigger" alt="UI Design">
+        <img src="../assets/images/projects/NGED/PSR-08.webp" class="lightbox-trigger" alt="UI Design">
     </div>
 
-    <h3 class="section-title">Pragmatic validation</h3>
-<p>
-    Ideally, a tool designed for vulnerable customers would undergo extensive external usability testing. However, working within strict timeline constraints meant we had to be strategic with our validation.
-</p>
-<p>
-    To mitigate risk, I leaned heavily into the existing NGED design system. By building 90% of the experience using established, well-known UI patterns from the wider National Grid site, we could be confident in the foundational usability. This allowed us to focus our internal testing sessions with colleagues purely on comprehending the flow and the tone of voice, rather than basic UI interaction, saving significant time and budget.
-</p>
+
 
                     <h3 class="section-title">Project outcomes</h3>
 <p>Most users can find out if they are eligible for PSR within two clicks. Given the old experience required completing an entire form before finding out if you even qualified. This felt like a meaningful shift towards Ofgems goal of getting more customers, who are eligible, onto the register. </p>
 
 <p>We defined success for this tool by looking beyond a 'you are eligible' result. <span class="rn-highlight">The ultimate goal was driving those users to the PSR application</span>. Due to system tracking limitations, we cannot directly attribute final application completions to this tool. Instead, we established increased traffic to the main application form as our primary success metric. We are actively tracking this data to see if reducing that up front complexity translates to a long term increase in sign ups.</p>
 
+<figure class="case-study-figure">
+
+<div class="case-study-image">
+        <img src="../assets/images/projects/NGED/PSR-09.webp" class="lightbox-trigger" alt="UI Design">
+    </div>
+    
+    <figcaption class="image-caption">Unsure instead became a precursor to the 'you aren't eligible' result</figcaption>
+    
+</figure>
 
             </article>
 
