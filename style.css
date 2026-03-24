@@ -98,12 +98,9 @@ p {font-weight: 420;}
 
 /* Editorial Inline Italic */
 .editorial-italic {
-    font-family: 'Times new', serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 1.15em; /* Bumps the size slightly to match Inter's height */
-    letter-spacing: 0.02em;
-    color: var(--text-main);
+    color: var(--text-muted);
 }
 
 /* =========================================
@@ -390,12 +387,11 @@ font-size: 16px;
 .case-study-quote {
     margin: 3rem 0;
     padding-left: 1.5rem;
-    border-left: 2px dotted var(--border-color); 
-    font-family: 'Times new roman', serif; /* Triggers your premium serif font */
-    font-size: 2rem; /* Noticeably larger than standard text */
+    border-left: 2px dotted var(--border-color);
+    font-size: 1.25rem;
     font-style: italic;
-    color: var(--text-main);
-    line-height: 1.2;
+    color: var(--text-muted);
+    line-height: 1.5;
 }
 
 .case-study-quote p {
@@ -656,11 +652,11 @@ font-size: 16px;
 
 /* Shake + blur on the dice icon only */
 @keyframes dice-roll {
-    0%   { transform: rotate(0deg);   filter: blur(0px); }
-    25%  { transform: rotate(-14deg); filter: blur(2px); }
-    50%  { transform: rotate(12deg);  filter: blur(4px); }
-    75%  { transform: rotate(-8deg);  filter: blur(2px); }
-    100% { transform: rotate(0deg);   filter: blur(0px); }
+    0%   { transform: rotate(0deg); }
+    25%  { transform: rotate(-14deg); }
+    50%  { transform: rotate(12deg); }
+    75%  { transform: rotate(-8deg); }
+    100% { transform: rotate(0deg); }
 }
 
 .lore-body.is-rolling {
@@ -826,6 +822,7 @@ font-size: 16px;
    ========================================= */
 .about-pictures {
     margin: 6rem 0;
+    overflow-x: clip; /* Prevents absolutely-positioned cards from causing horizontal scroll */
 }
 
 .picture-stack {
