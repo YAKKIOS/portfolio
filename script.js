@@ -333,6 +333,9 @@ function init() {
                 tooltip.classList.remove('is-visible');
             }
         });
+
+        // Hide tooltip while scrolling — position:fixed doesn't track the card on scroll
+        window.addEventListener('scroll', () => tooltip.classList.remove('is-visible'), { passive: true });
     }
 
     /* =========================================
