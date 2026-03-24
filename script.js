@@ -295,14 +295,19 @@ function init() {
             tooltip.style.left = `${rect.left + rect.width / 2}px`;
         };
 
+        let activePic = null; // tracks the card the mouse most recently entered
+
         stackedPics.forEach(pic => {
-            // Desktop: wait for the lift animation to finish before placing tooltip
-            // (mousemove during the 0.4s cubic-bezier causes the tooltip to chase the card)
+            // Desktop: wait for the lift animation to finish before placing tooltip.
+            // We track activePic so that stale transitionend events from a card the
+            // mouse has already left never fire the tooltip for the wrong card.
             pic.addEventListener('mouseenter', () => {
+                activePic = pic;
                 tooltip.textContent = pic.getAttribute('data-tooltip');
             });
             pic.addEventListener('transitionend', (e) => {
                 if (e.propertyName !== 'transform') return;
+                if (pic !== activePic) return;   // stale event from a card we've moved away from
                 if (!pic.matches(':hover')) return;
                 positionTooltip(pic);
                 tooltip.classList.add('is-visible');
