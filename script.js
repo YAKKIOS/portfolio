@@ -335,6 +335,73 @@ function init() {
         });
     }
 
+    /* =========================================
+       8. Contact Card — 3D Tilt, Holographic Glare, Copy Email
+       ========================================= */
+    const contactCard = document.getElementById('contact-card');
+    const copyBtn     = document.getElementById('copy-email-btn');
+
+    if (contactCard) {
+        const MAX_TILT = 10; // degrees
+        let rafId;
+
+        // Disable CSS transition while tracking so updates are instant
+        contactCard.addEventListener('mouseenter', () => {
+            contactCard.style.transition = 'none';
+        });
+
+        contactCard.addEventListener('mousemove', (e) => {
+            cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                const rect  = contactCard.getBoundingClientRect();
+                const x     = (e.clientX - rect.left) / rect.width;   // 0–1
+                const y     = (e.clientY - rect.top)  / rect.height;  // 0–1
+                const tiltX = (y - 0.5) * -MAX_TILT;
+                const tiltY = (x - 0.5) *  MAX_TILT;
+
+                contactCard.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+                contactCard.style.setProperty('--mouse-x', `${x * 100}%`);
+                contactCard.style.setProperty('--mouse-y', `${y * 100}%`);
+            });
+        });
+
+        // Spring back to flat on leave
+        contactCard.addEventListener('mouseleave', () => {
+            cancelAnimationFrame(rafId);
+            contactCard.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+            contactCard.style.transform  = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+            contactCard.style.setProperty('--mouse-x', '50%');
+            contactCard.style.setProperty('--mouse-y', '50%');
+            setTimeout(() => { contactCard.style.transition = ''; }, 600);
+        });
+    }
+
+    if (copyBtn) {
+        const EMAIL     = 'hello@jackjohnson.co.uk';
+        const copyIcon  = document.getElementById('copy-icon');
+        const copyLabel = document.getElementById('copy-label');
+        let resetTimer;
+
+        copyBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(EMAIL);
+            } catch {
+                return; // Clipboard unavailable — fail silently
+            }
+
+            copyIcon.textContent  = 'check';
+            copyLabel.textContent = 'Copied!';
+            copyBtn.disabled      = true;
+
+            clearTimeout(resetTimer);
+            resetTimer = setTimeout(() => {
+                copyIcon.textContent  = 'content_copy';
+                copyLabel.textContent = 'Copy email';
+                copyBtn.disabled      = false;
+            }, 2000);
+        });
+    }
+
 } // end init
 
 if (document.readyState === 'loading') {
