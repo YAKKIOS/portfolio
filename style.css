@@ -921,20 +921,25 @@ font-size: 16px;
     width: 100%;
     max-width: 22rem;
     aspect-ratio: 8 / 5;
-    background: #141820;
+    background: linear-gradient(135deg,
+        #ccd9f8 0%,
+        #d8cbf8 30%,
+        #f5c8ec 65%,
+        #c6eef8 100%
+    );
     border-radius: 20px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.12),
-        0 12px 40px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        0 2px 4px rgba(100, 80, 160, 0.08),
+        0 12px 40px rgba(100, 80, 180, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     user-select: none;
     --mouse-x: 50%;
     --mouse-y: 50%;
 }
 
-/* Clean specular highlight — follows the cursor */
+/* Bright specular highlight — visible against the light base */
 .contact-card::before {
     content: '';
     position: absolute;
@@ -942,15 +947,15 @@ font-size: 16px;
     border-radius: inherit;
     background: radial-gradient(
         ellipse 65% 55% at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.03) 50%,
-        transparent 75%
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.15) 45%,
+        transparent 72%
     );
     pointer-events: none;
     z-index: 1;
 }
 
-/* Very faint iridescent layer — barely-there color shift on tilt */
+/* Vibrant prismatic layer — shifts through the spectrum as the mouse moves */
 .contact-card::after {
     content: '';
     position: absolute;
@@ -958,14 +963,16 @@ font-size: 16px;
     border-radius: inherit;
     background: linear-gradient(
         125deg,
-        rgba(120, 180, 255, 0.05) 0%,
-        rgba(200, 140, 255, 0.03) 50%,
-        rgba(100, 220, 200, 0.05) 100%
+        rgba(160, 80, 255, 0.22) 0%,
+        rgba(80, 160, 255, 0.18) 33%,
+        rgba(80, 240, 200, 0.18) 66%,
+        rgba(255, 80, 180, 0.22) 100%
     );
-    background-size: 250% 250%;
+    background-size: 300% 300%;
     background-position: var(--mouse-x) var(--mouse-y);
     pointer-events: none;
     z-index: 1;
+    mix-blend-mode: multiply;
 }
 
 /* Inner fills the aspect-ratio box entirely */
@@ -986,13 +993,13 @@ font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(40, 20, 80, 0.45);
 }
 
 .contact-email {
     font-size: var(--text-16);
     font-weight: 430;
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(30, 15, 70, 0.82);
     margin: 0;
 }
 
@@ -1002,15 +1009,15 @@ font-size: 16px;
 }
 
 .btn-copy-email {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.65);
+    background: rgba(30, 15, 70, 0.08);
+    border: 1px solid rgba(30, 15, 70, 0.15);
+    color: rgba(30, 15, 70, 0.65);
 }
 
 .btn-copy-email:hover {
-    background: rgba(255, 255, 255, 0.13);
-    border-color: rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.95);
+    background: rgba(30, 15, 70, 0.13);
+    border-color: rgba(30, 15, 70, 0.25);
+    color: rgba(30, 15, 70, 0.9);
 }
 
 .btn-copy-email:disabled {
