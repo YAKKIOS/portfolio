@@ -857,27 +857,27 @@ font-size: 16px;
    ========================================= */
 @media (max-width: 768px) {
     .picture-stack {
-        height: 190px;
+        height: 230px;
     }
 
     .stacked-pic {
-        width: 100px;
-        height: 100px;
-        border-radius: 14px;
+        width: 120px;
+        height: 120px;
+        border-radius: 16px;
     }
 
-    /* Spread fits four 100px cards on a 320px screen */
-    .stacked-pic:nth-child(1) { transform: translateX(-55px) rotate(-4deg); z-index: 1; }
-    .stacked-pic:nth-child(2) { transform: translateX(-18px) rotate(2deg);  z-index: 2; }
-    .stacked-pic:nth-child(3) { transform: translateX(18px)  rotate(-2deg); z-index: 3; }
-    .stacked-pic:nth-child(4) { transform: translateX(55px)  rotate(4deg);  z-index: 4; }
+    /* Wider spread so cards fill a typical phone width */
+    .stacked-pic:nth-child(1) { transform: translateX(-68px) rotate(-4deg); z-index: 1; }
+    .stacked-pic:nth-child(2) { transform: translateX(-23px) rotate(2deg);  z-index: 2; }
+    .stacked-pic:nth-child(3) { transform: translateX(23px)  rotate(-2deg); z-index: 3; }
+    .stacked-pic:nth-child(4) { transform: translateX(68px)  rotate(4deg);  z-index: 4; }
 
     /* Tap to lift, straighten and scale up */
     .picture-stack:has(.stacked-pic.is-active) .stacked-pic:not(.is-active) { opacity: 0.6; }
-    .picture-stack .stacked-pic:nth-child(1).is-active { transform: translateX(-55px) translateY(-10px) rotate(0deg) scale(1.18); opacity: 1; z-index: 10; }
-    .picture-stack .stacked-pic:nth-child(2).is-active { transform: translateX(-18px) translateY(-10px) rotate(0deg) scale(1.18); opacity: 1; z-index: 10; }
-    .picture-stack .stacked-pic:nth-child(3).is-active { transform: translateX(18px)  translateY(-10px) rotate(0deg) scale(1.18); opacity: 1; z-index: 10; }
-    .picture-stack .stacked-pic:nth-child(4).is-active { transform: translateX(55px)  translateY(-10px) rotate(0deg) scale(1.18); opacity: 1; z-index: 10; }
+    .picture-stack .stacked-pic:nth-child(1).is-active { transform: translateX(-68px) translateY(-12px) rotate(0deg) scale(1.18); opacity: 1; z-index: 10; }
+    .picture-stack .stacked-pic:nth-child(2).is-active { transform: translateX(-23px) translateY(-12px) rotate(0deg) scale(1.18); opacity: 1; z-index: 10; }
+    .picture-stack .stacked-pic:nth-child(3).is-active { transform: translateX(23px)  translateY(-12px) rotate(0deg) scale(1.18); opacity: 1; z-index: 10; }
+    .picture-stack .stacked-pic:nth-child(4).is-active { transform: translateX(68px)  translateY(-12px) rotate(0deg) scale(1.18); opacity: 1; z-index: 10; }
 }
 
 /* The Tooltip UI */
@@ -993,6 +993,13 @@ font-size: 16px;
     justify-content: space-between;
     padding: 1.5rem 2rem;
     text-align: center;
+}
+
+.contact-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
 }
 
 .contact-eyebrow {
