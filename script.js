@@ -296,13 +296,17 @@ function init() {
         };
 
         stackedPics.forEach(pic => {
-            // Desktop: show on enter, track live as card lifts via transition
+            // Desktop: wait for the lift animation to finish before placing tooltip
+            // (mousemove during the 0.4s cubic-bezier causes the tooltip to chase the card)
             pic.addEventListener('mouseenter', () => {
                 tooltip.textContent = pic.getAttribute('data-tooltip');
+            });
+            pic.addEventListener('transitionend', (e) => {
+                if (e.propertyName !== 'transform') return;
+                if (!pic.matches(':hover')) return;
                 positionTooltip(pic);
                 tooltip.classList.add('is-visible');
             });
-            pic.addEventListener('mousemove', () => positionTooltip(pic));
             pic.addEventListener('mouseleave', () => tooltip.classList.remove('is-visible'));
 
             // Mobile: tap to lift + show tooltip
