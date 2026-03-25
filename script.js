@@ -196,7 +196,7 @@ function init() {
        5. Random Lore
        ========================================= */
     const loreFacts = [
-        "I was once choked in a pub by a Newcastle fan after mistaking me for a Sunderland supporter (I'm a Chelsea fan) 👀",
+        "I was once choked in a pub by a Newcastle fan after mistaking me for a Sunderland supporter (I'm a Chelsea fan) 😵",
         "I ran the Great North Run half marathon in 2023 in under 2 hours 🏃",
         "I met and spoke with Jeremy Corbyn (British politician) on a street in Newcastle after bottomless brunch with my wife 🥂",
         "I used to play with tiger cubs as a child because my best friends dad was the head tiger keeper at Port Port Lympne zoo in Kent 🐅",
@@ -207,6 +207,8 @@ function init() {
         "I was featured in Sketch's best designs of 2022 ✏️",
         "I was an avid horse rider until my sister was thrown from her horse and broke her shoulder... I promptly gave up the sport 🐎",
         "I setup an Onlyfans page for margaritas called Onlymargs and has since been deprecated 🍸",
+        "Whilst at Komodo Digital I accidentally had the office Christmas cards printed upside down and it's still talked about to this day 🎄",
+        
         
     ];
 
