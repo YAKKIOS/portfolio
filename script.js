@@ -320,34 +320,6 @@ function init() {
                 clearTimeout(tooltipTimer);
                 tooltip.classList.remove('is-visible');
             });
-
-            // Mobile: tap to lift + show tooltip
-            pic.addEventListener('touchstart', e => {
-                e.preventDefault();
-                const wasActive = pic.classList.contains('is-active');
-                stackedPics.forEach(p => p.classList.remove('is-active'));
-                tooltip.classList.remove('is-visible');
-
-                if (!wasActive) {
-                    // Capture position before lift; offset by the 6px translateY + 16px gap
-                    const rect = pic.getBoundingClientRect();
-                    tooltip.textContent = pic.getAttribute('data-tooltip');
-                    tooltip.style.top  = `${rect.top - 6 - 16}px`;
-                    tooltip.style.left = `${rect.left + rect.width / 2}px`;
-                    pic.classList.add('is-active');
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => tooltip.classList.add('is-visible'));
-                    });
-                }
-            }, { passive: false });
-        });
-
-        // Dismiss tooltip on tap outside the stack
-        document.addEventListener('touchstart', e => {
-            if (!e.target.closest('.stacked-pic')) {
-                stackedPics.forEach(p => p.classList.remove('is-active'));
-                tooltip.classList.remove('is-visible');
-            }
         });
 
         // Hide tooltip while scrolling — position:fixed doesn't track the card on scroll
