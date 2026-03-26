@@ -297,24 +297,29 @@ function init() {
             tooltip.style.left = `${rect.left + rect.width / 2}px`;
         };
 
-        let activePic = null; // tracks the card the mouse most recently entered
+        let activePic = null;
+        let tooltipTimer = null;
 
         stackedPics.forEach(pic => {
-            // Desktop: wait for the lift animation to finish before placing tooltip.
-            // We track activePic so that stale transitionend events from a card the
-            // mouse has already left never fire the tooltip for the wrong card.
+            // Desktop: show tooltip 250ms after mouseenter — fast enough to feel snappy,
+            // long enough for most of the lift animation to have played out.
+            // Text is set inside the timer so the fading-out tooltip from the previous
+            // card always shows the correct old label, never a flash of the new one.
             pic.addEventListener('mouseenter', () => {
                 activePic = pic;
-                tooltip.textContent = pic.getAttribute('data-tooltip');
+                clearTimeout(tooltipTimer);
+                tooltip.classList.remove('is-visible');
+                tooltipTimer = setTimeout(() => {
+                    if (pic !== activePic) return;
+                    tooltip.textContent = pic.getAttribute('data-tooltip');
+                    positionTooltip(pic);
+                    tooltip.classList.add('is-visible');
+                }, 250);
             });
-            pic.addEventListener('transitionend', (e) => {
-                if (e.propertyName !== 'transform') return;
-                if (pic !== activePic) return;   // stale event from a card we've moved away from
-                if (!pic.matches(':hover')) return;
-                positionTooltip(pic);
-                tooltip.classList.add('is-visible');
+            pic.addEventListener('mouseleave', () => {
+                clearTimeout(tooltipTimer);
+                tooltip.classList.remove('is-visible');
             });
-            pic.addEventListener('mouseleave', () => tooltip.classList.remove('is-visible'));
 
             // Mobile: tap to lift + show tooltip
             pic.addEventListener('touchstart', e => {
