@@ -297,15 +297,16 @@ function init() {
             tooltip.style.left = `${rect.left + rect.width / 2}px`;
         };
 
+        const canHover = window.matchMedia('(hover: hover)');
+
         let activePic = null;
         let tooltipTimer = null;
 
         stackedPics.forEach(pic => {
-            // Desktop: show tooltip 250ms after mouseenter — fast enough to feel snappy,
-            // long enough for most of the lift animation to have played out.
-            // Text is set inside the timer so the fading-out tooltip from the previous
-            // card always shows the correct old label, never a flash of the new one.
+            // Tooltip: real pointer devices only — guards against synthetic
+            // mouseenter fired by mobile browsers on tap.
             pic.addEventListener('mouseenter', () => {
+                if (!canHover.matches) return;
                 activePic = pic;
                 clearTimeout(tooltipTimer);
                 tooltip.classList.remove('is-visible');
@@ -317,10 +318,52 @@ function init() {
                 }, 250);
             });
             pic.addEventListener('mouseleave', () => {
+                if (!canHover.matches) return;
                 clearTimeout(tooltipTimer);
                 tooltip.classList.remove('is-visible');
             });
         });
+
+        // Mobile lightbox — proximity based so z-index stacking doesn't cause
+        // the wrong card to fire. Finds the card whose centre is closest to the
+        // tap point, then opens that image in the lightbox.
+        const pictureStack = document.querySelector('.picture-stack');
+        const lbModal  = document.querySelector('.lightbox-modal');
+        const lbImg    = document.querySelector('.lightbox-content');
+
+        if (pictureStack && lbModal && lbImg && !canHover.matches) {
+            let touchStartX, touchStartY;
+
+            pictureStack.addEventListener('touchstart', e => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            pictureStack.addEventListener('touchend', e => {
+                const t = e.changedTouches[0];
+                // Ignore if the finger drifted — likely a scroll
+                if (Math.abs(t.clientX - touchStartX) > 12 ||
+                    Math.abs(t.clientY - touchStartY) > 12) return;
+
+                // Find the card whose centre is nearest the tap
+                let closest = null, minDist = Infinity;
+                stackedPics.forEach(pic => {
+                    const r = pic.getBoundingClientRect();
+                    const dist = Math.hypot(t.clientX - (r.left + r.width / 2),
+                                           t.clientY - (r.top  + r.height / 2));
+                    if (dist < minDist) { minDist = dist; closest = pic; }
+                });
+
+                if (!closest) return;
+                const img = closest.querySelector('img');
+                if (!img) return;
+                lbImg.src = img.src;
+                lbImg.alt = img.alt;
+                lbModal.classList.add('is-open');
+                lbModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }, { passive: true });
+        }
 
         // Hide tooltip while scrolling — position:fixed doesn't track the card on scroll
         window.addEventListener('scroll', () => tooltip.classList.remove('is-visible'), { passive: true });
