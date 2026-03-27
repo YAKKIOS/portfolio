@@ -103,6 +103,31 @@ p {font-weight: 420;}
     color: var(--text-muted);
 }
 
+/* Napoleon link hover whisper */
+.napoleon-link {
+    position: relative;
+}
+
+.napoleon-whisper {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 2px);
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+.napoleon-link:hover .napoleon-whisper {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* =========================================
    Hero Section
    ========================================= */
@@ -873,11 +898,11 @@ p {font-weight: 420;}
         border-radius: 16px;
     }
 
-    /* Spread cards wider so they breathe on a phone screen */
-    .stacked-pic:nth-child(1) { transform: translateX(-80px) rotate(-4deg); z-index: 1; }
-    .stacked-pic:nth-child(2) { transform: translateX(-27px) rotate(2deg);  z-index: 2; }
-    .stacked-pic:nth-child(3) { transform: translateX(27px)  rotate(-2deg); z-index: 3; }
-    .stacked-pic:nth-child(4) { transform: translateX(80px)  rotate(4deg);  z-index: 4; }
+    /* Wider spread — more breathing room between cards */
+    .stacked-pic:nth-child(1) { transform: translateX(-93px) rotate(-4deg); z-index: 1; }
+    .stacked-pic:nth-child(2) { transform: translateX(-31px) rotate(2deg);  z-index: 2; }
+    .stacked-pic:nth-child(3) { transform: translateX(31px)  rotate(-2deg); z-index: 3; }
+    .stacked-pic:nth-child(4) { transform: translateX(93px)  rotate(4deg);  z-index: 4; }
 }
 
 /* The Tooltip UI */
