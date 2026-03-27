@@ -206,8 +206,9 @@ function init() {
         "I used to work as a car mechanic for fun whilst I studied at college 🔧",
         "I was featured in Sketch's best designs of 2022 ✏️",
         "I was an avid horse rider until my sister was thrown from her horse and broke her shoulder... I promptly gave up the sport 🐎",
-        "I setup an Onlyfans page for margaritas called Onlymargs and has since been deprecated 🍸",
+        "I setup an Onlyfans page for margaritas called Onlymargs but has since been deprecated 🍸",
         "Whilst at Komodo Digital I accidentally had the office Christmas cards printed upside down and it's still talked about to this day 🎄",
+        "I once drank an entire pitcher of raspberry mojito and I turned red like a scene from Charlie and the CHocolate Factory 😳",
         
         
     ];
