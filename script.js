@@ -199,7 +199,7 @@ function init() {
         "I was once choked in a pub by a Newcastle fan after mistaking me for a Sunderland supporter (I'm a Chelsea fan) 😵",
         "I ran the Great North Run half marathon in 2023 in under 2 hours 🏃",
         "I met and spoke with Jeremy Corbyn (British politician) on a street in Newcastle after bottomless brunch with my wife 🥂",
-        "I used to play with tiger cubs as a child because my best friends dad was the head tiger keeper at Port Port Lympne zoo in Kent 🐅",
+        "I used to play with tiger cubs as a child because my best friends dad was the head tiger keeper at Port Lympne zoo in Kent 🐅",
         "I used to play competitive division 1 volleyball for Hartlepool 🏐",
         "I was featured in a news article for The Chronicle over a pedestrian crossing because I've almost been hit there 4 times 🚗",
         "My dad was the mayor of Hawkinge from 2023-2024, which is a small town in Kent 🤴🏻",
