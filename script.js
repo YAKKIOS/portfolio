@@ -341,16 +341,16 @@ function init() {
 
             pictureStack.addEventListener('touchend', e => {
                 const t = e.changedTouches[0];
-                // Ignore if the finger drifted — likely a scroll
-                if (Math.abs(t.clientX - touchStartX) > 12 ||
-                    Math.abs(t.clientY - touchStartY) > 12) return;
+                // Ignore if the finger drifted vertically — likely a scroll.
+                // Horizontal drift is fine (swipe-like taps still count).
+                if (Math.abs(t.clientY - touchStartY) > 20) return;
 
-                // Find the card whose centre is nearest the tap
+                // Cards are spread horizontally, so use X distance only.
+                // 2D distance was picking the wrong card in overlap zones.
                 let closest = null, minDist = Infinity;
                 stackedPics.forEach(pic => {
                     const r = pic.getBoundingClientRect();
-                    const dist = Math.hypot(t.clientX - (r.left + r.width / 2),
-                                           t.clientY - (r.top  + r.height / 2));
+                    const dist = Math.abs(t.clientX - (r.left + r.width / 2));
                     if (dist < minDist) { minDist = dist; closest = pic; }
                 });
 
