@@ -341,12 +341,10 @@ function init() {
 
             pictureStack.addEventListener('touchend', e => {
                 const t = e.changedTouches[0];
-                // Ignore if the finger drifted vertically — likely a scroll.
-                // Horizontal drift is fine (swipe-like taps still count).
+                // Ignore vertical drift — likely a scroll attempt
                 if (Math.abs(t.clientY - touchStartY) > 20) return;
 
-                // Cards are spread horizontally, so use X distance only.
-                // 2D distance was picking the wrong card in overlap zones.
+                // Cards spread horizontally — X distance alone picks the right card
                 let closest = null, minDist = Infinity;
                 stackedPics.forEach(pic => {
                     const r = pic.getBoundingClientRect();
@@ -355,6 +353,15 @@ function init() {
                 });
 
                 if (!closest) return;
+
+                // Ignore taps in the empty space above/below the cards
+                const cr = closest.getBoundingClientRect();
+                if (t.clientY < cr.top - 8 || t.clientY > cr.bottom + 8) return;
+
+                // preventDefault stops the browser generating a synthetic click
+                // that would land on the now-visible modal and immediately close it
+                e.preventDefault();
+
                 const img = closest.querySelector('img');
                 if (!img) return;
                 lbImg.src = img.src;
@@ -362,7 +369,7 @@ function init() {
                 lbModal.classList.add('is-open');
                 lbModal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-            }, { passive: true });
+            }, { passive: false }); // must be non-passive to call preventDefault
         }
 
         // Hide tooltip while scrolling — position:fixed doesn't track the card on scroll

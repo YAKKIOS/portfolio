@@ -111,20 +111,20 @@ p {font-weight: 420;}
 .napoleon-whisper {
     position: absolute;
     left: 0;
-    top: calc(100% + 2px);
+    top: calc(100% + 6px);
     font-style: italic;
     font-size: 0.8rem;
     color: var(--text-muted);
     white-space: nowrap;
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translateY(-4px) rotate(-2deg);
     transition: opacity 0.25s ease, transform 0.25s ease;
     pointer-events: none;
 }
 
 .napoleon-link:hover .napoleon-whisper {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) rotate(-2deg);
 }
 
 /* =========================================
