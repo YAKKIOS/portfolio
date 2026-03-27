@@ -124,6 +124,9 @@ function init() {
 
         modal.addEventListener('click', closeLightbox);
 
+        // Prevent page scrolling through the modal on iOS (overflow:hidden alone is not enough)
+        modal.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 closeLightbox();
