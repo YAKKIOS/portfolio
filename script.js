@@ -216,45 +216,27 @@ function init() {
         
     ];
 
-    const loreDiceIcons = [
-        'assets/icons/dice_one.png',
-        'assets/icons/dice_two.svg',
-        'assets/icons/dice_three.svg',
-        'assets/icons/dice_four.svg',
-        'assets/icons/dice_five.svg',
-        'assets/icons/dice_six.svg',
-    ];
-
     const loreBtn  = document.getElementById('lore-btn');
     const loreBody = document.getElementById('lore-body');
     const loreText = document.getElementById('lore-text');
-    const loreDice = document.getElementById('lore-dice');
 
     if (loreBtn) {
         let currentLoreIndex = 0;
-        let currentDiceIndex = 2;
 
         loreBtn.addEventListener('click', () => {
             loreBody.classList.add('is-rolling');
 
-            // Swap content at peak blur (halfway through the 300ms animation)
+            // Swap content at the halfway point of the spin
             setTimeout(() => {
-                // Pick a different fact and a random dice
                 let nextLore = currentLoreIndex;
                 while (nextLore === currentLoreIndex) {
                     nextLore = Math.floor(Math.random() * loreFacts.length);
                 }
-                let nextDice = currentDiceIndex;
-                while (nextDice === currentDiceIndex) {
-                    nextDice = Math.floor(Math.random() * loreDiceIcons.length);
-                }
                 currentLoreIndex = nextLore;
-                currentDiceIndex = nextDice;
                 loreText.textContent = loreFacts[currentLoreIndex];
-                loreDice.src = loreDiceIcons[currentDiceIndex];
-            }, 150);
+            }, 200);
 
-            setTimeout(() => loreBody.classList.remove('is-rolling'), 300);
+            setTimeout(() => loreBody.classList.remove('is-rolling'), 400);
         });
     }
 

@@ -235,7 +235,21 @@ p {font-weight: 420;}
 }
 
 .card-content { padding: 1rem 0rem 0rem 0rem; }
-.card-title { font-size: var(--text-16); font-weight: 400; margin-bottom: 0.25rem; }
+
+.card-title {
+    font-size: var(--text-16);
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: var(--dotted-grey);
+    transition: text-decoration-color 0.2s ease;
+}
+
+.work-card:hover .card-title {
+    text-decoration-color: var(--text-main);
+}
+
 .card-desc { font-size: var(--text-16); color: var(--text-muted); }
 
 /* =========================================
@@ -255,18 +269,21 @@ p {font-weight: 420;}
     margin: 0 -1rem;
     border-radius: 0.5rem;
     font-size: var(--text-16);
-    transition: background-color 0.2s ease;
 }
 
-.writing-item:hover { 
-    background-color: var(--bg-hover); 
+.writing-title {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: var(--dotted-grey);
+    transition: text-decoration-color 0.2s ease;
 }
 
-.title-group { 
+.writing-item:hover .writing-title {
+    text-decoration-color: var(--text-main);
+}
+
+.title-group {
     color: var(--text-main);
-    /* Smooth slide effect, color transition removed */
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    will-change: transform;
 }
 
 /* On hover, just slide the title right 
@@ -676,28 +693,23 @@ p {font-weight: 420;}
     justify-content: center;
 }
 
-.lore-dice {
-    width: 20px;
-    height: 20px;
-    display: block;
+.lore-icon {
+    font-size: 18px;
+    line-height: 1;
     flex-shrink: 0;
 }
 
-/* Shake + blur on the dice icon only */
-@keyframes dice-roll {
-    0%   { transform: rotate(0deg); }
-    25%  { transform: rotate(-14deg); }
-    50%  { transform: rotate(12deg); }
-    75%  { transform: rotate(-8deg); }
-    100% { transform: rotate(0deg); }
+@keyframes lore-shuffle {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
 
 .lore-body.is-rolling {
     pointer-events: none;
 }
 
-.lore-body.is-rolling .lore-dice {
-    animation: dice-roll 0.3s ease both;
+.lore-body.is-rolling .lore-icon {
+    animation: lore-shuffle 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 /* =========================================
