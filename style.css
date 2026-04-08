@@ -200,6 +200,15 @@ p {font-weight: 420;}
     gap: 1.5rem;
 }
 
+/* Index page: two featured cards stacked full-width */
+.work-grid--stacked {
+    grid-template-columns: 1fr;
+}
+
+.work-grid--stacked .card-image-wrapper {
+    aspect-ratio: 16 / 9;
+}
+
 .work-card {
     /*border: 1px solid rgba(229, 231, 235, 0.6); 
     border-radius: 1rem;
@@ -289,6 +298,15 @@ p {font-weight: 420;}
     line-height: 1;
     vertical-align: -0.15em; /* nudge icon onto the text baseline */
     margin-left: 5px;
+}
+
+.company-icon {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    vertical-align: -0.15em;
+    margin-right: 4px;
+    display: inline;
 }
 
 .title-group {
