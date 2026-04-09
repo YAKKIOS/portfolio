@@ -95,7 +95,7 @@ p {font-weight: 420;}
 }
 
 .inline-link:hover,
-.writing-item:hover .writing-title,
+.writing-item a:hover .writing-title,
 .work-card:hover .card-title {
     color: var(--text-main);
     text-decoration-color: var(--text-main);
@@ -267,28 +267,21 @@ p {font-weight: 420;}
 }
 
 .writing-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 0.375rem 0;
+    display: block;
+    margin: 1rem 0;
     font-size: var(--text-16);
 }
 
-
-.title-group {
+.writing-item a {
+    display: block;
     color: var(--text-main);
 }
 
-/* On hover, just slide the title right 
-.writing-item:hover .title-group {
-    transform: translateX(2px);
-}*/
-
 .writing-date {
+    display: block;
     color: var(--text-muted);
-    flex-shrink: 0;
-    margin-left: 1.5rem;
-    padding-top: 1px; /* aligns year baseline with first line of title */
+    font-size: var(--text-14);
+    margin-top: 0.2rem;
 }
 
 .external-icon {
@@ -309,11 +302,6 @@ p {font-weight: 420;}
     display: inline;
 }
 
-.title-group {
-    display: block;
-    flex: 1;
-    min-width: 0; /* allows text to wrap rather than push the date off-screen */
-}
 
 
 /* =========================================
@@ -888,25 +876,26 @@ p {font-weight: 420;}
 .stacked-pic:nth-child(3) { transform: translateX(60px) rotate(-2deg); z-index: 3; }
 .stacked-pic:nth-child(4) { transform: translateX(180px) rotate(4deg); z-index: 4; }
 
-/* Hover interactions — real pointer only, never fires on touch */
+/* Hover interactions — desktop: lift in place using the same spread as the base */
 @media (hover: hover) {
     .picture-stack:has(.stacked-pic:hover) .stacked-pic:not(:hover) {
         opacity: 0.6;
     }
 
     .picture-stack .stacked-pic:nth-child(1):hover { transform: translateX(-180px) translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
-    .picture-stack .stacked-pic:nth-child(2):hover { transform: translateX(-60px) translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
-    .picture-stack .stacked-pic:nth-child(3):hover { transform: translateX(60px) translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
-    .picture-stack .stacked-pic:nth-child(4):hover { transform: translateX(180px) translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(2):hover { transform: translateX(-60px)  translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(3):hover { transform: translateX(60px)   translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(4):hover { transform: translateX(180px)  translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
 }
 
 /* =========================================
    Mobile View: Picture Stack
+   Breakpoint at 480px — phones only. Tablets get full desktop sizes.
    (must come AFTER the base .stacked-pic rules to win the cascade)
    ========================================= */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .picture-stack {
-        height: 230px;
+        height: 200px;
     }
 
     .stacked-pic {
@@ -915,11 +904,18 @@ p {font-weight: 420;}
         border-radius: 16px;
     }
 
-    /* Wider spread — more breathing room between cards */
     .stacked-pic:nth-child(1) { transform: translateX(-93px) rotate(-4deg); z-index: 1; }
     .stacked-pic:nth-child(2) { transform: translateX(-31px) rotate(2deg);  z-index: 2; }
     .stacked-pic:nth-child(3) { transform: translateX(31px)  rotate(-2deg); z-index: 3; }
     .stacked-pic:nth-child(4) { transform: translateX(93px)  rotate(4deg);  z-index: 4; }
+}
+
+/* Mobile hover — translateX must match mobile spread or cards jump on hover */
+@media (hover: hover) and (max-width: 480px) {
+    .picture-stack .stacked-pic:nth-child(1):hover { transform: translateX(-93px) translateY(-6px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(2):hover { transform: translateX(-31px) translateY(-6px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(3):hover { transform: translateX(31px)  translateY(-6px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(4):hover { transform: translateX(93px)  translateY(-6px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
 }
 
 /* The Tooltip UI */
