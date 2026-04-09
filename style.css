@@ -197,7 +197,7 @@ p {font-weight: 420;}
 .work-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 /* Index page: two featured cards stacked full-width */
