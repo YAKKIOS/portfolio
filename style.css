@@ -267,14 +267,17 @@ p {font-weight: 420;}
 }
 
 .writing-item {
-    display: block;
-    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin: 0.75rem 0;
     font-size: var(--text-16);
 }
 
 .writing-item a {
-    display: block;
     color: var(--text-main);
+    min-width: 0;
 }
 
 .writing-date {
@@ -827,6 +830,12 @@ p {font-weight: 420;}
 
     .experience-details {
         width: 100%;
+    }
+
+    /* Writing items: stack title above date on mobile */
+    .writing-item {
+        flex-direction: column;
+        gap: 0.15rem;
     }
 }
 
