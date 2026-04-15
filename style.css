@@ -283,7 +283,7 @@ p {font-weight: 420;}
 .writing-date {
     display: block;
     color: var(--text-muted);
-    font-size: var(--text-14);
+    font-size: var(--text-16);
     margin-top: 0.2rem;
 }
 
