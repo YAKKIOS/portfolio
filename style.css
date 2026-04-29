@@ -168,7 +168,7 @@ p {font-weight: 420;}
     appearance: none;
 }
 
-.btn:hover { transform: scale(1.08);}
+.btn:hover { transform: scale(1.06);}
 .btn:active { transform: scale(0.98);}
 
 .btn-primary { background: linear-gradient(#1994FF, #157CFF); color: #ffffff; }
