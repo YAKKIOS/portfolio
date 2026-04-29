@@ -161,14 +161,14 @@ p {font-weight: 420;}
     font-size: var(--text-14);
     font-weight: 480;
     color: inherit;
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    transition: transform 0.20s ease, opacity 0.20s ease;
     will-change: transform;
     cursor: pointer;
     -webkit-appearance: none;
     appearance: none;
 }
 
-.btn:hover { transform: scale(1.02);}
+.btn:hover { transform: scale(1.08);}
 .btn:active { transform: scale(0.98);}
 
 .btn-primary { background: linear-gradient(#1994FF, #157CFF); color: #ffffff; }
