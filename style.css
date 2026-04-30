@@ -422,23 +422,6 @@ p {font-weight: 420;}
 }
 
 /* =========================================
-   Quote Block
-   ========================================= */
-.case-study-quote {
-    margin: 3rem 0;
-    padding-left: 1.5rem;
-    border-left: 2px dotted var(--border-color);
-    font-size: 1.25rem;
-    font-style: italic;
-    color: var(--text-muted);
-    line-height: 1.5;
-}
-
-.case-study-quote p {
-    margin: 0; /* Overrides default paragraph margins to keep it perfectly aligned */
-}
-
-/* =========================================
    Testimonial Bubbles
    ========================================= */
 .testimonial {
@@ -453,7 +436,7 @@ p {font-weight: 420;}
     display: block;
 }
 
-.testimonial-bubble p {
+.case-study-content .testimonial-bubble p {
     margin: 0;
     font-size: var(--text-16);
     color: var(--text-main);
@@ -487,25 +470,30 @@ p {font-weight: 420;}
 .testimonial-attribution {
     display: flex;
     align-items: center;
-    gap: 0;
     margin-top: 1.5rem;
     padding-left: 2px;
 }
 
 .testimonial-name {
-    font-size: var(--text-14);
+    font-size: var(--text-16);
     font-weight: 500;
     color: var(--text-body);
 }
 
 .testimonial-role {
-    font-size: var(--text-14);
+    font-size: var(--text-16);
     color: var(--text-muted);
 }
 
 .testimonial-role::before {
-    content: ' · ';
-    color: var(--text-muted);
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 8px;
 }
 
 /* =========================================
