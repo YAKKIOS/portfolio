@@ -422,6 +422,62 @@ p {font-weight: 420;}
 }
 
 /* =========================================
+   Blockquote
+   ========================================= */
+blockquote {
+    position: relative;
+    padding: 0 0 0 1.25rem;
+    margin: 2rem 0;
+}
+
+blockquote::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-color);
+    border-radius: 2px;
+}
+
+blockquote p {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: var(--text-16);
+    line-height: var(--lh-base);
+    margin: 0;
+}
+
+.blockquote-attribution {
+    display: flex;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+
+.blockquote-name {
+    font-size: var(--text-14);
+    font-weight: 500;
+    color: var(--text-body);
+}
+
+.blockquote-role {
+    font-size: var(--text-14);
+    color: var(--text-muted);
+}
+
+.blockquote-role::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 8px;
+}
+
+/* =========================================
    Testimonial Bubbles
    ========================================= */
 .testimonial {
@@ -429,9 +485,8 @@ p {font-weight: 420;}
 }
 
 .testimonial-bubble {
-    position: relative;
     background: #e9e9eb;
-    border-radius: 18px 18px 18px 6px;
+    border-radius: 18px 18px 18px 0;
     padding: 16px 20px;
     display: block;
 }
@@ -441,30 +496,6 @@ p {font-weight: 420;}
     font-size: var(--text-16);
     color: var(--text-main);
     line-height: 1.6;
-}
-
-/* Large circle tail */
-.testimonial-bubble::before {
-    content: '';
-    position: absolute;
-    bottom: -9px;
-    left: 4px;
-    width: 12px;
-    height: 12px;
-    background: #e9e9eb;
-    border-radius: 50%;
-}
-
-/* Small circle tail */
-.testimonial-bubble::after {
-    content: '';
-    position: absolute;
-    bottom: -17px;
-    left: 12px;
-    width: 7px;
-    height: 7px;
-    background: #e9e9eb;
-    border-radius: 50%;
 }
 
 .testimonial-attribution {
