@@ -293,7 +293,6 @@ p {font-weight: 420;}
 .writing-item a {
     color: var(--text-main);
     min-width: 0;
-    flex: 1;
 }
 
 .writing-date {
