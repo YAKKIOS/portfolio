@@ -1,3 +1,13 @@
+/*
+
+       _            __     _       __                              ____      _ 
+      (_)___ ______/ /__  (_)___  / /_  ____  _________  ____    / __/_  __(_)
+     / / __ `/ ___/ //_/ / / __ \/ __ \/ __ \/ ___/ __ \/ __ \  / /_/ / / / /
+    / / /_/ / /__/ ,<   / / /_/ / / / / / / (__  ) /_/ / / / / / __/ /_/ / / 
+ __/ /\__,_/\___/_/|_|_/ /\____/_/ /_/_/ /_/____/\____/_/ /_(_)_/  \__, /_/  
+/___/               /___/                                          /____/     
+
+*/
 /* =========================================
    CSS Reset & Variables
    ========================================= */
@@ -111,13 +121,6 @@ p {font-weight: 420;}
 .work-card:hover .card-title {
     color: var(--text-main);
     text-decoration-color: var(--text-main);
-}
-
-/* Editorial Inline Italic */
-.editorial-italic {
-    font-style: italic;
-    font-weight: 400;
-    color: var(--text-muted);
 }
 
 /* Napoleon link hover whisper */
@@ -234,20 +237,6 @@ p {font-weight: 420;}
 
 .work-grid--stacked .card-image-wrapper {
     aspect-ratio: 16 / 9;
-}
-
-.work-card {
-    /*border: 1px solid rgba(229, 231, 235, 0.6); 
-    border-radius: 1rem;
-    padding: 0.5rem;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    Soft Double-Layer Shadow
-    box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.02), 
-        0 10px 15px -3px rgba(0, 0, 0, 0.04);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;*/
 }
 
 
@@ -380,18 +369,6 @@ p {font-weight: 420;}
 /* =========================================
    Footnote System (Ready for Case Studies)
    ========================================= */
-/* Superscript number in text */
-.footnote-ref a {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.75rem;
-    color: var(--blue-primary);
-    text-decoration: none;
-    margin-left: 2px;
-    font-weight: 500;
-    vertical-align: super;
-    background-color: #f4f4f5; /* Light grey */
-}
-
 /* Scroll margin prevents text being hidden behind top edge */
 .footnote-item, .footnote-ref, .footnote-ref a { 
     scroll-margin-top: 6rem; 
@@ -434,18 +411,6 @@ p {font-weight: 420;}
     color: var(--text-main);
         transition: color 0.2s ease, text-decoration-color 0.2s ease;
 
-}
-
-/* Flash effect when jumping */
-.footnote-item:target, .footnote-ref a:target {
-    background-color: rgba(245, 158, 11, 0.1);
-    border-radius: 4px;
-    animation: highlight-fade 2s ease-out forwards;
-}
-
-@keyframes highlight-fade {
-    0% { background-color: rgba(245, 158, 11, 0.2); }
-    100% { background-color: transparent; }
 }
 
 /* =========================================
@@ -665,15 +630,6 @@ blockquote p {
     font-size: var(--text-16);
     margin-bottom: 1.5rem;
     font-weight: 440;
-}
-
-/* =========================================
-   Dotted Divider
-   ========================================= */
-.divider {
-    border: none;
-    border-top: 1px solid var(--border-color);
-    margin: 3rem 0;
 }
 
 /* =========================================
@@ -957,11 +913,6 @@ blockquote p {
 /* =========================================
    About Page: Interactive Picture Stack
    ========================================= */
-.about-pictures {
-    margin: 6rem 0;
-    overflow-x: clip; /* Prevents absolutely-positioned cards from causing horizontal scroll */
-}
-
 .picture-stack {
     position: relative;
     display: flex;
