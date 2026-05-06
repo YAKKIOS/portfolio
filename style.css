@@ -227,12 +227,13 @@ p {font-weight: 420;}
 .work-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 2rem;
+    gap: 1rem;
 }
 
 /* Index page: two featured cards stacked full-width */
 .work-grid--stacked {
     grid-template-columns: 1fr;
+    gap: 2rem;
 }
 
 .work-grid--stacked .card-image-wrapper {
@@ -681,6 +682,20 @@ blockquote p {
 }
 
 /* =========================================
+   Case Study Image Pair (2-up layout)
+   ========================================= */
+.case-study-image-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.case-study-image-pair .case-study-image {
+    margin: 0;
+}
+
+/* =========================================
    Image Captions
    ========================================= */
 .case-study-figure {
@@ -892,6 +907,10 @@ blockquote p {
    Mobile View: Experience
    ========================================= */
 @media (max-width: 768px) {
+    .case-study-image-pair {
+        grid-template-columns: 1fr;
+    }
+
     /* Experience items: stack details above date */
     .experience-item {
         flex-direction: column;
