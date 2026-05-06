@@ -293,13 +293,13 @@ p {font-weight: 420;}
 .writing-item a {
     color: var(--text-main);
     min-width: 0;
+    flex: 1;
 }
 
 .writing-date {
-    display: block;
     color: var(--text-muted);
     font-size: var(--text-16);
-    margin-top: 0.2rem;
+    flex-shrink: 0;
 }
 
 .external-icon {
