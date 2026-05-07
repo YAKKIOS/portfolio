@@ -233,11 +233,11 @@ p {font-weight: 420;}
 /* Index page: two featured cards stacked full-width */
 .work-grid--stacked {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 4rem;
 }
 
 .work-grid--stacked .card-image-wrapper {
-    aspect-ratio: 16 / 9;
+    /*aspect-ratio: 16 / 9;*/
 }
 
 
