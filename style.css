@@ -86,15 +86,28 @@ html {
 
 body { font-size: var(--text-16); }
 
-/* GFS Didot for all title-weight elements */
+@font-face {
+    font-family: 'Sentient';
+    src: url('assets/fonts/Sentient-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Sentient for all title elements */
 .name,
 .job-title,
 .section-title,
 .card-title,
 .writing-title,
 .case-study-title {
-    font-family: 'GFS Didot', Georgia, serif;
-    font-weight: 400;
+    font-family: 'Sentient', Georgia, serif;
+    font-weight: 500;
+}
+
+/* Homepage featured cards use Inter — serif reads poorly at small size in grid context */
+.work-grid--stacked .card-title {
+    font-family: 'Inter', sans-serif;
 }
 a { color: inherit; text-decoration: none; }
 
