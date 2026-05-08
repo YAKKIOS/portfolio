@@ -664,13 +664,10 @@ blockquote p {
    Section Break (Dinkus)
    ========================================= */
 .section-break {
-    width: 100%;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: var(--text-16);
-    letter-spacing: 0.6em;
-    margin: 4rem 0;
-    user-select: none;
+    border: none;
+    border-top: 1px solid var(--border-color);
+    width: 8rem;
+    margin: 3.5rem auto;
 }
 
 /* =========================================
