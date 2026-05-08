@@ -676,6 +676,7 @@ blockquote p {
     border-top: 2px solid var(--border-color);
     width: 4rem;
     margin: 3.5rem auto;
+    border-radius: 24px;
 }
 
 /* =========================================
