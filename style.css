@@ -673,8 +673,8 @@ blockquote p {
    ========================================= */
 .section-break {
     border: none;
-    border-top: 1px solid var(--border-color);
-    width: 8rem;
+    border-top: 2px solid var(--border-color);
+    width: 4rem;
     margin: 3.5rem auto;
 }
 
