@@ -94,6 +94,10 @@ p {font-weight: 420;}
     transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
+.inline-link { color: var(--text-main); }
+
+.breadcrumbs .inline-link { color: inherit; }
+
 .inline-link:hover,
 .writing-item a:hover .writing-title,
 .work-card:hover .card-title {
@@ -550,6 +554,19 @@ p {font-weight: 420;}
     font-size: var(--text-16);
     margin-bottom: 1.5rem;
     font-weight: 440;
+}
+
+/* =========================================
+   Section Break (Dinkus)
+   ========================================= */
+.section-break {
+    width: 100%;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: var(--text-16);
+    letter-spacing: 0.6em;
+    margin: 4rem 0;
+    user-select: none;
 }
 
 /* =========================================
