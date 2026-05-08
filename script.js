@@ -1,3 +1,13 @@
+/*
+
+       _            __     _       __                              ____      _ 
+      (_)___ ______/ /__  (_)___  / /_  ____  _________  ____    / __/_  __(_)
+     / / __ `/ ___/ //_/ / / __ \/ __ \/ __ \/ ___/ __ \/ __ \  / /_/ / / / /
+    / / /_/ / /__/ ,<   / / /_/ / / / / / / (__  ) /_/ / / / / / __/ /_/ / / 
+ __/ /\__,_/\___/_/|_|_/ /\____/_/ /_/_/ /_/____/\____/_/ /_(_)_/  \__, /_/  
+/___/               /___/                                          /____/     
+
+*/
 function init() {
 
     /* =========================================
@@ -196,7 +206,34 @@ function init() {
     }
 
     /* =========================================
-       5. Random Lore
+       5. Section Reveal on Scroll
+       ========================================= */
+    const revealEls = document.querySelectorAll('.reveal');
+
+    if (revealEls.length > 0) {
+        const _initReveal = () => {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealEls.forEach(el => revealObserver.observe(el));
+        };
+
+        const _revealContainer = document.querySelector('.container');
+        if (_revealContainer) {
+            _revealContainer.addEventListener('animationend', _initReveal, { once: true });
+        } else {
+            _initReveal();
+        }
+    }
+
+    /* =========================================
+       6. Random Lore
        ========================================= */
     const loreFacts = [
         "I was once choked in a pub by a Newcastle fan after mistaking me for a Sunderland supporter (I'm a Chelsea fan) 😵",
@@ -241,7 +278,7 @@ function init() {
     }
 
     /* =========================================
-       6. Live Weather (Gateshead, UK)
+       7. Live Weather (Gateshead, UK)
        ========================================= */
     const weatherDisplay = document.querySelector('#local-weather');
     
@@ -271,7 +308,7 @@ function init() {
     }
 
     /* =========================================
-       7. About Page Picture Tooltips
+       8. About Page Picture Tooltips
        ========================================= */
     const stackedPics = document.querySelectorAll('.stacked-pic');
     const tooltip = document.getElementById('picture-tooltip');
@@ -363,7 +400,7 @@ function init() {
     }
 
     /* =========================================
-       8. Contact Card — 3D Tilt, Holographic Glare, Copy Email
+       9. Contact Card — 3D Tilt, Holographic Glare, Copy Email
        ========================================= */
     const contactCard = document.getElementById('contact-card');
     const copyBtn     = document.getElementById('copy-email-btn');
