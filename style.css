@@ -95,6 +95,14 @@ body { font-size: var(--text-16); }
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Sentient';
+    src: url('assets/fonts/Sentient-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Sentient for primary titles only */
 .name,
 .section-title,
@@ -664,13 +672,10 @@ blockquote p {
    Section Break (Dinkus)
    ========================================= */
 .section-break {
-    width: 100%;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: var(--text-16);
-    letter-spacing: 0.6em;
-    margin: 4rem 0;
-    user-select: none;
+    border: none;
+    border-top: 1px solid var(--border-color);
+    width: 8rem;
+    margin: 3.5rem auto;
 }
 
 /* =========================================
