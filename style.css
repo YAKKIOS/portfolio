@@ -85,6 +85,17 @@ html {
 }
 
 body { font-size: var(--text-16); }
+
+/* GFS Didot for all title-weight elements */
+.name,
+.job-title,
+.section-title,
+.card-title,
+.writing-title,
+.case-study-title {
+    font-family: 'GFS Didot', Georgia, serif;
+    font-weight: 400;
+}
 a { color: inherit; text-decoration: none; }
 
 /* =========================================
