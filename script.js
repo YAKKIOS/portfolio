@@ -402,12 +402,14 @@ function init() {
     /* =========================================
        9. Picture Stack Pagination
        ========================================= */
+    const ABOUT_IMG  = '../assets/images/about/';
     const STACK_POOL = [
-        { src: '../assets/images/about/ruby.webp',     alt: 'Ruby my cat',                tooltip: 'Say hello to my cat Ruby' },
-        { src: '../assets/images/about/cheviot.webp',  alt: '815 metres above sea level', tooltip: 'Taken at 815 metres above sea level' },
-        { src: '../assets/images/about/bookcase.webp', alt: 'Bookcase in my home office', tooltip: 'Beloved bookcase in my home office' },
-        { src: '../assets/images/about/wedding.jpg',   alt: 'My wedding',                 tooltip: 'My wedding' },
-        // Add more photos: { src: '../assets/images/about/stack/photo.webp', alt: '...', tooltip: '...' },
+        { src: ABOUT_IMG + 'ruby.webp',     alt: 'Ruby my cat',                tooltip: 'Say hello to my cat Ruby' },
+        { src: ABOUT_IMG + 'cheviot.webp',  alt: '815 metres above sea level', tooltip: 'Taken at 815 metres above sea level' },
+        { src: ABOUT_IMG + 'bookcase.webp', alt: 'Bookcase in my home office', tooltip: 'Beloved bookcase in my home office' },
+        { src: ABOUT_IMG + 'wedding.jpg',   alt: 'My wedding',                 tooltip: 'My wedding' },
+        // Drop photos into assets/images/about/ then add a line here:
+        // { src: ABOUT_IMG + 'filename.webp', alt: '...', tooltip: '...' },
     ];
 
     const PAGE_SIZE     = 4;
