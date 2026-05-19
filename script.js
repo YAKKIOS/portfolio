@@ -409,7 +409,10 @@ function init() {
         { src: ABOUT_IMG + 'bookcase.webp', alt: 'Bookcase in my home office', tooltip: 'Beloved bookcase in my home office' },
         { src: ABOUT_IMG + 'wedding.jpg',   alt: 'My wedding',                 tooltip: 'My wedding' },
         // Drop photos into assets/images/about/ then add a line here:
-        // { src: ABOUT_IMG + 'filename.webp', alt: '...', tooltip: '...' },
+        { src: ABOUT_IMG + 'trafalgar-01.webp', alt: 'Battle of Trafalgar painting',      tooltip: 'My oil painting of the Battle of Trafalgar' },
+        { src: ABOUT_IMG + 'trafalgar-02.webp', alt: 'Close up of Trafalgar painting',    tooltip: 'A close up of my oil painting' },
+        { src: ABOUT_IMG + 'napoleon-tomb.webp', alt: "Napoleon's tomb",                  tooltip: "Napoleon's tomb, Paris" },
+        { src: ABOUT_IMG + 'hougomont.webp',    alt: 'Closing the Gates at Hougoumont',   tooltip: "Robert Gibb's 'Closing the Gates at Hougoumont'" },
     ];
 
     const PAGE_SIZE     = 4;
