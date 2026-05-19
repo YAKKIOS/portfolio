@@ -985,6 +985,44 @@ blockquote p {
 }
 
 /* =========================================
+   About Page: Picture Stack Navigation
+   ========================================= */
+.stack-nav {
+    display: none; /* shown by JS once pool has > 4 images */
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+}
+
+.stack-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    color: var(--text-main);
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.stack-nav-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.10);
+}
+
+.stack-nav-btn:active { transform: scale(0.96); }
+
+.stack-nav-btn .material-symbols-rounded {
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* =========================================
    About Page: Interactive Picture Stack
    ========================================= */
 .picture-stack {
