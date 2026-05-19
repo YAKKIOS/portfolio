@@ -988,6 +988,7 @@ blockquote p {
    ========================================= */
 .stack-nav {
     display: none; /* shown by JS once pool has > 4 images */
+    justify-content: center;
     gap: 0.5rem;
     margin-top: 1.75rem;
 }

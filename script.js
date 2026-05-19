@@ -428,9 +428,15 @@ function init() {
 
         stackNavEl.style.display = 'flex';
 
+        // Preload every image in the pool so swaps are instant
+        STACK_POOL.forEach(item => { const i = new Image(); i.src = item.src; });
+
         const renderStackPage = (newPage) => {
-            pictureStackEl.style.transition = 'opacity 0.18s ease';
-            pictureStackEl.style.opacity = '0';
+            // Fast fade-out all cards together
+            stackPicEls.forEach(pic => {
+                pic.style.transition = 'opacity 0.12s ease';
+                pic.style.opacity = '0';
+            });
 
             setTimeout(() => {
                 stackPage = newPage;
@@ -443,8 +449,19 @@ function init() {
                     img.alt = item.alt;
                     pic.setAttribute('data-tooltip', item.tooltip);
                 });
-                pictureStackEl.style.opacity = '1';
-            }, 180);
+
+                // Staggered fade-in — each card deals in 60ms after the last
+                stackPicEls.forEach((pic, i) => {
+                    pic.style.transition = `opacity 0.22s ease ${i * 60}ms`;
+                    pic.style.opacity = '1';
+                });
+
+                // Clean up inline transitions so hover styles work normally again
+                setTimeout(() => {
+                    stackPicEls.forEach(pic => { pic.style.transition = ''; pic.style.opacity = ''; });
+                }, 220 + PAGE_SIZE * 60 + 50);
+
+            }, 130);
 
             stackPrevBtn.disabled = newPage === 0;
             stackNextBtn.disabled = newPage === totalStackPages - 1;
