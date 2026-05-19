@@ -400,7 +400,60 @@ function init() {
     }
 
     /* =========================================
-       9. Contact Card — 3D Tilt, Holographic Glare, Copy Email
+       9. Picture Stack Pagination
+       ========================================= */
+    const STACK_POOL = [
+        { src: '../assets/images/about/ruby.webp',     alt: 'Ruby my cat',                tooltip: 'Say hello to my cat Ruby' },
+        { src: '../assets/images/about/cheviot.webp',  alt: '815 metres above sea level', tooltip: 'Taken at 815 metres above sea level' },
+        { src: '../assets/images/about/bookcase.webp', alt: 'Bookcase in my home office', tooltip: 'Beloved bookcase in my home office' },
+        { src: '../assets/images/about/wedding.jpg',   alt: 'My wedding',                 tooltip: 'My wedding' },
+        // Add more photos: { src: '../assets/images/about/stack/photo.webp', alt: '...', tooltip: '...' },
+    ];
+
+    const PAGE_SIZE     = 4;
+    const stackPicEls   = document.querySelectorAll('.stacked-pic');
+    const stackNavEl    = document.getElementById('stack-nav');
+    const stackPrevBtn  = document.getElementById('stack-prev');
+    const stackNextBtn  = document.getElementById('stack-next');
+    const pictureStackEl = document.querySelector('.picture-stack');
+
+    if (stackPicEls.length === PAGE_SIZE && stackNavEl && STACK_POOL.length > PAGE_SIZE) {
+        let stackPage = 0;
+        const totalStackPages = Math.ceil(STACK_POOL.length / PAGE_SIZE);
+
+        stackNavEl.style.display = 'flex';
+
+        const renderStackPage = (newPage) => {
+            pictureStackEl.style.transition = 'opacity 0.18s ease';
+            pictureStackEl.style.opacity = '0';
+
+            setTimeout(() => {
+                stackPage = newPage;
+                const offset = stackPage * PAGE_SIZE;
+                stackPicEls.forEach((pic, i) => {
+                    const item = STACK_POOL[offset + i];
+                    if (!item) return;
+                    const img = pic.querySelector('img');
+                    img.src = item.src;
+                    img.alt = item.alt;
+                    pic.setAttribute('data-tooltip', item.tooltip);
+                });
+                pictureStackEl.style.opacity = '1';
+            }, 180);
+
+            stackPrevBtn.disabled = newPage === 0;
+            stackNextBtn.disabled = newPage === totalStackPages - 1;
+        };
+
+        stackPrevBtn.disabled = true;
+        stackNextBtn.disabled = totalStackPages <= 1;
+
+        stackPrevBtn.addEventListener('click', () => { if (stackPage > 0) renderStackPage(stackPage - 1); });
+        stackNextBtn.addEventListener('click', () => { if (stackPage < totalStackPages - 1) renderStackPage(stackPage + 1); });
+    }
+
+    /* =========================================
+       10. Contact Card — 3D Tilt, Copy Email
        ========================================= */
     const contactCard = document.getElementById('contact-card');
     const copyBtn     = document.getElementById('copy-email-btn');
