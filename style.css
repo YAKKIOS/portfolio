@@ -17,10 +17,6 @@
     --text-18: 1.125rem;
     --text-14: 0.875rem;
     --text-12: 0.75rem;   
-    --highlight-underline: var(--blue-primary);
-    --highlight-circle: #f59e0b; /* Orange */
-    --highlight-box: #ef4444;    /* Red */ 
-    
     /* Mathematically perfect 24px line height (1.5 * 16px) */
     --lh-base: 1.625rem;        
     
@@ -258,7 +254,6 @@ p {font-weight: 420;}
    Featured Work Grid (Premium Shadows)
    ========================================= */
 .section-title { font-size: var(--text-16); font-weight: 500; margin-bottom: 2rem; }
-.section-title.center { text-align: center; }
 
 .work-grid {
     display: grid;
@@ -271,11 +266,6 @@ p {font-weight: 420;}
     grid-template-columns: 1fr;
     gap: 4rem;
 }
-
-.work-grid--stacked .card-image-wrapper {
-    /*aspect-ratio: 16 / 9;*/
-}
-
 
 .card-image-wrapper {
     background-color: #ffffff;
@@ -445,8 +435,6 @@ p {font-weight: 420;}
 /* No grey boxes, just a clean text color shift */
 .footnote-block-link:hover {
     color: var(--text-main);
-        transition: color 0.2s ease, text-decoration-color 0.2s ease;
-
 }
 
 /* =========================================
@@ -477,34 +465,6 @@ blockquote p {
     margin: 0;
 }
 
-.blockquote-attribution {
-    display: flex;
-    align-items: center;
-    margin-top: 0.75rem;
-}
-
-.blockquote-name {
-    font-size: var(--text-14);
-    font-weight: 500;
-    color: var(--text-body);
-}
-
-.blockquote-role {
-    font-size: var(--text-14);
-    color: var(--text-muted);
-}
-
-.blockquote-role::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    background: var(--text-muted);
-    border-radius: 50%;
-    vertical-align: middle;
-    margin: 0 8px;
-}
-
 /* =========================================
    Testimonial Bubbles
    ========================================= */
@@ -529,14 +489,14 @@ blockquote p {
 .testimonial-attribution {
     display: flex;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     padding-left: 2px;
 }
 
 .testimonial-name {
     font-size: var(--text-16);
     font-weight: 500;
-    color: var(--text-body);
+    color: var(--text-main);
 }
 
 .testimonial-role {
@@ -676,15 +636,6 @@ blockquote p {
     border-top: 1px solid var(--border-color);
     width: 8rem;
     margin: 3.5rem auto;
-}
-
-/* =========================================
-   Dotted Divider
-   ========================================= */
-.divider {
-    border: none;
-    border-top: 1px solid var(--border-color);
-    margin: 3rem 0;
 }
 
 /* =========================================
@@ -1021,8 +972,6 @@ blockquote p {
     opacity: 0.3;
     cursor: default;
 }
-
-.stack-nav-btn:active { transform: scale(0.96); }
 
 .stack-nav-btn .material-symbols-rounded {
     font-size: 18px;
