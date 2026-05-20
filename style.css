@@ -1010,9 +1010,16 @@ blockquote p {
     appearance: none;
 }
 
-.stack-nav-btn:hover {
+.stack-nav-btn:not(:disabled):hover {
     transform: scale(1.08);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.10);
+}
+
+.stack-nav-btn:active { transform: scale(0.96); }
+
+.stack-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
 }
 
 .stack-nav-btn:active { transform: scale(0.96); }
