@@ -13,8 +13,7 @@ function init() {
     /* =========================================
        0. Page Transitions
        ========================================= */
-    // A fixed white overlay handles the fade so body opacity is never
-    // touched — body opacity breaks position:fixed on all descendants.
+    // Fixed white overlay — avoids touching body opacity which breaks position:fixed
     const overlay = document.createElement('div');
     overlay.style.cssText = [
         'position:fixed', 'inset:0', 'background:#fff',
@@ -23,25 +22,16 @@ function init() {
     ].join(';');
     document.body.appendChild(overlay);
 
-    // Fade the overlay out (page enter)
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            overlay.style.opacity = '0';
-        });
-    });
+    requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = '0'; }));
 
-    // Safari bfcache: hitting Back restores the page without firing DOMContentLoaded,
-    // leaving the overlay stuck at opacity:1. pageshow fires instead with e.persisted=true.
+    // Safari bfcache: Back navigation restores without DOMContentLoaded
     window.addEventListener('pageshow', e => {
         if (e.persisted) {
             overlay.style.transition = 'opacity 0.35s ease';
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => { overlay.style.opacity = '0'; });
-            });
+            requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = '0'; }));
         }
     });
 
-    // Fade the overlay in then navigate (page leave)
     document.querySelectorAll('a[href]').forEach(link => {
         const href = link.getAttribute('href');
         if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') return;
@@ -62,23 +52,13 @@ function init() {
     if (scrollbar && fill) {
         function updateProgress() {
             const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-            
-            if (scrollableHeight <= 0) {
-                scrollbar.style.opacity = '0';
-                return;
-            } else {
-                scrollbar.style.opacity = '1';
-            }
-
-            let progress = window.scrollY / scrollableHeight;
-            progress = Math.max(0, Math.min(progress, 1)); 
-            
-            fill.style.height = `${progress * 100}%`;
+            if (scrollableHeight <= 0) { scrollbar.style.opacity = '0'; return; }
+            scrollbar.style.opacity = '1';
+            fill.style.height = `${Math.max(0, Math.min(window.scrollY / scrollableHeight, 1)) * 100}%`;
         }
-
         window.addEventListener('scroll', updateProgress, { passive: true });
         window.addEventListener('resize', updateProgress);
-        setTimeout(updateProgress, 100); 
+        setTimeout(updateProgress, 100);
     }
 
 /* =========================================
@@ -88,22 +68,13 @@ function init() {
     
     if (timeDisplay) {
         const updateTime = () => {
-            const now = new Date();
-            const rawTime = now.toLocaleTimeString('en-GB', {
-                timeZone: 'Europe/London',
-                hour: 'numeric', /* <-- Changed from '2-digit' to remove the leading zero */
-                minute: '2-digit',
-                hour12: true
+            const raw = new Date().toLocaleTimeString('en-GB', {
+                timeZone: 'Europe/London', hour: 'numeric', minute: '2-digit', hour12: true
             });
-            
-            // Force lowercase and strip out the space before am/pm
-            const cleanTime = rawTime.toLowerCase().replace(' ', '');
-            
-            timeDisplay.textContent = cleanTime; 
+            timeDisplay.textContent = raw.toLowerCase().replace(' ', '');
         };
-        
-        updateTime(); 
-        setInterval(updateTime, 1000); 
+        updateTime();
+        setInterval(updateTime, 1000);
     }
 
     /* =========================================
@@ -146,59 +117,33 @@ function init() {
 
 
     /* =========================================
-       4. Rough Notation (Scroll-Triggered, Multi-Element)
+       4. Rough Notation (Scroll-Triggered)
        ========================================= */
-    // Defer until the container slide-up animation ends so getBoundingClientRect()
-    // returns correct coordinates (a live transform shifts them off-screen).
+    // Deferred until container animation ends — live transform skews getBoundingClientRect()
     const _rnContainer = document.querySelector('.container');
     const _initRoughNotation = () => {
-    if (typeof RoughNotation !== 'undefined') {
-        const annotate = RoughNotation.annotate;
-        
-        // Define your styles. You can use these classes as many times as you want!
+        if (typeof RoughNotation === 'undefined') return;
         const styles = [
             { selector: '.rn-highlight', type: 'highlight', color: '#F4B3F8', strokeWidth: 1.5 },
             { selector: '.rn-underline', type: 'underline', color: '#157CFF', strokeWidth: 2 },
-            { selector: '.rn-circle', type: 'circle', color: '#FF9800', strokeWidth: 1.5 },
-            { selector: '.rn-box', type: 'box', color: '#F44336', strokeWidth: 1.5 }
+            { selector: '.rn-circle',    type: 'circle',    color: '#FF9800', strokeWidth: 1.5 },
+            { selector: '.rn-box',       type: 'box',       color: '#F44336', strokeWidth: 1.5 }
         ];
-
-        // The scroll-watcher
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // When the element comes into view and hasn't been animated yet
-                if (entry.isIntersecting) {
-                    const annotation = entry.target._rnAnnotation; 
-                    if (annotation && !entry.target.dataset.animated) {
-                        annotation.show();
-                        entry.target.dataset.animated = 'true'; // Lock it so it only draws once
-                    }
+                if (entry.isIntersecting && entry.target._rnAnnotation && !entry.target.dataset.animated) {
+                    entry.target._rnAnnotation.show();
+                    entry.target.dataset.animated = 'true';
                 }
             });
-        }, { threshold: 0.5 }); // Triggers when 50% visible
-
-        // Find ALL matching elements on the page and prep them
-        styles.forEach(style => {
-            const elements = document.querySelectorAll(style.selector); // Grab all of them!
-            
-            elements.forEach(el => {
-                // Prep the drawing instructions and attach it to the element
-                el._rnAnnotation = annotate(el, {
-                    type: style.type,
-                    color: style.color,
-                    strokeWidth: style.strokeWidth,
-                    padding: 2,
-                    animationDuration: 600,
-                    multiline: true /* <-- THE FIX: Tells the script to trace actual text lines */
-                });
-                
-                // Tell the scroll-watcher to keep an eye on this specific element
+        }, { threshold: 0.5 });
+        styles.forEach(({ selector, type, color, strokeWidth }) => {
+            document.querySelectorAll(selector).forEach(el => {
+                el._rnAnnotation = RoughNotation.annotate(el, { type, color, strokeWidth, padding: 2, animationDuration: 600, multiline: true });
                 observer.observe(el);
             });
         });
-    }
-    }; // end _initRoughNotation
-
+    };
     if (_rnContainer) {
         _rnContainer.addEventListener('animationend', _initRoughNotation, { once: true });
     } else {
@@ -259,20 +204,14 @@ function init() {
 
     if (loreBtn) {
         let currentLoreIndex = 0;
-
         loreBtn.addEventListener('click', () => {
             loreBody.classList.add('is-rolling');
-
-            // Swap content at the halfway point of the spin
             setTimeout(() => {
-                let nextLore = currentLoreIndex;
-                while (nextLore === currentLoreIndex) {
-                    nextLore = Math.floor(Math.random() * loreFacts.length);
-                }
-                currentLoreIndex = nextLore;
+                let next = currentLoreIndex;
+                while (next === currentLoreIndex) next = Math.floor(Math.random() * loreFacts.length);
+                currentLoreIndex = next;
                 loreText.textContent = loreFacts[currentLoreIndex];
             }, 200);
-
             setTimeout(() => loreBody.classList.remove('is-rolling'), 400);
         });
     }
@@ -282,29 +221,18 @@ function init() {
        ========================================= */
     const weatherDisplay = document.querySelector('#local-weather');
     
-    // SAFETY CHECK: Only run if the weather span exists on the page
     if (weatherDisplay) {
         async function fetchWeather() {
             try {
-                // Fetching data for Gateshead (Lat: 54.962, Long: -1.6017)
-                const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=54.962&longitude=-1.6017&current_weather=true');
-                const data = await response.json();
-                
-                // Grab the temperature and round it so we don't get messy decimals
-                const temp = Math.round(data.current_weather.temperature);
-                
-                // Inject the clean temperature with the Celsius symbol
-                weatherDisplay.textContent = `${temp}°C`; 
-                
-            } catch (error) {
-                // If the user is offline or the API fails, fail silently and cleanly
-                console.error("Weather data unavailable", error);
+                const res  = await fetch('https://api.open-meteo.com/v1/forecast?latitude=54.962&longitude=-1.6017&current_weather=true');
+                const data = await res.json();
+                weatherDisplay.textContent = `${Math.round(data.current_weather.temperature)}°C`;
+            } catch {
                 weatherDisplay.textContent = '--°C';
             }
         }
-
-        fetchWeather(); // Run immediately on load
-        setInterval(fetchWeather, 1800000); // Check for an update every 30 minutes
+        fetchWeather();
+        setInterval(fetchWeather, 1800000);
     }
 
     /* =========================================
@@ -325,9 +253,8 @@ function init() {
         let activePic = null;
         let tooltipTimer = null;
 
+        // Guards against synthetic mouseenter fired by mobile browsers on tap
         stackedPics.forEach(pic => {
-            // Tooltip: real pointer devices only — guards against synthetic
-            // mouseenter fired by mobile browsers on tap.
             pic.addEventListener('mouseenter', () => {
                 if (!canHover.matches) return;
                 activePic = pic;
@@ -347,16 +274,13 @@ function init() {
             });
         });
 
-        // Mobile lightbox — proximity based so z-index stacking doesn't cause
-        // the wrong card to fire. Finds the card whose centre is closest to the
-        // tap point, then opens that image in the lightbox.
+        // Mobile: proximity tap — picks card whose centre is closest to the touch point
         const pictureStack = document.querySelector('.picture-stack');
-        const lbModal  = document.querySelector('.lightbox-modal');
-        const lbImg    = document.querySelector('.lightbox-content');
+        const lbModal = document.querySelector('.lightbox-modal');
+        const lbImg   = document.querySelector('.lightbox-content');
 
         if (pictureStack && lbModal && lbImg && !canHover.matches) {
             let touchStartX, touchStartY;
-
             pictureStack.addEventListener('touchstart', e => {
                 touchStartX = e.touches[0].clientX;
                 touchStartY = e.touches[0].clientY;
@@ -364,27 +288,18 @@ function init() {
 
             pictureStack.addEventListener('touchend', e => {
                 const t = e.changedTouches[0];
-                // Ignore vertical drift — likely a scroll attempt
                 if (Math.abs(t.clientY - touchStartY) > 20) return;
-
-                // Cards spread horizontally — X distance alone picks the right card
                 let closest = null, minDist = Infinity;
                 stackedPics.forEach(pic => {
-                    const r = pic.getBoundingClientRect();
+                    const r    = pic.getBoundingClientRect();
                     const dist = Math.abs(t.clientX - (r.left + r.width / 2));
                     if (dist < minDist) { minDist = dist; closest = pic; }
                 });
-
                 if (!closest) return;
-
-                // Ignore taps in the empty space above/below the cards
                 const cr = closest.getBoundingClientRect();
                 if (t.clientY < cr.top - 8 || t.clientY > cr.bottom + 8) return;
-
-                // preventDefault stops the browser generating a synthetic click
-                // that would land on the now-visible modal and immediately close it
+                // Prevents synthetic click landing on the modal and immediately closing it
                 e.preventDefault();
-
                 const img = closest.querySelector('img');
                 if (!img) return;
                 lbImg.src = img.src;
@@ -392,10 +307,10 @@ function init() {
                 lbModal.classList.add('is-open');
                 lbModal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-            }, { passive: false }); // must be non-passive to call preventDefault
+            }, { passive: false });
         }
 
-        // Hide tooltip while scrolling — position:fixed doesn't track the card on scroll
+        // position:fixed tooltips don't track scroll
         window.addEventListener('scroll', () => tooltip.classList.remove('is-visible'), { passive: true });
     }
 
@@ -415,12 +330,11 @@ function init() {
         { src: ABOUT_IMG + 'hougomont.webp',    alt: 'Closing the Gates at Hougoumont',   tooltip: "Robert Gibb's 'Closing the Gates at Hougoumont'" },
     ];
 
-    const PAGE_SIZE     = 4;
-    const stackPicEls   = document.querySelectorAll('.stacked-pic');
-    const stackNavEl    = document.getElementById('stack-nav');
-    const stackPrevBtn  = document.getElementById('stack-prev');
-    const stackNextBtn  = document.getElementById('stack-next');
-    const pictureStackEl = document.querySelector('.picture-stack');
+    const PAGE_SIZE    = 4;
+    const stackPicEls  = document.querySelectorAll('.stacked-pic');
+    const stackNavEl   = document.getElementById('stack-nav');
+    const stackPrevBtn = document.getElementById('stack-prev');
+    const stackNextBtn = document.getElementById('stack-next');
 
     if (stackPicEls.length === PAGE_SIZE && stackNavEl && STACK_POOL.length > PAGE_SIZE) {
         let stackPage = 0;
@@ -428,16 +342,13 @@ function init() {
 
         stackNavEl.style.display = 'flex';
 
-        // Preload every image in the pool so swaps are instant
         STACK_POOL.forEach(item => { const i = new Image(); i.src = item.src; });
 
         const renderStackPage = (newPage) => {
-            // Fast fade-out all cards together
             stackPicEls.forEach(pic => {
                 pic.style.transition = 'opacity 0.12s ease';
                 pic.style.opacity = '0';
             });
-
             setTimeout(() => {
                 stackPage = newPage;
                 const offset = stackPage * PAGE_SIZE;
@@ -449,27 +360,22 @@ function init() {
                     img.alt = item.alt;
                     pic.setAttribute('data-tooltip', item.tooltip);
                 });
-
-                // Staggered fade-in — each card deals in 60ms after the last
+                // Stagger each card in left-to-right
                 stackPicEls.forEach((pic, i) => {
                     pic.style.transition = `opacity 0.22s ease ${i * 60}ms`;
                     pic.style.opacity = '1';
                 });
-
-                // Clean up inline transitions so hover styles work normally again
+                // Restore hover transitions once animation finishes
                 setTimeout(() => {
                     stackPicEls.forEach(pic => { pic.style.transition = ''; pic.style.opacity = ''; });
                 }, 220 + PAGE_SIZE * 60 + 50);
-
             }, 130);
-
             stackPrevBtn.disabled = newPage === 0;
             stackNextBtn.disabled = newPage === totalStackPages - 1;
         };
 
         stackPrevBtn.disabled = true;
         stackNextBtn.disabled = totalStackPages <= 1;
-
         stackPrevBtn.addEventListener('click', () => { if (stackPage > 0) renderStackPage(stackPage - 1); });
         stackNextBtn.addEventListener('click', () => { if (stackPage < totalStackPages - 1) renderStackPage(stackPage + 1); });
     }
@@ -481,30 +387,20 @@ function init() {
     const copyBtn     = document.getElementById('copy-email-btn');
 
     if (contactCard) {
-        const MAX_TILT = 10; // degrees
+        const MAX_TILT = 10;
         let rafId;
-
-        // Disable CSS transition while tracking so updates are instant
-        contactCard.addEventListener('mouseenter', () => {
-            contactCard.style.transition = 'none';
-        });
-
+        contactCard.addEventListener('mouseenter', () => { contactCard.style.transition = 'none'; });
         contactCard.addEventListener('mousemove', (e) => {
             cancelAnimationFrame(rafId);
             rafId = requestAnimationFrame(() => {
                 const rect  = contactCard.getBoundingClientRect();
-                const x     = (e.clientX - rect.left) / rect.width;   // 0–1
-                const y     = (e.clientY - rect.top)  / rect.height;  // 0–1
-                const tiltX = (y - 0.5) * -MAX_TILT;
-                const tiltY = (x - 0.5) *  MAX_TILT;
-
-                contactCard.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+                const x     = (e.clientX - rect.left) / rect.width;
+                const y     = (e.clientY - rect.top)  / rect.height;
+                contactCard.style.transform = `perspective(900px) rotateX(${(y - 0.5) * -MAX_TILT}deg) rotateY(${(x - 0.5) * MAX_TILT}deg)`;
                 contactCard.style.setProperty('--mouse-x', `${x * 100}%`);
                 contactCard.style.setProperty('--mouse-y', `${y * 100}%`);
             });
         });
-
-        // Spring back to flat on leave
         contactCard.addEventListener('mouseleave', () => {
             cancelAnimationFrame(rafId);
             contactCard.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
