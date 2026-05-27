@@ -618,8 +618,23 @@ blockquote p {
 
 .case-study-content .section-title {
     margin-top: 3rem;
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1.5rem;
 }
+
+.section-eyebrow {
+    font-size: var(--text-14);
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin-top: 3rem;
+    margin-bottom: 0.3rem;
+}
+
+.section-eyebrow + .section-title {
+    margin-top: 0;
+}
+
+.text-medium { font-weight: 500; }
 
 
 .case-study-content p {
