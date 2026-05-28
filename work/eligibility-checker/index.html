@@ -99,7 +99,8 @@
 
                 
                 
-                <h3 class="section-title">Context and problem</h3>
+                <p class="section-eyebrow">Regulatory Challenge</p>
+                <h3 class="section-title">Identifying vulnerable customers missed by the legacy form</h3>
                 <p>
                     There are around <span class="rn-underline">16 million people in the UK living with a disability.</span><sup class="footnote-ref"><a href="#fn:1" id="fnref:1">1</a></sup> The PSR (Priority Services Register) exists to make sure the most vulnerable energy customers get extra support from their electric or water company when they need it most.</p>
 
@@ -119,7 +120,8 @@
 
 
 
-                <h3 class="section-title">Changing health landscape</h3>
+                <p class="section-eyebrow">Demographic Shift</p>
+                <h3 class="section-title">Designing for a rapidly aging population</h3>
                 <p>
                     The older population in England is getting larger. In the last 40 years, the number of people aged 65 and over has increased by over 3.5 million (a 52% increase).<sup class="footnote-ref"><a href="#fn:3" id="fnref:3">3</a></sup>
 </p>
@@ -136,12 +138,14 @@
                 <hr class="section-break">
 
 
-                <h3 class="section-title">The approach</h3>
+                <p class="section-eyebrow">Product Strategy</p>
+                <h3 class="section-title">Proposing a lightweight checker to beat form fatigue</h3>
                 <p>
                     Ofgem had been pushing energy companies to find more innovative ways to increase PSR sign-ups. Rather than redesigning the full application form, we proposed something lighter. An eligibility checker that answers one question fast: do I qualify for PSR?</p>
 
 
-                    <h3 class="section-title">Structuring the flow</h3>
+                    <p class="section-eyebrow">Information Architecture</p>
+                    <h3 class="section-title">Grouping user needs into a metaphorical funnel</h3>
 <p>National Grid's existing form split PSR criteria into two categories: electrical medical equipment and all other health needs. That wasn't the right shape for a tool designed to reassure people quickly.</p>
 
 <p>Rather than presenting every option at once, I reorganised the flow into a metaphorical funnel. The tool leads with broad and generalist questions first (age, life circumstances), because these cast the widest net and would provide most people with the fastest answer. Medical needs came next, then communication needs and lastly temporary needs. The idea was simple, lead with options most likely to apply and work inward from there.</p>
@@ -153,7 +157,8 @@
 <p>A customer may well have 5 options apply to them but this tool was designed to supply them with an answer fastest by selecting the first option that applies. The more detailed form can capture those other health needs later in the process.</p>
 
 
-                    <h3 class="section-title">Unsure if you qualify?</h3>
+                    <p class="section-eyebrow">User Psychology</p>
+                    <h3 class="section-title">Moving the "unsure" option to simplify back-end logic</h3>
 <p>A huge aspect of this tool was to try and encourage customers who are unsure if they are eligible, to apply anyway. For those caught in between a definite yes and no, we wanted to reassure them and advise them to apply. 
 </p>
 
@@ -178,7 +183,8 @@
 
 <p>This decision also simplified the back-end logic. Reducing the decision tree by 50%. That was because selecting unsure created a split in the decision tree where the system had to understand if the user moving on has flagged unsure at any point which would eventually lead them to a ‘you may be eligible’ screen.</p>
 
-    <h3 class="section-title">Design validation</h3>
+    <p class="section-eyebrow">Rapid Testing</p>
+    <h3 class="section-title">Validating the flow internally on a tight timeline</h3>
 <p>
     Ideally, a tool designed for vulnerable customers would undergo extensive external testing, but a tight timeline meant we had to be strategic. I leaned heavily into the existing NGED design system and built 90% of the experience using established NGED design system patterns. We could skip testing the basic UI and focus our internal sessions entirely on the flow and tone of voice.
 
@@ -223,7 +229,8 @@
     
 </figure>
 
-    <h3 class="section-title">Technical feasbility</h3>
+    <p class="section-eyebrow">Engineering Alignment</p>
+    <h3 class="section-title">Deploying in pre-production to test live system architecture</h3>
 
 <p>
     While we reused a significant amount of existing components, the new flow required some custom elements and styling. We built and deployed the tool in a pre-prod environment. It gave us a direct understanding of exactly what backend or front-end changes were required to align our new flow with National Grid’s existing architecture before pushing to production.
@@ -241,7 +248,8 @@
 
                 <hr class="section-break">
 
-                    <h3 class="section-title">Softening the visuals</h3>
+                    <p class="section-eyebrow">Interface & Tone</p>
+                    <h3 class="section-title">Shifting the color palette to reduce user anxiety</h3>
 <p>The users coming to this tool may be managing chronic illness, caring for a vulnerable relative, or dealing with a difficult diagnosis. The design had to feel approachable without feeling patronising.</p>
 
 <div class="case-study-image">
@@ -253,7 +261,8 @@
 
 <p>I worked within National Grid's existing component library, updating and refreshing where needed. It kept the build extremely lean whilst also providing us with exactly what we needed it to do.</p>
 
-                    <h3 class="section-title">Tone of voice</h3>
+                    <p class="section-eyebrow">Content Design</p>
+                    <h3 class="section-title">Setting clear expectations for self-service and carers</h3>
 <p>I worked closely with our content designer to manage expectations clearly. National Grid flagged early that customers often assumed PSR offered more than it does, and with high anticipated usage, that expectation needed addressing in the content.</p>
 
 <p>The tool reflected the PSR form of being able to submit a claim for yourself or on behalf of somebody else. The language reflected that to ensure there was no confusion about the journey taken by customers.</p>
@@ -265,7 +274,8 @@
                 <hr class="section-break">
 
 
-                    <h3 class="section-title">Project outcomes</h3>
+                    <p class="section-eyebrow">Growth & Impact</p>
+                    <h3 class="section-title">Getting users to an eligibility answer within two clicks</h3>
 <p>Most users can find out if they are eligible for PSR within two clicks. Given the old experience required completing an entire form before finding out if you even qualified. This felt like a meaningful shift towards Ofgems goal of getting more customers, who are eligible, onto the register. </p>
 
 <p>We defined success for this tool by looking beyond a 'you are eligible' result. <span class="rn-highlight">The ultimate goal was driving those users to the PSR application</span>. Due to system tracking limitations, we cannot directly attribute final application completions to this tool. Instead, we established increased traffic to the main application form as our primary success metric. We are actively tracking this data to see if reducing that up front complexity translates to a long term increase in sign ups.</p>
@@ -280,7 +290,8 @@
     
 </figure>
 
-                    <h3 class="section-title">Moving forward</h3>
+                    <p class="section-eyebrow">Next Steps</p>
+                    <h3 class="section-title">Aligning the core registration form with the new logic</h3>
 <p>Breaking the PSR needs into logical groups for the checker created a conflict with the existing registration form. We identified that the form would need to be updated to match the checker’s grouping. Luckily, there’s already a project running in tandem to improve the PSR content across NGED, so these new groupings will be introduced as part of that work.</p>
 
             </article>
