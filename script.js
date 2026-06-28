@@ -319,73 +319,7 @@ function init() {
     }
 
     /* =========================================
-       9. Picture Stack Pagination
-       ========================================= */
-    const ABOUT_IMG  = '../assets/images/about/';
-    const STACK_POOL = [
-        { src: ABOUT_IMG + 'ruby.webp',     alt: 'Ruby my cat',                tooltip: 'Say hello to my cat Ruby' },
-        { src: ABOUT_IMG + 'cheviot.webp',  alt: '815 metres above sea level', tooltip: 'Taken at 815 metres above sea level' },
-        { src: ABOUT_IMG + 'bookcase.webp', alt: 'Bookcase in my home office', tooltip: 'Beloved bookcase in my home office' },
-        { src: ABOUT_IMG + 'wedding.jpg',   alt: 'My wedding',                 tooltip: 'My wedding' },
-        // Drop photos into assets/images/about/ then add a line here:
-        { src: ABOUT_IMG + 'trafalgar-01.webp', alt: 'Battle of Trafalgar painting',      tooltip: 'My oil painting of the Battle of Trafalgar' },
-        { src: ABOUT_IMG + 'trafalgar-02.webp', alt: 'Close up of Trafalgar painting',    tooltip: 'A close up of my oil painting' },
-        { src: ABOUT_IMG + 'napoleon-tomb.webp', alt: "Napoleon's tomb",                  tooltip: "Napoleon's tomb, Paris" },
-        { src: ABOUT_IMG + 'hougomont.webp',    alt: 'Closing the Gates at Hougoumont',   tooltip: "Robert Gibb's 'Closing the Gates at Hougoumont'" },
-    ];
-
-    const PAGE_SIZE    = 4;
-    const stackPicEls  = document.querySelectorAll('.stacked-pic');
-    const stackNavEl   = document.getElementById('stack-nav');
-    const stackPrevBtn = document.getElementById('stack-prev');
-    const stackNextBtn = document.getElementById('stack-next');
-
-    if (stackPicEls.length === PAGE_SIZE && stackNavEl && STACK_POOL.length > PAGE_SIZE) {
-        let stackPage = 0;
-        const totalStackPages = Math.ceil(STACK_POOL.length / PAGE_SIZE);
-
-        stackNavEl.style.display = 'flex';
-
-        STACK_POOL.forEach(item => { const i = new Image(); i.src = item.src; });
-
-        const renderStackPage = (newPage) => {
-            stackPicEls.forEach(pic => {
-                pic.style.transition = 'opacity 0.12s ease';
-                pic.style.opacity = '0';
-            });
-            setTimeout(() => {
-                stackPage = newPage;
-                const offset = stackPage * PAGE_SIZE;
-                stackPicEls.forEach((pic, i) => {
-                    const item = STACK_POOL[offset + i];
-                    if (!item) return;
-                    const img = pic.querySelector('img');
-                    img.src = item.src;
-                    img.alt = item.alt;
-                    pic.setAttribute('data-tooltip', item.tooltip);
-                });
-                // Stagger each card in left-to-right
-                stackPicEls.forEach((pic, i) => {
-                    pic.style.transition = `opacity 0.22s ease ${i * 60}ms`;
-                    pic.style.opacity = '1';
-                });
-                // Restore hover transitions once animation finishes
-                setTimeout(() => {
-                    stackPicEls.forEach(pic => { pic.style.transition = ''; pic.style.opacity = ''; });
-                }, 220 + PAGE_SIZE * 60 + 50);
-            }, 130);
-            stackPrevBtn.disabled = newPage === 0;
-            stackNextBtn.disabled = newPage === totalStackPages - 1;
-        };
-
-        stackPrevBtn.disabled = true;
-        stackNextBtn.disabled = totalStackPages <= 1;
-        stackPrevBtn.addEventListener('click', () => { if (stackPage > 0) renderStackPage(stackPage - 1); });
-        stackNextBtn.addEventListener('click', () => { if (stackPage < totalStackPages - 1) renderStackPage(stackPage + 1); });
-    }
-
-    /* =========================================
-       10. Contact Card — 3D Tilt, Copy Email
+       9. Contact Card — 3D Tilt, Copy Email
        ========================================= */
     const contactCard = document.getElementById('contact-card');
     const copyBtn     = document.getElementById('copy-email-btn');
