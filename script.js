@@ -416,7 +416,7 @@ function init() {
     }
 
     if (copyBtn) {
-        const EMAIL     = 'hello@jackjohnson.co.uk';
+        const EMAIL     = 'hello@jackjohnson.fyi';
         const copyIcon  = document.getElementById('copy-icon');
         const copyLabel = document.getElementById('copy-label');
         let resetTimer;
