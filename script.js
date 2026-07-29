@@ -405,6 +405,7 @@ function init() {
             }
         }
         checkSpoonsStatus();
+        setInterval(checkSpoonsStatus, 2 * 60 * 1000);
     }
 
 } // end init
