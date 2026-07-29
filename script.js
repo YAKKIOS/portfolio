@@ -389,7 +389,7 @@ function init() {
                 const hoursAgo = (new Date() - new Date(data.updated_at)) / (1000 * 60 * 60);
 
                 if (data.isAtSpoons && hoursAgo < 4) {
-                    const time = new Date(data.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    const time = new Date(data.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
                     spoonsText.textContent = `At Spoons · ${time}`;
                     spoonsPill.classList.add('spoons-active');
                     spoonsPill.classList.remove('spoons-inactive');
