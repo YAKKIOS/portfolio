@@ -384,7 +384,7 @@ function init() {
     if (spoonsPill && spoonsText) {
         async function checkSpoonsStatus() {
             try {
-                const res  = await fetch('https://gist.githubusercontent.com/YAKKIOS/4a7f1969a739becbbb62c6d226dd744a/raw/status.json');
+                const res  = await fetch('https://gist.githubusercontent.com/YAKKIOS/4a7f1969a739becbbb62c6d226dd744a/raw/status.json?t=' + Date.now(), { cache: 'no-store' });
                 const data = await res.json();
                 const hoursAgo = (new Date() - new Date(data.updated_at)) / (1000 * 60 * 60);
 
