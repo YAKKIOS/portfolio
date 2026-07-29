@@ -203,10 +203,10 @@ p {font-weight: 420;}
     border-radius: 50%;
     object-fit: cover;
     display: block;
-    transition: opacity 0.2s ease;
+    transition: transform 0.15s ease;
 }
 
-.nav-home-link:hover .nav-avatar { opacity: 0.75; }
+.nav-home-link:active .nav-avatar { transform: scale(0.93); }
 
 /* Spoons Pill */
 .spoons-pill {
