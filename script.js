@@ -384,8 +384,9 @@ function init() {
     if (spoonsPill && spoonsText) {
         async function checkSpoonsStatus() {
             try {
-                const res  = await fetch('https://gist.githubusercontent.com/YAKKIOS/4a7f1969a739becbbb62c6d226dd744a/raw/status.json?t=' + Date.now(), { cache: 'no-store' });
-                const data = await res.json();
+                const res  = await fetch('https://api.github.com/gists/4a7f1969a739becbbb62c6d226dd744a', { cache: 'no-store' });
+                const gist = await res.json();
+                const data = JSON.parse(gist.files['status.json'].content);
                 const hoursAgo = (new Date() - new Date(data.updated_at)) / (1000 * 60 * 60);
 
                 if (data.isAtSpoons && hoursAgo < 4) {
@@ -405,7 +406,7 @@ function init() {
             }
         }
         checkSpoonsStatus();
-        setInterval(checkSpoonsStatus, 2 * 60 * 1000);
+        setInterval(checkSpoonsStatus, 60 * 1000);
     }
 
 } // end init
