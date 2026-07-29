@@ -375,6 +375,38 @@ function init() {
         });
     }
 
+    /* =========================================
+       10. Spoons Status
+       ========================================= */
+    const spoonsPill = document.getElementById('spoons-pill');
+    const spoonsText = document.getElementById('spoons-text');
+
+    if (spoonsPill && spoonsText) {
+        async function checkSpoonsStatus() {
+            try {
+                const res  = await fetch('https://gist.githubusercontent.com/YAKKIOS/4a7f1969a739becbbb62c6d226dd744a/raw/status.json');
+                const data = await res.json();
+                const hoursAgo = (new Date() - new Date(data.updated_at)) / (1000 * 60 * 60);
+
+                if (data.isAtSpoons && hoursAgo < 4) {
+                    const time = new Date(data.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    spoonsText.textContent = `At Spoons · ${time}`;
+                    spoonsPill.classList.add('spoons-active');
+                    spoonsPill.classList.remove('spoons-inactive');
+                } else {
+                    spoonsText.textContent = 'Not at Spoons';
+                    spoonsPill.classList.add('spoons-inactive');
+                    spoonsPill.classList.remove('spoons-active');
+                }
+            } catch (e) {
+                spoonsText.textContent = 'Not at Spoons';
+                spoonsPill.classList.add('spoons-inactive');
+                console.log('Spoons radar offline', e);
+            }
+        }
+        checkSpoonsStatus();
+    }
+
 } // end init
 
 if (document.readyState === 'loading') {

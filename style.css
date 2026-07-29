@@ -81,7 +81,7 @@ html {
     overflow-x: hidden; /* Prevent any absolutely-positioned element causing horizontal scroll */
 }
 
-body { font-size: var(--text-16); }
+body { font-size: var(--text-16); padding-top: 3.5rem; }
 
 @font-face {
     font-family: 'Sentient';
@@ -180,9 +180,86 @@ p {font-weight: 420;}
 }
 
 /* =========================================
+   Site Navigation
+   ========================================= */
+.site-nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+}
+
+.site-nav {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0.75rem var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.2s ease;
+}
+
+.nav-home-link:hover .nav-avatar { opacity: 0.75; }
+
+/* Spoons Pill */
+.spoons-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-color);
+    font-size: var(--text-12);
+    color: var(--text-muted);
+    font-weight: 480;
+    user-select: none;
+}
+
+.spoons-orb {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: #d1d5db;
+}
+
+.spoons-pill.spoons-active .spoons-orb {
+    background: #22c55e;
+    animation: spoons-pulse 1.8s ease-in-out infinite;
+}
+
+.spoons-pill.spoons-active .spoons-text {
+    color: var(--text-body);
+}
+
+.spoons-pill.spoons-inactive .spoons-orb {
+    background: #ef4444;
+}
+
+@keyframes spoons-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+    60%  { box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+/* =========================================
    Hero Section
    ========================================= */
-.hero { margin-top: 12rem; }
+.hero { margin-top: 8.5rem; }
 .identity { margin-bottom: 2rem; }
 .name { font-size: var(--text-18); }
 .job-title { font-size: var(--text-16); font-weight: 420; color: var(--text-muted); }
@@ -591,7 +668,7 @@ blockquote p {
    Case Study Layout
    ========================================= */
 .case-study-header {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
     margin-bottom: 4rem;
 }
 
