@@ -217,6 +217,7 @@ p {font-weight: 420;}
     border-radius: 9999px;
     background: var(--bg-hover);
     border: 1px solid var(--border-color);
+    font: inherit;
     font-size: var(--text-12);
     color: var(--text-muted);
     font-weight: 480;
