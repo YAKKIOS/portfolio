@@ -406,7 +406,10 @@ function init() {
             }
         }
         checkSpoonsStatus();
-        setInterval(checkSpoonsStatus, 60 * 1000);
+        setInterval(checkSpoonsStatus, 15 * 1000);
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') checkSpoonsStatus();
+        });
     }
 
 } // end init
