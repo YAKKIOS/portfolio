@@ -384,13 +384,21 @@ function init() {
     if (spoonsPill && spoonsText) {
         async function checkSpoonsStatus() {
             try {
-                const res  = await fetch('https://api.github.com/gists/4a7f1969a739becbbb62c6d226dd744a', { cache: 'no-store' });
-                const gist = await res.json();
-                const data = JSON.parse(gist.files['status.json'].content);
-                const hoursAgo = (new Date() - new Date(data.updated_at)) / (1000 * 60 * 60);
+                const res = await fetch(
+                    'https://wbutnbxpntpxkovptooh.supabase.co/rest/v1/visits?select=checked_in_at&checked_out_at=is.null&order=checked_in_at.desc&limit=1',
+                    {
+                        cache: 'no-store',
+                        headers: {
+                            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidXRuYnhwbnRweGtvdnB0b29oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2NTExNjcsImV4cCI6MjEwMTIyNzE2N30.J8WuLz_cFQL0ZP2dURcPvPaPuvU8QgG34nRWgsyebwE',
+                            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidXRuYnhwbnRweGtvdnB0b29oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2NTExNjcsImV4cCI6MjEwMTIyNzE2N30.J8WuLz_cFQL0ZP2dURcPvPaPuvU8QgG34nRWgsyebwE'
+                        }
+                    }
+                );
+                const rows = await res.json();
+                const active = rows[0];
 
-                if (data.isAtSpoons && hoursAgo < 4) {
-                    const time = new Date(data.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+                if (active) {
+                    const time = new Date(active.checked_in_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
                     spoonsText.textContent = `At Spoons · ${time}`;
                     spoonsPill.classList.add('spoons-active');
                     spoonsPill.classList.remove('spoons-inactive');
