@@ -1134,37 +1134,6 @@ blockquote p {
     cursor: pointer;
 }
 
-.stacked-pic--more {
-    background:
-        linear-gradient(white, white) padding-box,
-        linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) border-box;
-    border: 4px solid transparent;
-    text-decoration: none;
-}
-
-.stacked-pic--more::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%);
-    border-radius: 20px;
-    pointer-events: none;
-}
-
-.stacked-pic-label {
-    position: absolute;
-    bottom: 12px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    color: #fff;
-    font-size: var(--text-12);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    z-index: 1;
-    pointer-events: none;
-}
-
 /* Fanning them out wider to naturally fill the column width */
 .stacked-pic:nth-child(1) { transform: translateX(-180px) rotate(-4deg); z-index: 1; }
 .stacked-pic:nth-child(2) { transform: translateX(-60px) rotate(2deg); z-index: 2; }
