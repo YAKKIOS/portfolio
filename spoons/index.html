@@ -116,7 +116,6 @@
                 { headers: HEADERS }
             );
             const all = await res.json();
-            console.log('Spoons all visits:', all);
 
             if (!Array.isArray(all)) {
                 document.getElementById('visit-history').innerHTML = '<p class="spoons-empty">Couldn\'t load visit data.</p>';
