@@ -252,6 +252,82 @@ p {font-weight: 420;}
 }
 
 /* =========================================
+   Spoons Stats Page
+   ========================================= */
+.spoons-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.spoons-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+}
+
+.spoons-stat-value {
+    font-size: var(--text-24);
+    font-weight: 600;
+    color: var(--text-body);
+    line-height: 1.1;
+}
+
+.spoons-stat-label {
+    font-size: var(--text-12);
+    color: var(--text-muted);
+    line-height: var(--lh-base);
+}
+
+.spoons-history {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.visit-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.visit-row:first-child {
+    border-top: 1px solid var(--border-color);
+}
+
+.visit-date {
+    font-size: var(--text-14);
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.visit-location {
+    font-size: var(--text-14);
+    color: var(--text-body);
+    font-weight: 480;
+}
+
+.visit-duration {
+    font-size: var(--text-14);
+    color: var(--text-muted);
+    text-align: right;
+    white-space: nowrap;
+}
+
+.spoons-empty {
+    font-size: var(--text-14);
+    color: var(--text-muted);
+}
+
+/* =========================================
    Hero Section
    ========================================= */
 .hero { margin-top: 8.5rem; }
