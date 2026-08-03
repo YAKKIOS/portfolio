@@ -116,6 +116,13 @@
                 { headers: HEADERS }
             );
             const visits = await res.json();
+            console.log('Spoons visits response:', visits);
+
+            if (!Array.isArray(visits)) {
+                document.getElementById('visit-history').innerHTML = '<p class="spoons-empty">Couldn\'t load visit data.</p>';
+                console.error('Unexpected response shape:', visits);
+                return;
+            }
 
             if (!visits.length) {
                 document.getElementById('visit-history').innerHTML = '<p class="spoons-empty">No completed visits yet.</p>';
