@@ -222,6 +222,8 @@ p {font-weight: 420;}
     color: var(--text-muted);
     font-weight: 480;
     user-select: none;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .spoons-orb {
