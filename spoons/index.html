@@ -112,17 +112,19 @@
     async function loadSpoonsStats() {
         try {
             const res = await fetch(
-                `${SUPABASE_URL}/rest/v1/visits?select=checked_in_at,checked_out_at,location_name&checked_out_at=not.is.null&order=checked_in_at.desc`,
+                `${SUPABASE_URL}/rest/v1/visits?select=checked_in_at,checked_out_at,location_name&order=checked_in_at.desc`,
                 { headers: HEADERS }
             );
-            const visits = await res.json();
-            console.log('Spoons visits response:', visits);
+            const all = await res.json();
+            console.log('Spoons all visits:', all);
 
-            if (!Array.isArray(visits)) {
+            if (!Array.isArray(all)) {
                 document.getElementById('visit-history').innerHTML = '<p class="spoons-empty">Couldn\'t load visit data.</p>';
-                console.error('Unexpected response shape:', visits);
+                console.error('Unexpected response shape:', all);
                 return;
             }
+
+            const visits = all.filter(v => v.checked_out_at);
 
             if (!visits.length) {
                 document.getElementById('visit-history').innerHTML = '<p class="spoons-empty">No completed visits yet.</p>';
