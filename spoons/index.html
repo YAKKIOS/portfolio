@@ -64,11 +64,6 @@
                         </div>
 
                         <div class="spoons-stat">
-                            <span class="spoons-stat-value" id="stat-fav-location">—</span>
-                            <span class="spoons-stat-label">Favourite location</span>
-                        </div>
-
-                        <div class="spoons-stat">
                             <span class="spoons-stat-value" id="stat-longest">—</span>
                             <span class="spoons-stat-label">Longest visit</span>
                         </div>
@@ -77,9 +72,9 @@
                 </section>
 
                 <section>
-                    <h2 class="section-title">Visit history</h2>
-                    <div id="visit-history" class="spoons-history">
-                        <p class="spoons-empty">Loading visits...</p>
+                    <h2 class="section-title">Leaderboard</h2>
+                    <div id="leaderboard" class="spoons-history">
+                        <p class="spoons-empty">Loading...</p>
                     </div>
                 </section>
 
@@ -118,7 +113,7 @@
             const all = await res.json();
 
             if (!Array.isArray(all)) {
-                document.getElementById('visit-history').innerHTML = '<p class="spoons-empty">Couldn\'t load visit data.</p>';
+                document.getElementById('leaderboard').innerHTML = '<p class="spoons-empty">Couldn\'t load visit data.</p>';
                 console.error('Unexpected response shape:', all);
                 return;
             }
@@ -126,7 +121,7 @@
             const visits = all.filter(v => v.checked_out_at);
 
             if (!visits.length) {
-                document.getElementById('visit-history').innerHTML = '<p class="spoons-empty">No completed visits yet.</p>';
+                document.getElementById('leaderboard').innerHTML = '<p class="spoons-empty">No completed visits yet.</p>';
                 return;
             }
 
@@ -143,31 +138,35 @@
                 const loc = v.location_name || 'Unknown';
                 locationCounts[loc] = (locationCounts[loc] || 0) + 1;
             });
-            const favLocation = Object.entries(locationCounts).sort((a, b) => b[1] - a[1])[0][0];
+
+            const leaderboard = Object.entries(locationCounts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+
+            const topCount = leaderboard[0][1];
 
             document.getElementById('stat-total-visits').textContent  = visits.length;
             document.getElementById('stat-total-hours').textContent   = `${(totalMins / 60).toFixed(1)}h`;
             document.getElementById('stat-avg-duration').textContent  = formatDuration(avgMins);
-            document.getElementById('stat-fav-location').textContent  = favLocation;
             document.getElementById('stat-longest').textContent       = formatDuration(maxMins);
 
-            document.getElementById('visit-history').innerHTML = visits.map((v, i) => {
-                const date = new Date(v.checked_in_at).toLocaleDateString('en-GB', {
-                    day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'
-                });
-                const time = new Date(v.checked_in_at).toLocaleTimeString([], {
-                    hour: '2-digit', minute: '2-digit', timeZone: 'UTC'
-                });
+            document.getElementById('leaderboard').innerHTML = leaderboard.map(([name, count], i) => {
+                const barWidth = Math.round((count / topCount) * 100);
                 return `
-                    <div class="visit-row">
-                        <span class="visit-date">${date} · ${time}</span>
-                        <span class="visit-location">${v.location_name || '—'}</span>
-                        <span class="visit-duration">${formatDuration(durations[i])}</span>
+                    <div class="leaderboard-row">
+                        <span class="leaderboard-rank">${i + 1}</span>
+                        <div class="leaderboard-info">
+                            <span class="leaderboard-name">${name}</span>
+                            <div class="leaderboard-bar-track">
+                                <div class="leaderboard-bar" style="width: ${barWidth}%"></div>
+                            </div>
+                        </div>
+                        <span class="leaderboard-count">${count} ${count === 1 ? 'visit' : 'visits'}</span>
                     </div>`;
             }).join('');
 
         } catch (e) {
-            document.getElementById('visit-history').innerHTML = '<p class="spoons-empty">Couldn\'t load visit data.</p>';
+            document.getElementById('leaderboard').innerHTML = '<p class="spoons-empty">Couldn\'t load visit data.</p>';
             console.log('Spoons stats offline', e);
         }
     }
