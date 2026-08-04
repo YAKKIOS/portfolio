@@ -396,10 +396,16 @@ function init() {
                 );
                 const rows = await res.json();
                 const active = rows[0];
+                const wasActive = spoonsPill.classList.contains('spoons-active');
+                const wasInactive = spoonsPill.classList.contains('spoons-inactive');
 
                 if (active) {
                     const time = new Date(active.checked_in_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
                     spoonsText.textContent = `At Spoons · ${time}`;
+                    if (!wasActive && wasInactive) {
+                        spoonsPill.classList.add('spoons-ripple');
+                        setTimeout(() => spoonsPill.classList.remove('spoons-ripple'), 700);
+                    }
                     spoonsPill.classList.add('spoons-active');
                     spoonsPill.classList.remove('spoons-inactive');
                 } else {

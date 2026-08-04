@@ -214,17 +214,23 @@ p {font-weight: 420;}
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 0.25rem 0.625rem;
+    padding: 0.25rem 0.875rem;
     border-radius: 9999px;
-    background: var(--bg-hover);
+    background: linear-gradient(to bottom, #ffffff, #f3f4f6);
     border: 1px solid var(--border-color);
+    box-shadow:
+        inset 0 1px 0 #ffffff,
+        0 1px 3px rgba(0, 0, 0, 0.07),
+        0 1px 1px rgba(0, 0, 0, 0.04);
     font: inherit;
-    font-size: var(--text-12);
+    font-size: var(--text-14);
     color: var(--text-muted);
     font-weight: 480;
     user-select: none;
     text-decoration: none;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
 .spoons-orb {
@@ -254,6 +260,21 @@ p {font-weight: 420;}
     100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
 }
 
+@keyframes spoons-ripple {
+    0%   { transform: scale(0); opacity: 0.5; }
+    100% { transform: scale(4); opacity: 0; }
+}
+
+.spoons-pill.spoons-ripple::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: radial-gradient(circle, #4ade80, #16a34a);
+    animation: spoons-ripple 0.7s ease-out forwards;
+    pointer-events: none;
+}
+
 /* =========================================
    Spoons Stats Page
    ========================================= */
@@ -275,9 +296,9 @@ p {font-weight: 420;}
 }
 
 .spoons-stat-value {
-    font-size: var(--text-24);
+    font-size: var(--text-18);
     font-weight: 600;
-    color: var(--text-body);
+    color: var(--text-main);
     line-height: 1.1;
 }
 
