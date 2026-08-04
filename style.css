@@ -271,7 +271,7 @@ p {font-weight: 420;}
     inset: 0;
     border-radius: 9999px;
     background: radial-gradient(circle, #4ade80, #16a34a);
-    animation: spoons-ripple 0.7s ease-out forwards;
+    animation: spoons-ripple 1.4s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
     pointer-events: none;
 }
 
