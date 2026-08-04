@@ -13,10 +13,11 @@
    ========================================= */
 :root {
     /* Strict 3-tier Font Size System (16px base) */
-    --text-16: 1rem;
+    --text-24: 1.5rem;
     --text-18: 1.125rem;
+    --text-16: 1rem;
     --text-14: 0.875rem;
-    --text-12: 0.75rem;   
+    --text-12: 0.75rem;
     /* Mathematically perfect 24px line height (1.5 * 16px) */
     --lh-base: 1.625rem;        
     
@@ -284,44 +285,6 @@ p {font-weight: 420;}
     font-size: var(--text-12);
     color: var(--text-muted);
     line-height: var(--lh-base);
-}
-
-.spoons-history {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-.visit-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto;
-    gap: 1rem;
-    align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.visit-row:first-child {
-    border-top: 1px solid var(--border-color);
-}
-
-.visit-date {
-    font-size: var(--text-14);
-    color: var(--text-muted);
-    white-space: nowrap;
-}
-
-.visit-location {
-    font-size: var(--text-14);
-    color: var(--text-body);
-    font-weight: 480;
-}
-
-.visit-duration {
-    font-size: var(--text-14);
-    color: var(--text-muted);
-    text-align: right;
-    white-space: nowrap;
 }
 
 .spoons-empty {
