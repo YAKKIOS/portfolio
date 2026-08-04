@@ -154,14 +154,14 @@
                 const barWidth = Math.round((count / topCount) * 100);
                 return `
                     <div class="leaderboard-row">
-                        <span class="leaderboard-rank">${i + 1}</span>
-                        <div class="leaderboard-info">
+                        <div class="leaderboard-header">
+                            <span class="leaderboard-rank">${i + 1}</span>
                             <span class="leaderboard-name">${name}</span>
-                            <div class="leaderboard-bar-track">
-                                <div class="leaderboard-bar" style="width: ${barWidth}%"></div>
-                            </div>
+                            <span class="leaderboard-count">${count} ${count === 1 ? 'visit' : 'visits'}</span>
                         </div>
-                        <span class="leaderboard-count">${count} ${count === 1 ? 'visit' : 'visits'}</span>
+                        <div class="leaderboard-bar-track">
+                            <div class="leaderboard-bar" style="width: ${barWidth}%"></div>
+                        </div>
                     </div>`;
             }).join('');
 
