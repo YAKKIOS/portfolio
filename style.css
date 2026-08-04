@@ -84,27 +84,9 @@ html {
 
 body { font-size: var(--text-16); padding-top: 3.5rem; }
 
-@font-face {
-    font-family: 'Sentient';
-    src: url('assets/fonts/Sentient-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Sentient';
-    src: url('assets/fonts/Sentient-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* Sentient for primary titles only */
 .name,
 .section-title,
 .case-study-title {
-    font-family: 'Sentient', Georgia, serif;
     font-weight: 500;
 }
 
@@ -129,7 +111,7 @@ section { margin-top: 8rem; }
 
 p {font-weight: 420;}
 
-.name, .job-title, .section-title, .card-title, .writing-title {
+.name, .section-title, .card-title, .writing-title {
     color: var(--text-main);
 }
 
@@ -359,7 +341,6 @@ p {font-weight: 420;}
 .hero { margin-top: 8.5rem; }
 .identity { margin-bottom: 2rem; }
 .name { font-size: var(--text-18); }
-.job-title { font-size: var(--text-16); font-weight: 420; color: var(--text-muted); }
 
 .bio { 
     display: flex; 
