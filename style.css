@@ -198,7 +198,7 @@ p {font-weight: 420;}
     gap: 6px;
     padding: 0.25rem 0.875rem;
     border-radius: 9999px;
-    background: linear-gradient(to bottom, #ffffff, #f3f4f6);
+    background: #ffffff;
     border: 1px solid var(--border-color);
     box-shadow:
         inset 0 1px 0 #ffffff,
@@ -383,7 +383,7 @@ p {font-weight: 420;}
 }
 
 .btn-secondary {
-    background: linear-gradient(to bottom, #ffffff, #f3f4f6);
+    background: #ffffff;
     border: 1px solid var(--border-color);
     box-shadow:
         inset 0 1px 0 #ffffff,
