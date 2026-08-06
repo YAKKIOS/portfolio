@@ -755,7 +755,7 @@ blockquote p {
     font-weight: 500;
     line-height: var(--lh-base);
     color: var(--text-main);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 
