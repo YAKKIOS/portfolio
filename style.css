@@ -335,6 +335,12 @@ p {font-weight: 420;}
     border-radius: 9999px;
 }
 
+.leaderboard-row--empty .leaderboard-rank,
+.leaderboard-row--empty .leaderboard-name {
+    color: var(--text-muted);
+    opacity: 0.4;
+}
+
 /* =========================================
    Hero Section
    ========================================= */
