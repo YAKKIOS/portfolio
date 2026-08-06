@@ -98,6 +98,10 @@
     const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidXRuYnhwbnRweGtvdnB0b29oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2NTExNjcsImV4cCI6MjEwMTIyNzE2N30.J8WuLz_cFQL0ZP2dURcPvPaPuvU8QgG34nRWgsyebwE';
     const HEADERS       = { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` };
 
+    function toTitleCase(str) {
+        return str.replace(/\w\S*/g, w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+    }
+
     function formatDuration(mins) {
         if (mins < 60) return `${Math.round(mins)}m`;
         const h = Math.floor(mins / 60);
@@ -136,29 +140,31 @@
 
             const locationCounts = {};
             visits.forEach(v => {
-                const loc = v.location_name || 'Unknown';
+                const loc = toTitleCase(v.location_name || 'Unknown');
                 locationCounts[loc] = (locationCounts[loc] || 0) + 1;
             });
 
-            const leaderboard = Object.entries(locationCounts)
+            const ranked = Object.entries(locationCounts)
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 5);
 
-            const topCount = leaderboard[0][1];
+            const topCount = ranked[0]?.[1] || 1;
+
+            while (ranked.length < 5) ranked.push([null, null]);
 
             document.getElementById('stat-total-visits').textContent  = visits.length;
             document.getElementById('stat-total-hours').textContent   = `${(totalMins / 60).toFixed(1)}h`;
             document.getElementById('stat-avg-duration').textContent  = formatDuration(avgMins);
             document.getElementById('stat-longest').textContent       = formatDuration(maxMins);
 
-            document.getElementById('leaderboard').innerHTML = leaderboard.map(([name, count], i) => {
-                const barWidth = Math.round((count / topCount) * 100);
+            document.getElementById('leaderboard').innerHTML = ranked.map(([name, count], i) => {
+                const barWidth = count ? Math.round((count / topCount) * 100) : 0;
                 return `
-                    <div class="leaderboard-row">
+                    <div class="leaderboard-row${!name ? ' leaderboard-row--empty' : ''}">
                         <div class="leaderboard-header">
                             <span class="leaderboard-rank">${i + 1}</span>
-                            <span class="leaderboard-name">${name}</span>
-                            <span class="leaderboard-count">${count} ${count === 1 ? 'visit' : 'visits'}</span>
+                            <span class="leaderboard-name">${name || '—'}</span>
+                            <span class="leaderboard-count">${count ? `${count} ${count === 1 ? 'visit' : 'visits'}` : ''}</span>
                         </div>
                         <div class="leaderboard-bar-track">
                             <div class="leaderboard-bar" style="width: ${barWidth}%"></div>
