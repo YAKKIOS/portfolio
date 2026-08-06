@@ -271,13 +271,13 @@ p {font-weight: 420;}
 
 .spoons-stat-value {
     font-size: var(--text-18);
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-main);
     line-height: 1.1;
 }
 
 .spoons-stat-label {
-    font-size: var(--text-12);
+    font-size: var(--text-14);
     color: var(--text-muted);
     line-height: var(--lh-base);
 }
@@ -308,14 +308,14 @@ p {font-weight: 420;}
 }
 
 .leaderboard-name {
-    font-size: var(--text-14);
+    font-size: var(--text-16);
     color: var(--text-body);
     font-weight: 480;
     flex: 1;
 }
 
 .leaderboard-count {
-    font-size: var(--text-14);
+    font-size: var(--text-16);
     color: var(--text-muted);
     white-space: nowrap;
 }
@@ -330,7 +330,7 @@ p {font-weight: 420;}
 
 .leaderboard-bar {
     height: 100%;
-    background: var(--text-body);
+    background: var(--text-main);
     border-radius: 9999px;
 }
 
