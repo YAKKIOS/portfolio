@@ -190,14 +190,15 @@ function init() {
         "My dad was the mayor of Hawkinge from 2023-2024, which is a small town in Kent 🤴🏻",
         "I used to work as a car mechanic for fun whilst I studied at college 🔧",
         "I was featured in Sketch's best designs of 2022 ✏️",
-        "I was an avid horse rider until my sister was thrown from her horse and shattered her shoulder and then I promptly gave up the sport 🐎",
+        "I was an avid horse rider until my sister was thrown from her horse and shattered her shoulder which made me give up the sport 🐎",
         "I started an Onlyfans page for margaritas called OnlyMargs but it has since been deprecated 🍸",
         "Whilst at Komodo Digital I accidentally had the office Christmas cards printed upside down and it's still talked about to this day 🎄",
         "I once drank an entire pitcher of raspberry mojito and I turned red like a scene from Charlie and the Chocolate Factory 😳",
         "I was pushed away by royal security whilst petting a horse at York races because Queen Camilla also wanted to pet the horse 😅",
         "I applied to audition for Peaky Blinders season 3 - I did not receive a callback 😅",
-         "I was once photographed by an abscure Chinese fashion magazine in London for their on the street fashion segment",
-         "I dyed my hair blonde for Euro 2020 using Holly Willoughby's garnier hair dye box",
+         "I was once photographed by an abscure Chinese fashion magazine in London for their on the street fashion segment 👖",
+         "I dyed my hair blonde for Euro 2020 using Holly Willoughby's Garnier hair dye 💇🏻‍♂️",
+           "I have a margarita tattooed on my ankle 🍸",
         
         
     ];
