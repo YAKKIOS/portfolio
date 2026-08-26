@@ -896,7 +896,11 @@ blockquote p {
    Image Captions
    ========================================= */
 .case-study-figure {
-    margin: 2.5rem 0; /* Controls the spacing for the whole image+caption block */
+    margin: 2.5rem 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(48rem, 100vw);
 }
 
 /* Ensure your existing .case-study-image margins are reset so the caption sits flush */
@@ -1149,6 +1153,9 @@ blockquote p {
    ========================================= */
 .picture-stack {
     position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(48rem, 100vw);
     display: flex;
     justify-content: center;
     align-items: center;
