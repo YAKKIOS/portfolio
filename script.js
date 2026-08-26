@@ -86,15 +86,18 @@ function init() {
 
     if (modal && modalImg && triggers.length > 0) {
 
-        triggers.forEach(trigger => {
-            trigger.addEventListener('click', () => {
-                modalImg.src = trigger.src;
-                modalImg.alt = trigger.alt || 'Expanded case study image';
-                modal.classList.add('is-open');
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
-        });
+        let currentIndex = 0;
+        const triggerList = Array.from(triggers);
+
+        const openLightbox = (index) => {
+            currentIndex = index;
+            modalImg.src = triggerList[currentIndex].src;
+            modalImg.alt = triggerList[currentIndex].alt || 'Expanded case study image';
+            modal.classList.add('is-open');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            updateNavButtons();
+        };
 
         const closeLightbox = () => {
             modal.style.display = 'none';
@@ -103,15 +106,34 @@ function init() {
             document.body.style.overflow = '';
         };
 
-        modal.addEventListener('click', closeLightbox);
+        const navigate = (dir) => {
+            const next = currentIndex + dir;
+            if (next >= 0 && next < triggerList.length) openLightbox(next);
+        };
 
-        // Prevent page scrolling through the modal on iOS (overflow:hidden alone is not enough)
+        const updateNavButtons = () => {
+            modal.querySelector('.lightbox-prev').style.visibility = currentIndex > 0 ? 'visible' : 'hidden';
+            modal.querySelector('.lightbox-next').style.visibility = currentIndex < triggerList.length - 1 ? 'visible' : 'hidden';
+        };
+
+        triggers.forEach((trigger, i) => {
+            trigger.addEventListener('click', () => openLightbox(i));
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (!e.target.closest('.lightbox-nav')) closeLightbox();
+        });
+
+        modal.querySelector('.lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); navigate(-1); });
+        modal.querySelector('.lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
+
         modal.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.style.display === 'flex') {
-                closeLightbox();
-            }
+            if (modal.style.display !== 'flex') return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigate(-1);
+            if (e.key === 'ArrowRight') navigate(1);
         });
     }
 
