@@ -278,26 +278,38 @@ function init() {
         const canHover = window.matchMedia('(hover: hover)');
 
         let activePic = null;
-        let tooltipTimer = null;
+        let showTimer = null;
+        let hideTimer = null;
 
         // Guards against synthetic mouseenter fired by mobile browsers on tap
         stackedPics.forEach(pic => {
             pic.addEventListener('mouseenter', () => {
                 if (!canHover.matches) return;
                 activePic = pic;
-                clearTimeout(tooltipTimer);
-                tooltip.classList.remove('is-visible');
-                tooltipTimer = setTimeout(() => {
-                    if (pic !== activePic) return;
+                clearTimeout(hideTimer);
+                clearTimeout(showTimer);
+
+                if (tooltip.classList.contains('is-visible')) {
+                    // Already visible — instantly update without hiding
                     tooltip.textContent = pic.getAttribute('data-tooltip');
                     positionTooltip(pic);
-                    tooltip.classList.add('is-visible');
-                }, 250);
+                } else {
+                    // First reveal — animate in after short delay
+                    showTimer = setTimeout(() => {
+                        if (pic !== activePic) return;
+                        tooltip.textContent = pic.getAttribute('data-tooltip');
+                        positionTooltip(pic);
+                        tooltip.classList.add('is-visible');
+                    }, 250);
+                }
             });
             pic.addEventListener('mouseleave', () => {
                 if (!canHover.matches) return;
-                clearTimeout(tooltipTimer);
-                tooltip.classList.remove('is-visible');
+                clearTimeout(showTimer);
+                // Short grace period — cancelled if mouse enters another card immediately
+                hideTimer = setTimeout(() => {
+                    tooltip.classList.remove('is-visible');
+                }, 80);
             });
         });
 
