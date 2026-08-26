@@ -1259,18 +1259,22 @@ blockquote p {
     opacity: 0;
     
     /* Anchors the tooltip by its bottom edge, starting slightly lower for the fade-in */
-    transform: translate(-50%, calc(-100% + 10px)); 
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: translate(-50%, calc(-100% + 10px));
+    transition: opacity 0.2s ease, transform 0.2s ease, filter 0.15s ease;
     z-index: 9999;
-    
-    /* THE FIX: Prevents text from wrapping on a single card */
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 .picture-tooltip.is-visible {
     opacity: 1;
-    /* Glides up so the bottom of the tooltip rests where the JS tells it to */
     transform: translate(-50%, -100%);
+}
+
+/* Mid-swap state: fades + blurs out while text updates between cards */
+.picture-tooltip.is-swapping {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translate(-50%, calc(-100% + 3px));
 }
 
 /* =========================================

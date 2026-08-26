@@ -280,6 +280,7 @@ function init() {
         let activePic = null;
         let showTimer = null;
         let hideTimer = null;
+        let swapTimer = null;
 
         // Guards against synthetic mouseenter fired by mobile browsers on tap
         stackedPics.forEach(pic => {
@@ -290,9 +291,15 @@ function init() {
                 clearTimeout(showTimer);
 
                 if (tooltip.classList.contains('is-visible')) {
-                    // Already visible — instantly update without hiding
-                    tooltip.textContent = pic.getAttribute('data-tooltip');
-                    positionTooltip(pic);
+                    // Already visible — fade+blur out, update, fade+blur back in
+                    clearTimeout(swapTimer);
+                    tooltip.classList.add('is-swapping');
+                    swapTimer = setTimeout(() => {
+                        if (pic !== activePic) return;
+                        tooltip.textContent = pic.getAttribute('data-tooltip');
+                        positionTooltip(pic);
+                        tooltip.classList.remove('is-swapping');
+                    }, 110);
                 } else {
                     // First reveal — animate in after short delay
                     showTimer = setTimeout(() => {
@@ -306,6 +313,8 @@ function init() {
             pic.addEventListener('mouseleave', () => {
                 if (!canHover.matches) return;
                 clearTimeout(showTimer);
+                clearTimeout(swapTimer);
+                tooltip.classList.remove('is-swapping');
                 // Short grace period — cancelled if mouse enters another card immediately
                 hideTimer = setTimeout(() => {
                     tooltip.classList.remove('is-visible');
