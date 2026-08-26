@@ -112,8 +112,8 @@ function init() {
         };
 
         const updateNavButtons = () => {
-            modal.querySelector('.lightbox-prev').style.visibility = currentIndex > 0 ? 'visible' : 'hidden';
-            modal.querySelector('.lightbox-next').style.visibility = currentIndex < triggerList.length - 1 ? 'visible' : 'hidden';
+            modal.querySelector('.lightbox-prev').disabled = currentIndex <= 0;
+            modal.querySelector('.lightbox-next').disabled = currentIndex >= triggerList.length - 1;
         };
 
         triggers.forEach((trigger, i) => {

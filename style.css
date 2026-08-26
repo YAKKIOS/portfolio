@@ -961,16 +961,24 @@ blockquote p {
     background: rgba(255,255,255,0.12);
     border: none;
     color: #ffffff;
-    font-size: 2.5rem;
-    line-height: 1;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, opacity 0.15s ease;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+.lightbox-nav .material-symbols-rounded {
+    font-size: 2rem;
+    line-height: 1;
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 48;
+}
+
+.lightbox-nav:hover:not(:disabled) { background: rgba(255,255,255,0.22); }
+.lightbox-nav:disabled { opacity: 0.3; cursor: default; }
 .lightbox-prev { left: 1.5rem; }
 .lightbox-next { right: 1.5rem; }
 
@@ -1186,11 +1194,11 @@ blockquote p {
     cursor: pointer;
 }
 
-/* Fanning them out wider to naturally fill the column width */
-.stacked-pic:nth-child(1) { transform: translateX(-180px) rotate(-4deg); z-index: 1; }
-.stacked-pic:nth-child(2) { transform: translateX(-60px) rotate(2deg); z-index: 2; }
-.stacked-pic:nth-child(3) { transform: translateX(60px) rotate(-2deg); z-index: 3; }
-.stacked-pic:nth-child(4) { transform: translateX(180px) rotate(4deg); z-index: 4; }
+/* Fanning out wide enough to visibly break past the text-column edges */
+.stacked-pic:nth-child(1) { transform: translateX(-240px) rotate(-4deg); z-index: 1; }
+.stacked-pic:nth-child(2) { transform: translateX(-80px) rotate(2deg); z-index: 2; }
+.stacked-pic:nth-child(3) { transform: translateX(80px) rotate(-2deg); z-index: 3; }
+.stacked-pic:nth-child(4) { transform: translateX(240px) rotate(4deg); z-index: 4; }
 
 /* Hover interactions — desktop: lift in place using the same spread as the base */
 @media (hover: hover) {
@@ -1198,10 +1206,10 @@ blockquote p {
         opacity: 0.6;
     }
 
-    .picture-stack .stacked-pic:nth-child(1):hover { transform: translateX(-180px) translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
-    .picture-stack .stacked-pic:nth-child(2):hover { transform: translateX(-60px)  translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
-    .picture-stack .stacked-pic:nth-child(3):hover { transform: translateX(60px)   translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
-    .picture-stack .stacked-pic:nth-child(4):hover { transform: translateX(180px)  translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(1):hover { transform: translateX(-240px) translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(2):hover { transform: translateX(-80px)  translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(3):hover { transform: translateX(80px)   translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
+    .picture-stack .stacked-pic:nth-child(4):hover { transform: translateX(240px)  translateY(-8px) rotate(0deg) scale(1.12); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 16px 28px -5px rgba(0, 0, 0, 0.18); }
 }
 
 /* =========================================
