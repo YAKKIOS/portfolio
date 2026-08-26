@@ -419,6 +419,10 @@ p {font-weight: 420;}
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     gap: 1rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(48rem, 100vw);
 }
 
 /* Index page: two featured cards stacked full-width */
@@ -841,11 +845,14 @@ blockquote p {
    Case Study Image Frame
    ========================================= */
 .case-study-image {
-    background-color: #ffffff; 
-    /* Removed padding to make the image flush */
+    background-color: #ffffff;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    margin: 2rem 0; /* Keeps the spacing above and below the whole block */
+    margin: 2rem 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(48rem, 100vw);
     display: flex;
     overflow: hidden; /* THE FIX: Clips the sharp corners of the image */
 }
@@ -871,9 +878,17 @@ blockquote p {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     margin: 2rem 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(48rem, 100vw);
 }
 
 .case-study-image-pair .case-study-image {
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%;
     margin: 0;
 }
 
@@ -886,7 +901,11 @@ blockquote p {
 
 /* Ensure your existing .case-study-image margins are reset so the caption sits flush */
 .case-study-figure .case-study-image {
-    margin: 0 0 0.75rem 0; 
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%;
+    margin: 0 0 0.75rem 0;
 }
 
 .image-caption {
