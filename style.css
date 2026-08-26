@@ -484,7 +484,7 @@ p {font-weight: 420;}
 .writing-date,
 .writing-desc {
     color: var(--text-muted);
-    font-size: var(--text-14);
+    font-size: var(--text-16);
     flex-shrink: 0;
 }
 
