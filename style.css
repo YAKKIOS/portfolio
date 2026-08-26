@@ -931,6 +931,26 @@ blockquote p {
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #ffffff;
+    font-size: 2.5rem;
+    line-height: 1;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    z-index: 10;
+}
+
+.lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+.lightbox-prev { left: 1.5rem; }
+.lightbox-next { right: 1.5rem; }
+
 /* =========================================
    Random Lore
    ========================================= */
