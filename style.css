@@ -422,7 +422,7 @@ p {font-weight: 420;}
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    width: min(48rem, 100vw);
+    width: min(48rem, calc(100vw - 3rem));
 }
 
 /* Index page: two featured cards stacked full-width */
@@ -852,7 +852,7 @@ blockquote p {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    width: min(48rem, 100vw);
+    width: min(48rem, calc(100vw - 3rem));
     display: flex;
     overflow: hidden; /* THE FIX: Clips the sharp corners of the image */
 }
@@ -881,7 +881,7 @@ blockquote p {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    width: min(48rem, 100vw);
+    width: min(48rem, calc(100vw - 3rem));
 }
 
 .case-study-image-pair .case-study-image {
@@ -900,7 +900,7 @@ blockquote p {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    width: min(48rem, 100vw);
+    width: min(48rem, calc(100vw - 3rem));
 }
 
 /* Ensure your existing .case-study-image margins are reset so the caption sits flush */
@@ -1156,14 +1156,13 @@ blockquote p {
 
 }
 
-/* On small screens, cancel the breakout and use padded width instead */
+/* On small screens, cancel the breakout positioning — width is already padded by base styles */
 @media (max-width: 600px) {
     .case-study-image,
     .case-study-image-pair,
     .case-study-figure,
     .work-grid,
     .picture-stack {
-        width: calc(100vw - 3rem) !important;
         left: auto !important;
         transform: none !important;
         margin-left: auto;
@@ -1178,7 +1177,7 @@ blockquote p {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    width: min(48rem, 100vw);
+    width: min(48rem, calc(100vw - 3rem));
     display: flex;
     justify-content: center;
     align-items: center;
