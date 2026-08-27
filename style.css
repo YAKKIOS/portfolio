@@ -1161,8 +1161,9 @@ blockquote p {
     .case-study-image,
     .case-study-image-pair,
     .case-study-figure,
-    .work-grid {
-        width: calc(100vw - 2 * var(--container-padding));
+    .work-grid,
+    .picture-stack {
+        width: calc(100vw - 3rem);
     }
 }
 
