@@ -962,7 +962,7 @@ blockquote p {
     border: none;
     color: #ffffff;
     padding: 0.5rem;
-    border-radius: 8px;
+    border-radius: 50%;
     cursor: pointer;
     transition: background 0.15s ease, opacity 0.15s ease;
     z-index: 10;
@@ -1154,6 +1154,16 @@ blockquote p {
         width: 100%;
     }
 
+}
+
+/* On small screens, breakout elements respect the container side padding */
+@media (max-width: 600px) {
+    .case-study-image,
+    .case-study-image-pair,
+    .case-study-figure,
+    .work-grid {
+        width: calc(100vw - 2 * var(--container-padding));
+    }
 }
 
 /* =========================================
