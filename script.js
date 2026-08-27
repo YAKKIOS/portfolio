@@ -82,7 +82,9 @@ function init() {
        ========================================= */
     const modal = document.querySelector('.lightbox-modal');
     const modalImg = document.querySelector('.lightbox-content');
+    const modalVideo = modal ? modal.querySelector('.lightbox-video') : null;
     const triggers = document.querySelectorAll('.lightbox-trigger');
+    let openLightboxByTrigger = null; // shared with section 8's mobile tap-to-preview
 
     if (modal && modalImg && triggers.length > 0) {
 
@@ -91,8 +93,27 @@ function init() {
 
         const openLightbox = (index) => {
             currentIndex = index;
-            modalImg.src = triggerList[currentIndex].src;
-            modalImg.alt = triggerList[currentIndex].alt || 'Expanded case study image';
+            const trigger = triggerList[currentIndex];
+            const videoSrc = trigger.dataset.video;
+
+            if (videoSrc && modalVideo) {
+                modalImg.style.display = 'none';
+                modalVideo.style.display = 'block';
+                modalVideo.src = videoSrc;
+                modalVideo.currentTime = 0;
+                modalVideo.play().catch(() => {});
+            } else {
+                if (modalVideo) {
+                    modalVideo.pause();
+                    modalVideo.style.display = 'none';
+                    modalVideo.removeAttribute('src');
+                    modalVideo.load();
+                }
+                modalImg.style.display = '';
+                modalImg.src = trigger.src;
+                modalImg.alt = trigger.alt || 'Expanded case study image';
+            }
+
             modal.classList.add('is-open');
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -103,6 +124,12 @@ function init() {
             modal.style.display = 'none';
             modal.classList.remove('is-open');
             modalImg.src = '';
+            if (modalVideo) {
+                modalVideo.pause();
+                modalVideo.style.display = 'none';
+                modalVideo.removeAttribute('src');
+                modalVideo.load();
+            }
             document.body.style.overflow = '';
         };
 
@@ -119,6 +146,11 @@ function init() {
         triggers.forEach((trigger, i) => {
             trigger.addEventListener('click', () => openLightbox(i));
         });
+
+        openLightboxByTrigger = (trigger) => {
+            const i = triggerList.indexOf(trigger);
+            if (i !== -1) openLightbox(i);
+        };
 
         modal.addEventListener('click', (e) => {
             if (!e.target.closest('.lightbox-nav')) closeLightbox();
@@ -324,10 +356,8 @@ function init() {
 
         // Mobile: proximity tap — picks card whose centre is closest to the touch point
         const pictureStack = document.querySelector('.picture-stack');
-        const lbModal = document.querySelector('.lightbox-modal');
-        const lbImg   = document.querySelector('.lightbox-content');
 
-        if (pictureStack && lbModal && lbImg && !canHover.matches) {
+        if (pictureStack && openLightboxByTrigger && !canHover.matches) {
             let touchStartX, touchStartY;
             pictureStack.addEventListener('touchstart', e => {
                 touchStartX = e.touches[0].clientX;
@@ -350,16 +380,99 @@ function init() {
                 e.preventDefault();
                 const img = closest.querySelector('img');
                 if (!img) return;
-                lbImg.src = img.src;
-                lbImg.alt = img.alt;
-                lbModal.classList.add('is-open');
-                lbModal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
+                openLightboxByTrigger(img);
             }, { passive: false });
         }
 
         // position:fixed tooltips don't track scroll
         window.addEventListener('scroll', () => tooltip.classList.remove('is-visible'), { passive: true });
+    }
+
+    /* =========================================
+       8b. About Page — Draggable Pictures
+       Freeform drag anywhere on the page. Pictures are lifted out of
+       .picture-stack (which has a transform, trapping fixed/absolute
+       descendants) and reparented to <body> so they can go anywhere and
+       render above the surrounding text. Positions live only in memory —
+       a normal page reload resets everything back to the stack.
+       ========================================= */
+    if (stackedPics.length > 0) {
+        const herAudio = document.getElementById('her-audio');
+        let drag = null; // { el, pointerId, startX, startY, baseLeft, baseTop, width, height, moved }
+
+        stackedPics.forEach(pic => {
+            pic.addEventListener('pointerdown', (e) => {
+                if (e.button !== 0 && e.pointerType === 'mouse') return;
+                const rect = pic.getBoundingClientRect();
+                drag = {
+                    el: pic,
+                    pointerId: e.pointerId,
+                    startX: e.clientX,
+                    startY: e.clientY,
+                    baseLeft: rect.left + window.scrollX,
+                    baseTop: rect.top + window.scrollY,
+                    width: rect.width,
+                    height: rect.height,
+                    moved: false
+                };
+            });
+        });
+
+        document.addEventListener('pointermove', (e) => {
+            if (!drag || e.pointerId !== drag.pointerId) return;
+            const dx = e.clientX - drag.startX;
+            const dy = e.clientY - drag.startY;
+
+            if (!drag.moved) {
+                if (Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
+                drag.moved = true;
+
+                const { el, baseLeft, baseTop, width, height } = drag;
+                el.style.transition = 'none';
+                el.style.position = 'absolute';
+                el.style.left = `${baseLeft}px`;
+                el.style.top = `${baseTop}px`;
+                el.style.width = `${width}px`;
+                el.style.height = `${height}px`;
+                el.style.margin = '0';
+                el.style.transform = 'none';
+                el.style.zIndex = '50'; // above body text, below the fixed nav (100) and lightbox (9999)
+                el.classList.add('is-dragging');
+                if (el.parentElement !== document.body) document.body.appendChild(el);
+
+                if (el.dataset.her === 'true' && herAudio) {
+                    herAudio.currentTime = 0;
+                    herAudio.play().catch(() => {});
+                }
+            }
+
+            // Clamp horizontally so the picture can't slide under the page's overflow-x: hidden
+            const maxLeft = window.scrollX + document.documentElement.clientWidth - drag.width;
+            const nextLeft = Math.min(Math.max(drag.baseLeft + dx, window.scrollX), Math.max(maxLeft, window.scrollX));
+            const nextTop = Math.max(drag.baseTop + dy, 0);
+
+            drag.el.style.left = `${nextLeft}px`;
+            drag.el.style.top = `${nextTop}px`;
+        });
+
+        const endDrag = (e) => {
+            if (!drag || e.pointerId !== drag.pointerId) return;
+            if (drag.moved) {
+                drag.el.classList.remove('is-dragging');
+                drag.el.style.transition = 'box-shadow 0.3s ease';
+                // Swallow the click that follows a real drag so it doesn't reopen the lightbox
+                const suppressClick = (ce) => {
+                    ce.stopPropagation();
+                    ce.preventDefault();
+                    drag.el.removeEventListener('click', suppressClick, true);
+                };
+                drag.el.addEventListener('click', suppressClick, true);
+            }
+            drag = null;
+        };
+
+        document.addEventListener('pointerup', endDrag);
+        document.addEventListener('pointercancel', endDrag);
     }
 
     /* =========================================
