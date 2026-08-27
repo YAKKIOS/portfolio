@@ -1156,14 +1156,18 @@ blockquote p {
 
 }
 
-/* On small screens, breakout elements respect the container side padding */
+/* On small screens, cancel the breakout and use padded width instead */
 @media (max-width: 600px) {
     .case-study-image,
     .case-study-image-pair,
     .case-study-figure,
     .work-grid,
     .picture-stack {
-        width: calc(100vw - 3rem);
+        width: calc(100vw - 3rem) !important;
+        left: auto !important;
+        transform: none !important;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
