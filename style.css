@@ -665,7 +665,7 @@ blockquote p {
 }
 
 .testimonial-role {
-    font-size: var(--text-14);
+    font-size: var(--text-16);
     color: var(--text-muted);
 }
 
