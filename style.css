@@ -1213,6 +1213,8 @@ blockquote p {
 .stacked-pic--sm { --pic-size: 160px; }
 .stacked-pic--lg { --pic-size: 240px; }
 
+.stacked-pic video { pointer-events: none; }
+
 .stacked-pic img,
 .stacked-pic video {
     width: 100%;
