@@ -1244,39 +1244,70 @@ blockquote p {
 }
 
 /* =========================================
+   Tablet View: Picture Stack (600–768px)
+   Scales cards down and drops alternating cards for breathing room.
+   ========================================= */
+@media (max-width: 768px) {
+    .picture-stack {
+        height: 280px;
+    }
+
+    .stacked-pic {
+        --pic-size: 150px;
+        border-radius: 20px;
+    }
+
+    .stacked-pic--sm { --pic-size: 120px; }
+    .stacked-pic--lg { --pic-size: 185px; }
+
+    [data-fan="1"] { transform: translateX(-220px) translateY(-8px)  rotate(-7deg); z-index: 1; }
+    [data-fan="2"] { transform: translateX(-110px) translateY(42px)  rotate(5deg);  z-index: 2; }
+    [data-fan="3"] { transform: translateX(0)      translateY(-10px) rotate(-6deg); z-index: 3; }
+    [data-fan="4"] { transform: translateX(110px)  translateY(42px)  rotate(4deg);  z-index: 4; }
+    [data-fan="5"] { transform: translateX(220px)  translateY(-5px)  rotate(-5deg); z-index: 5; }
+}
+
+@media (hover: hover) and (max-width: 768px) {
+    .picture-stack [data-fan="1"]:hover { transform: translateX(-220px) translateY(-16px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 14px 26px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="2"]:hover { transform: translateX(-110px) translateY(34px)  rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 14px 26px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="3"]:hover { transform: translateX(0)      translateY(-18px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 14px 26px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="4"]:hover { transform: translateX(110px)  translateY(34px)  rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 14px 26px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="5"]:hover { transform: translateX(220px)  translateY(-13px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 14px 26px -4px rgba(0, 0, 0, 0.18); }
+}
+
+/* =========================================
    Mobile View: Picture Stack
-   Breakpoint at 480px — phones only. Tablets get full desktop sizes.
-   (must come AFTER the base .stacked-pic rules to win the cascade)
+   Tighter horizontal spread, cards 2+4 drop down to free up row space.
    ========================================= */
 @media (max-width: 480px) {
     .picture-stack {
-        height: 160px;
+        height: 240px;
         margin-top: 2.5rem;
     }
 
     .stacked-pic {
-        width: var(--pic-size-mobile, 120px);
-        height: var(--pic-size-mobile, 120px);
+        width: var(--pic-size-mobile, 110px);
+        height: var(--pic-size-mobile, 110px);
         border-radius: 16px;
     }
 
-    .stacked-pic--sm { --pic-size-mobile: 96px; }
-    .stacked-pic--lg { --pic-size-mobile: 144px; }
+    .stacked-pic--sm { --pic-size-mobile: 88px; }
+    .stacked-pic--lg { --pic-size-mobile: 132px; }
 
-    [data-fan="1"] { transform: translateX(-128px) translateY(-4px) rotate(-7deg); z-index: 1; }
-    [data-fan="2"] { transform: translateX(-64px)  translateY(8px)  rotate(5deg);  z-index: 2; }
-    [data-fan="3"] { transform: translateX(0)      translateY(-6px) rotate(-6deg); z-index: 3; }
-    [data-fan="4"] { transform: translateX(64px)   translateY(6px)  rotate(4deg);  z-index: 4; }
-    [data-fan="5"] { transform: translateX(128px)  translateY(-3px) rotate(-5deg); z-index: 5; }
+    [data-fan="1"] { transform: translateX(-96px)  translateY(-4px)  rotate(-7deg); z-index: 1; }
+    [data-fan="2"] { transform: translateX(-48px)  translateY(52px)  rotate(5deg);  z-index: 2; }
+    [data-fan="3"] { transform: translateX(0)      translateY(-6px)  rotate(-6deg); z-index: 3; }
+    [data-fan="4"] { transform: translateX(48px)   translateY(52px)  rotate(4deg);  z-index: 4; }
+    [data-fan="5"] { transform: translateX(96px)   translateY(-3px)  rotate(-5deg); z-index: 5; }
 }
 
 /* Mobile hover — translateX must match mobile spread or cards jump on hover */
 @media (hover: hover) and (max-width: 480px) {
-    .picture-stack [data-fan="1"]:hover { transform: translateX(-128px) translateY(-10px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
-    .picture-stack [data-fan="2"]:hover { transform: translateX(-64px)  translateY(2px)   rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
-    .picture-stack [data-fan="3"]:hover { transform: translateX(0)      translateY(-12px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
-    .picture-stack [data-fan="4"]:hover { transform: translateX(64px)   translateY(0)     rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
-    .picture-stack [data-fan="5"]:hover { transform: translateX(128px)  translateY(-9px)  rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="1"]:hover { transform: translateX(-96px)  translateY(-12px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="2"]:hover { transform: translateX(-48px)  translateY(44px)  rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="3"]:hover { transform: translateX(0)      translateY(-14px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="4"]:hover { transform: translateX(48px)   translateY(44px)  rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="5"]:hover { transform: translateX(96px)   translateY(-11px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
 }
 
 /* The Tooltip UI */
