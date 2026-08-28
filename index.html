@@ -45,10 +45,7 @@
         <a href="/" class="nav-home-link" aria-label="Jack Johnson — Home">
             <img src="/assets/images/about/jack.webp" class="nav-avatar" alt="Jack Johnson">
         </a>
-        <a href="/spoons/" id="spoons-pill" class="spoons-pill">
-            <span class="spoons-orb"></span>
-            <span id="spoons-text" class="spoons-text"></span>
-        </a>
+        <a href="/spoons/" id="spoons-pill" class="spoons-pill" aria-hidden="true"></a>
     </nav>
 </div>
 
@@ -59,7 +56,7 @@
             </div>
 
             <div class="bio">
-                <p>I am currently Lead User Experience Design at <a href="https://www.enigma-interactive.co.uk/intro" class="inline-link"><img src="assets/images/shared/enigma_logo.svg" class="company-icon" alt="">Enigma Interactive</a>.</p>
+                <p>I am currently Lead User Experience Design at <a href="https://www.enigma-interactive.co.uk/intro" class="inline-link"><img src="assets/images/shared/enigma_logo.svg" class="company-icon" alt="">Enigma Interactive</a> and I'm <a href="/spoons/" class="spoons-inline-link"><span id="spoons-inline-orb" class="spoons-orb"></span> <span id="spoons-inline-text">not currently at a Spoons</span></a>.</p>
                 <p>I have eight years of experience designing digital products across enterprise SaaS, retail, finance, energy, and the public sector.</p>
                 <p>Clients include Harrods, Sephora, Aldi, NatWest, and National Grid.</p>
             </div>
@@ -161,8 +158,13 @@
 </footer>
     </div>
 
+<a href="/spoons/" id="spoons-bottom-pill" class="spoons-bottom-pill" aria-hidden="true">
+    <span class="spoons-orb"></span>
+    <span id="spoons-bottom-text" class="spoons-text"></span>
+</a>
+
 <script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
-    
+
     <script src="script.js"></script>
 </body>
 </html>

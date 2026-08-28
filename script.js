@@ -449,52 +449,65 @@ function init() {
        10. Spoons Status
        ========================================= */
     const spoonsPill = document.getElementById('spoons-pill');
-    const spoonsText = document.getElementById('spoons-text');
+    const spoonsInlineOrb = document.getElementById('spoons-inline-orb');
+    const spoonsInlineText = document.getElementById('spoons-inline-text');
+    const spoonsBottomPill = document.getElementById('spoons-bottom-pill');
+    const spoonsBottomText = document.getElementById('spoons-bottom-text');
 
-    if (spoonsPill && spoonsText) {
-        async function checkSpoonsStatus() {
-            try {
-                const res = await fetch(
-                    'https://wbutnbxpntpxkovptooh.supabase.co/rest/v1/visits?select=checked_in_at&checked_out_at=is.null&order=checked_in_at.desc&limit=1',
-                    {
-                        cache: 'no-store',
-                        headers: {
-                            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidXRuYnhwbnRweGtvdnB0b29oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2NTExNjcsImV4cCI6MjEwMTIyNzE2N30.J8WuLz_cFQL0ZP2dURcPvPaPuvU8QgG34nRWgsyebwE',
-                            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidXRuYnhwbnRweGtvdnB0b29oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2NTExNjcsImV4cCI6MjEwMTIyNzE2N30.J8WuLz_cFQL0ZP2dURcPvPaPuvU8QgG34nRWgsyebwE'
-                        }
+    async function checkSpoonsStatus() {
+        try {
+            const res = await fetch(
+                'https://wbutnbxpntpxkovptooh.supabase.co/rest/v1/visits?select=checked_in_at,location_name&checked_out_at=is.null&order=checked_in_at.desc&limit=1',
+                {
+                    cache: 'no-store',
+                    headers: {
+                        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidXRuYnhwbnRweGtvdnB0b29oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2NTExNjcsImV4cCI6MjEwMTIyNzE2N30.J8WuLz_cFQL0ZP2dURcPvPaPuvU8QgG34nRWgsyebwE',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndidXRuYnhwbnRweGtvdnB0b29oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2NTExNjcsImV4cCI6MjEwMTIyNzE2N30.J8WuLz_cFQL0ZP2dURcPvPaPuvU8QgG34nRWgsyebwE'
                     }
-                );
-                const rows = await res.json();
-                const active = rows[0];
-                const wasActive = spoonsPill.classList.contains('spoons-active');
-                const wasInactive = spoonsPill.classList.contains('spoons-inactive');
-
-                if (active) {
-                    const time = new Date(active.checked_in_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
-                    spoonsText.textContent = `At Spoons · ${time}`;
-                    if (!wasActive && wasInactive) {
-                        spoonsPill.classList.add('spoons-ripple');
-                        setTimeout(() => spoonsPill.classList.remove('spoons-ripple'), 700);
-                    }
-                    spoonsPill.classList.add('spoons-active');
-                    spoonsPill.classList.remove('spoons-inactive');
-                } else {
-                    spoonsText.textContent = 'Not at Spoons';
-                    spoonsPill.classList.add('spoons-inactive');
-                    spoonsPill.classList.remove('spoons-active');
                 }
-            } catch (e) {
-                spoonsText.textContent = 'Not at Spoons';
-                spoonsPill.classList.add('spoons-inactive');
-                console.log('Spoons radar offline', e);
+            );
+            const rows = await res.json();
+            const active = rows[0];
+
+            if (spoonsInlineOrb && spoonsInlineText) {
+                if (active) {
+                    spoonsInlineOrb.className = 'spoons-orb';
+                    spoonsInlineOrb.classList.add('spoons-active-orb');
+                    spoonsInlineText.textContent = 'currently at a Spoons';
+                } else {
+                    spoonsInlineOrb.className = 'spoons-orb';
+                    spoonsInlineText.textContent = 'not currently at a Spoons';
+                }
             }
+
+            if (spoonsBottomPill && spoonsBottomText) {
+                if (active) {
+                    const pub = active.location_name ? active.location_name.replace(/^wetherspoons\s*/i, '').trim() : 'a Spoons';
+                    spoonsBottomText.textContent = `At ${pub}`;
+                    spoonsBottomPill.classList.add('spoons-active');
+                    spoonsBottomPill.classList.remove('spoons-inactive');
+                    spoonsBottomPill.style.display = '';
+                } else {
+                    spoonsBottomPill.style.display = 'none';
+                }
+            }
+
+            if (spoonsPill) {
+                spoonsPill.style.display = 'none';
+            }
+
+        } catch (e) {
+            if (spoonsInlineText) spoonsInlineText.textContent = 'not currently at a Spoons';
+            if (spoonsBottomPill) spoonsBottomPill.style.display = 'none';
+            console.log('Spoons radar offline', e);
         }
-        checkSpoonsStatus();
-        setInterval(checkSpoonsStatus, 15 * 1000);
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'visible') checkSpoonsStatus();
-        });
     }
+
+    checkSpoonsStatus();
+    setInterval(checkSpoonsStatus, 15 * 1000);
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') checkSpoonsStatus();
+    });
 
 } // end init
 

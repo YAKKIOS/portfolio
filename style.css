@@ -221,9 +221,51 @@ p {font-weight: 420;}
     background: #d1d5db;
 }
 
-.spoons-pill.spoons-active .spoons-orb {
+.spoons-pill.spoons-active .spoons-orb,
+.spoons-active-orb {
     background: #22c55e;
     animation: spoons-pulse 1.8s ease-in-out infinite;
+}
+
+/* Inline Spoons status in bio */
+.spoons-inline-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.spoons-inline-link:hover {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: var(--dotted-grey);
+    text-underline-offset: 4px;
+}
+
+/* Bottom pill — fixed, centered, shown only when active */
+.spoons-bottom-pill {
+    display: none;
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    align-items: center;
+    gap: 6px;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    background: #111111;
+    color: #ffffff;
+    font-size: var(--text-14);
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    white-space: nowrap;
+}
+
+.spoons-bottom-pill.spoons-active {
+    display: inline-flex;
 }
 
 .spoons-pill.spoons-active .spoons-text {
