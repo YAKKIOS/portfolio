@@ -473,10 +473,10 @@ function init() {
                 if (active) {
                     spoonsInlineOrb.className = 'spoons-orb';
                     spoonsInlineOrb.classList.add('spoons-active-orb');
-                    spoonsInlineText.textContent = 'currently at a Spoons';
+                    spoonsInlineText.textContent = 'at a Spoons';
                 } else {
                     spoonsInlineOrb.className = 'spoons-orb';
-                    spoonsInlineText.textContent = 'not currently at a Spoons';
+                    spoonsInlineText.textContent = 'not at a Spoons';
                 }
             }
 
