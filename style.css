@@ -82,7 +82,7 @@ html {
     overflow-x: hidden; /* Prevent any absolutely-positioned element causing horizontal scroll */
 }
 
-body { font-size: var(--text-16); padding-top: 3.5rem; }
+body { font-size: var(--text-16); }
 
 .name,
 .section-title,
@@ -233,14 +233,15 @@ p {font-weight: 420;}
     align-items: center;
     gap: 5px;
     color: inherit;
-    text-decoration: none;
-}
-
-.spoons-inline-link:hover {
-    text-decoration: underline;
+    text-decoration-line: underline;
     text-decoration-style: dotted;
     text-decoration-color: var(--dotted-grey);
     text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.spoons-inline-link:hover {
+    text-decoration-color: var(--text-main);
 }
 
 /* Bottom pill — fixed, centered, shown only when active */
