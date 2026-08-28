@@ -229,9 +229,7 @@ p {font-weight: 420;}
 
 /* Inline Spoons status in bio */
 .spoons-inline-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
+    display: inline;
     color: inherit;
     text-decoration-line: underline;
     text-decoration-style: dotted;
@@ -242,6 +240,12 @@ p {font-weight: 420;}
 
 .spoons-inline-link:hover {
     text-decoration-color: var(--text-main);
+}
+
+.spoons-inline-link .spoons-orb {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
 }
 
 /* Bottom pill — fixed, centered, shown only when active */
