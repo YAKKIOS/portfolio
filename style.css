@@ -345,7 +345,7 @@ p {font-weight: 420;}
    ========================================= */
 .hero { margin-top: 8.5rem; }
 .identity { margin-bottom: 2rem; }
-.name { font-size: var(--text-18); }
+.name { font-size: var(--text-16); font-weight: 560; }
 
 .bio { 
     display: flex; 
@@ -750,8 +750,8 @@ blockquote p {
 }
 
 .case-study-title {
-    font-size: var(--text-18);
-    font-weight: 500;
+    font-size: var(--text-16);
+    font-weight: 560;
     line-height: var(--lh-base);
     color: var(--text-main);
     margin-bottom: 0.5rem;
