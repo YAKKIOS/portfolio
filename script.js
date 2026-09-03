@@ -225,7 +225,10 @@ function init() {
 
         const _revealContainer = document.querySelector('.container');
         if (_revealContainer) {
-            _revealContainer.addEventListener('animationend', _initReveal, { once: true });
+            let _revealDone = false;
+            const _safeInitReveal = () => { if (!_revealDone) { _revealDone = true; _initReveal(); } };
+            _revealContainer.addEventListener('animationend', _safeInitReveal, { once: true });
+            setTimeout(_safeInitReveal, 600); // fallback if animationend doesn't fire (some mobile browsers)
         } else {
             _initReveal();
         }

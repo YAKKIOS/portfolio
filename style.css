@@ -1320,33 +1320,34 @@ blockquote p {
    ========================================= */
 @media (max-width: 480px) {
     .picture-stack {
-        height: 240px;
-        margin-top: 2.5rem;
+        height: 260px;
+        margin-top: 3rem;
+        width: calc(100vw - 3rem);
     }
 
     .stacked-pic {
-        width: var(--pic-size-mobile, 110px);
-        height: var(--pic-size-mobile, 110px);
+        width: var(--pic-size-mobile, 120px);
+        height: var(--pic-size-mobile, 120px);
         border-radius: 16px;
     }
 
-    .stacked-pic--sm { --pic-size-mobile: 88px; }
-    .stacked-pic--lg { --pic-size-mobile: 132px; }
+    .stacked-pic--sm { --pic-size-mobile: 96px; }
+    .stacked-pic--lg { --pic-size-mobile: 140px; }
 
-    [data-fan="1"] { transform: translateX(-96px)  translateY(-4px)  rotate(-7deg); z-index: 1; }
-    [data-fan="2"] { transform: translateX(-48px)  translateY(52px)  rotate(5deg);  z-index: 2; }
-    [data-fan="3"] { transform: translateX(0)      translateY(-6px)  rotate(-6deg); z-index: 3; }
-    [data-fan="4"] { transform: translateX(48px)   translateY(52px)  rotate(4deg);  z-index: 4; }
-    [data-fan="5"] { transform: translateX(96px)   translateY(-3px)  rotate(-5deg); z-index: 5; }
+    [data-fan="1"] { transform: translateX(-110px) translateY(-8px)  rotate(-8deg); z-index: 1; }
+    [data-fan="2"] { transform: translateX(-55px)  translateY(60px)  rotate(6deg);  z-index: 2; }
+    [data-fan="3"] { transform: translateX(0)      translateY(-10px) rotate(-5deg); z-index: 3; }
+    [data-fan="4"] { transform: translateX(55px)   translateY(60px)  rotate(5deg);  z-index: 4; }
+    [data-fan="5"] { transform: translateX(110px)  translateY(-6px)  rotate(-7deg); z-index: 5; }
 }
 
 /* Mobile hover — translateX must match mobile spread or cards jump on hover */
 @media (hover: hover) and (max-width: 480px) {
-    .picture-stack [data-fan="1"]:hover { transform: translateX(-96px)  translateY(-12px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
-    .picture-stack [data-fan="2"]:hover { transform: translateX(-48px)  translateY(44px)  rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
-    .picture-stack [data-fan="3"]:hover { transform: translateX(0)      translateY(-14px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
-    .picture-stack [data-fan="4"]:hover { transform: translateX(48px)   translateY(44px)  rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
-    .picture-stack [data-fan="5"]:hover { transform: translateX(96px)   translateY(-11px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="1"]:hover { transform: translateX(-110px) translateY(-16px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="2"]:hover { transform: translateX(-55px)  translateY(52px)  rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="3"]:hover { transform: translateX(0)      translateY(-18px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="4"]:hover { transform: translateX(55px)   translateY(52px)  rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
+    .picture-stack [data-fan="5"]:hover { transform: translateX(110px)  translateY(-14px) rotate(0deg) scale(1.1); opacity: 1; z-index: 10; box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.92), 0 12px 24px -4px rgba(0, 0, 0, 0.18); }
 }
 
 /* The Tooltip UI */
