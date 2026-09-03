@@ -71,8 +71,10 @@
 
                 <section class="reveal">
                     <h2 class="section-title">How it works</h2>
-                    <p>I have an iOS Shortcut on my phone. I tap it when I arrive, enter the pub name, and it fires a JSON payload to a Supabase table with the location and check-in time. I tap it again when I leave and it records the checkout.</p>
-                    <p>The site polls Supabase directly from the browser — no server, no build pipeline. If there's a check-in with no checkout, it knows I'm currently in a pub and updates the homepage in real time.</p>
+                    <p>I have an iOS Shortcut on my phone. I tap it when I arrive, enter the pub name, and it sends a JSON file to a Supabase table with the location and check-in time. It also tracks my longitude and latitude… but that's for later.</p>
+                    <p>I tap the shortcut again when I leave and it marks the checkout time. My GitHub Pages site polls Supabase directly from the browser. That then gets reflected in my status that I'm at the pub automatically.</p>
+                    <h2 class="section-title">Next steps</h2>
+                    <p>I will be using a 3rd party platform to take my longitude and latitude from Supabase and cross reference that to Wetherspoons pubs. That will then get added to the table without the need for my input.</p>
                 </section>
 
             </article>
