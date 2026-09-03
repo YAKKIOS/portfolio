@@ -69,6 +69,20 @@
                     </div>
                 </section>
 
+                <section class="reveal">
+                    <h2 class="section-title">How it works</h2>
+                    <p>The whole thing runs off an iOS Shortcut. When I walk into a Spoons I tap it, it asks me for the pub name, and fires a JSON payload off to a Supabase table — recording the location and the time I checked in. When I leave I tap it again and it stamps the checkout time.</p>
+                    <p>The portfolio then polls Supabase directly from the browser. No server, no build step — just a fetch call with the public anon key hitting the REST API. If there's an open check-in with no checkout time, the site knows I'm currently in a pub and updates accordingly in real time.</p>
+                    <p>The stats and leaderboard below are pulled from the same table every time the page loads, so they're always up to date without me having to touch anything.</p>
+
+                    <div class="build-video-placeholder reveal">
+                        <div class="build-video-inner">
+                            <span class="material-symbols-rounded build-video-icon">play_circle</span>
+                            <p class="build-video-label">Walkthrough coming soon</p>
+                        </div>
+                    </div>
+                </section>
+
             </article>
         </main>
 
