@@ -577,10 +577,10 @@ p {font-weight: 420;}
 }
 
 .company-icon {
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
     border-radius: 3px;
-    vertical-align: -0.15em;
+    vertical-align: -0.35em;
     margin-right: 4px;
     display: inline;
 }
