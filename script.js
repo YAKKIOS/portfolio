@@ -425,6 +425,14 @@ function init() {
     if (copyBtn) {
         copyBtn.addEventListener('click', () => {
             navigator.clipboard.writeText('hello@jackjohnson.fyi');
+            const label = document.getElementById('copy-label');
+            if (label) {
+                label.textContent = 'Copied!';
+                setTimeout(() => { label.textContent = 'Copy email'; }, 2000);
+            } else {
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => { copyBtn.textContent = 'Copy email'; }, 2000);
+            }
         });
     }
 
