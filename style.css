@@ -448,6 +448,7 @@ p {font-weight: 420;}
     transition: transform 0.20s ease, opacity 0.20s ease, box-shadow 0.15s ease;
     will-change: transform;
     cursor: pointer;
+    outline: none;
     -webkit-appearance: none;
     appearance: none;
 }
