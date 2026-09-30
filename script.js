@@ -423,28 +423,8 @@ function init() {
     }
 
     if (copyBtn) {
-        const EMAIL     = 'hello@jackjohnson.fyi';
-        const copyIcon  = document.getElementById('copy-icon');
-        const copyLabel = document.getElementById('copy-label');
-        let resetTimer;
-
-        copyBtn.addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(EMAIL);
-            } catch {
-                return; // Clipboard unavailable — fail silently
-            }
-
-            copyIcon.textContent  = 'check';
-            copyLabel.textContent = 'Copied!';
-            copyBtn.disabled      = true;
-
-            clearTimeout(resetTimer);
-            resetTimer = setTimeout(() => {
-                copyIcon.textContent  = 'content_copy';
-                copyLabel.textContent = 'Copy email';
-                copyBtn.disabled      = false;
-            }, 2000);
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText('hello@jackjohnson.fyi');
         });
     }
 
