@@ -422,7 +422,7 @@ p {font-weight: 420;}
 .hero { margin-top: 8.5rem; }
 .identity { margin-bottom: 2rem; }
 .name { font-size: var(--text-16); font-weight: 500; }
-.tagline { font-size: var(--text-14); color: var(--text-muted); margin-top: 0.25rem; }
+.tagline { font-size: var(--text-16); color: var(--text-muted); margin-top: 0; }
 
 .bio { 
     display: flex; 
@@ -449,6 +449,7 @@ p {font-weight: 420;}
     will-change: transform;
     cursor: pointer;
     outline: none;
+    border: none;
     -webkit-appearance: none;
     appearance: none;
 }
