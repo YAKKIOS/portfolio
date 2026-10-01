@@ -32,8 +32,7 @@
     --bg-hover: #f4f4f5;
     --border-color: #e5e7eb;
     --blue-primary: #3b82f6;
-    --placeholder-grey: #f0f0f0; 
-    --dotted-grey: #a3a3a3;
+    --placeholder-grey: #f0f0f0;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -117,12 +116,21 @@ p {font-weight: 420;}
 
 .name { font-weight: 500; }
 
+/* De-emphasise the homepage sections' titles */
+.featured-work .section-title,
+.side-projects .section-title,
+.writing .section-title,
+.contact .section-title {
+    color: var(--text-muted);
+}
+
 .inline-link,
 .writing-title,
 .card-title {
     text-decoration-line: underline;
     text-decoration-style: solid;
-    text-decoration-color: var(--dotted-grey);
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--border-color);
     text-underline-offset: 5px;
     transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
@@ -233,7 +241,8 @@ p {font-weight: 420;}
     color: var(--text-main);
     text-decoration-line: underline;
     text-decoration-style: solid;
-    text-decoration-color: var(--dotted-grey);
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--border-color);
     text-underline-offset: 5px;
     transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
@@ -478,8 +487,28 @@ p {font-weight: 420;}
 .btn .material-symbols-rounded {
     font-size: 20px;
     line-height: 1;
-    font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20; 
+    font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20;
 }
+
+.copy-icon-wrap {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.copy-icon {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    filter: blur(0);
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.copy-icon--check { opacity: 0; filter: blur(4px); }
+
+#copy-email-btn.is-copied .copy-icon--copy { opacity: 0; filter: blur(4px); }
+#copy-email-btn.is-copied .copy-icon--check { opacity: 1; filter: blur(0); }
 
 .btn-avatar {
     width: 20px;
@@ -504,10 +533,14 @@ p {font-weight: 420;}
     width: min(48rem, calc(100vw - 3rem));
 }
 
-/* Index page: two featured cards stacked full-width */
+/* Index page: two featured cards stacked, matching the main container width */
 .work-grid--stacked {
     grid-template-columns: 1fr;
     gap: 4rem;
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%;
 }
 
 .card-media {
