@@ -624,6 +624,20 @@ p {font-weight: 420;}
     font-size: var(--text-16);
 }
 
+.writing .writing-item {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+@media (max-width: 480px) {
+    .writing .writing-item {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+}
+
 .writing-item a {
     color: var(--text-main);
     min-width: 0;
@@ -642,7 +656,7 @@ p {font-weight: 420;}
     color: #aaaaaa;
     line-height: 1;
     vertical-align: -0.15em; /* nudge icon onto the text baseline */
-    margin-left: 5px;
+    margin-left: 2px;
 }
 
 .company-icon {
