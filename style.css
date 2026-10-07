@@ -32,8 +32,10 @@
     --bg-hover: #f4f4f5;
     --border-color: #e5e7eb;
     --blue-primary: #3b82f6;
-    --placeholder-grey: #f0f0f0; 
+    --placeholder-grey: #f0f0f0;
     --dotted-grey: #a3a3a3;
+    --bg: #ffffff;
+    --text-faint: #999999;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,7 +74,7 @@ html {
     font-size: 16px;
     font-family: 'Inter', sans-serif;
     color: var(--text-body);
-    background-color: #ffffff;
+    background-color: var(--bg);
     line-height: var(--lh-base);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -208,10 +210,10 @@ p {font-weight: 420;}
     gap: 6px;
     padding: 0.25rem 0.875rem;
     border-radius: 9999px;
-    background: #ffffff;
+    background: var(--bg);
     border: 1px solid var(--border-color);
     box-shadow:
-        inset 0 1px 0 #ffffff,
+        inset 0 1px 0 var(--bg),
         0 1px 3px rgba(0, 0, 0, 0.07),
         0 1px 1px rgba(0, 0, 0, 0.04);
     font: inherit;
@@ -270,8 +272,8 @@ p {font-weight: 420;}
     gap: 6px;
     padding: 0.4rem 1rem;
     border-radius: 9999px;
-    background: #111111;
-    color: #ffffff;
+    background: var(--text-main);
+    color: var(--bg);
     font-size: var(--text-14);
     font-weight: 500;
     text-decoration: none;
@@ -327,8 +329,8 @@ p {font-weight: 420;}
 }
 
 @keyframes spoons-checkin {
-    0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45), inset 0 1px 0 #ffffff, 0 1px 3px rgba(0,0,0,0.07), 0 1px 1px rgba(0,0,0,0.04); }
-    100% { box-shadow: 0 0 0 18px rgba(34, 197, 94, 0), inset 0 1px 0 #ffffff, 0 1px 3px rgba(0,0,0,0.07), 0 1px 1px rgba(0,0,0,0.04); }
+    0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45), inset 0 1px 0 var(--bg), 0 1px 3px rgba(0,0,0,0.07), 0 1px 1px rgba(0,0,0,0.04); }
+    100% { box-shadow: 0 0 0 18px rgba(34, 197, 94, 0), inset 0 1px 0 var(--bg), 0 1px 3px rgba(0,0,0,0.07), 0 1px 1px rgba(0,0,0,0.04); }
 }
 
 .spoons-pill.spoons-ripple {
@@ -467,8 +469,8 @@ p {font-weight: 420;}
 .btn:active { transform: scale(0.98); }
 
 .btn-primary {
-    background: #111111;
-    color: #ffffff;
+    background: var(--text-main);
+    color: var(--bg);
     box-shadow: none;
 }
 
@@ -477,10 +479,10 @@ p {font-weight: 420;}
 }
 
 .btn-secondary {
-    background: #ffffff;
+    background: var(--bg);
     border: 1px solid var(--border-color);
     box-shadow:
-        inset 0 1px 0 #ffffff,
+        inset 0 1px 0 var(--bg),
         0 1px 3px rgba(0, 0, 0, 0.07),
         0 1px 1px rgba(0, 0, 0, 0.04);
 }
@@ -562,7 +564,7 @@ p {font-weight: 420;}
 }
 
 .card-image-wrapper {
-    background-color: #ffffff;
+    background-color: var(--bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     aspect-ratio: 4 / 3;
@@ -636,7 +638,7 @@ p {font-weight: 420;}
 .external-icon {
     display: inline;
     font-size: 16px;
-    color: #aaaaaa;
+    color: var(--dotted-grey);
     line-height: 1;
     vertical-align: -0.15em; /* nudge icon onto the text baseline */
     margin-left: 5px;
@@ -778,7 +780,7 @@ blockquote p {
 }
 
 .testimonial-bubble {
-    background: #e9e9eb;
+    background: var(--bg-hover);
     border-radius: 18px 18px 18px 0;
     padding: 16px 20px;
     display: block;
@@ -835,7 +837,7 @@ blockquote p {
     top: 0.65rem; /* Aligns the dot perfectly with the middle of the first line of text */
     width: 6px;
     height: 6px;
-    background-color: #cccccc; /* Matches the subtle grey from your mockup */
+    background-color: var(--dotted-grey);
     border-radius: 50%;
 }
 
@@ -855,7 +857,7 @@ blockquote p {
     font-size: 20px;
     flex-shrink: 0;
     margin-top: 0.2em;
-    color: #cccccc;
+    color: var(--dotted-grey);
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
 }
 
@@ -880,7 +882,7 @@ blockquote p {
     display: inline-block;
 }
 
-.footer-tagline { font-style: italic; color: #999999; }
+.footer-tagline { font-style: italic; color: var(--text-faint); }
 
 /* =========================================
    Case Study Layout
@@ -976,7 +978,7 @@ blockquote p {
    Case Study Image Frame
    ========================================= */
 .case-study-image {
-    background-color: #ffffff;
+    background-color: var(--bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     margin: 2rem 0;
@@ -1100,7 +1102,7 @@ blockquote p {
     transform: translateY(-50%);
     background: rgba(255,255,255,0.12);
     border: none;
-    color: #ffffff;
+    color: var(--bg);
     padding: 0.25rem;
     border-radius: 50%;
     cursor: pointer;
@@ -1126,7 +1128,7 @@ blockquote p {
    Random Lore
    ========================================= */
 .lore-card {
-    background-color: #ffffff;
+    background-color: var(--bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     overflow: hidden;
@@ -1228,8 +1230,8 @@ blockquote p {
 }
 
 @keyframes badge-flash {
-    0% { background-color: #f59e0b; color: #fff; transform: scale(1.1); }
-    100% { background-color: var(--text-muted); color: #fff; transform: scale(1); }
+    0% { background-color: #f59e0b; color: var(--bg); transform: scale(1.1); }
+    100% { background-color: var(--text-muted); color: var(--bg); transform: scale(1); }
 }
 
 @keyframes text-flash {
@@ -1450,7 +1452,7 @@ blockquote p {
     top: 0;
     left: 0;
     background-color: var(--text-main); /* Keeping your dark grey as instructed */
-    color: #ffffff;
+    color: var(--bg);
     
     /* THE FIX: Generous, clean padding matching image_8.png's style */
     padding: 0.25rem 0.875rem; 
@@ -1505,7 +1507,7 @@ blockquote p {
             #A4B0E8 0%,
             #C4CCEE 42%,
             #edf0ff 68%,
-            #ffffff 88%
+            var(--bg) 88%
         );
     border-radius: 20px;
     overflow: hidden;
