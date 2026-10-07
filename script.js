@@ -427,21 +427,17 @@ function init() {
         const copyIcon = document.getElementById('copy-icon');
         let resetTimer;
 
-        const BLUR_DUR = 220;
-
         function blurSwap(icon, newText) {
-            icon.style.transition = `filter ${BLUR_DUR}ms cubic-bezier(0.4,0,0.2,1), opacity ${BLUR_DUR}ms cubic-bezier(0.4,0,0.2,1)`;
-            requestAnimationFrame(() => {
-                icon.style.filter  = 'blur(8px)';
-                icon.style.opacity = '0';
-            });
+            icon.style.transition = 'filter 0.1s ease, opacity 0.1s ease';
+            icon.getBoundingClientRect();
+            icon.style.filter  = 'blur(3px)';
+            icon.style.opacity = '0';
             setTimeout(() => {
                 icon.textContent = newText;
-                requestAnimationFrame(() => requestAnimationFrame(() => {
-                    icon.style.filter  = 'blur(0px)';
-                    icon.style.opacity = '1';
-                }));
-            }, BLUR_DUR);
+                icon.getBoundingClientRect();
+                icon.style.filter  = 'blur(0px)';
+                icon.style.opacity = '1';
+            }, 100);
         }
 
         copyBtn.addEventListener('click', async () => {
