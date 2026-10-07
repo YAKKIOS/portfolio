@@ -599,21 +599,28 @@ p {font-weight: 420;}
 
 .writing-item {
     display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.2rem 0.5rem;
     font-size: var(--text-16);
 }
 
 .writing-item a {
     color: var(--text-main);
+    flex: 1;
     min-width: 0;
+}
+
+.writing-desc {
+    flex: 0 0 100%;
 }
 
 .writing-date,
 .writing-desc {
     color: var(--text-muted);
     font-size: var(--text-16);
-    flex-shrink: 0;
 }
 
 .external-icon {
