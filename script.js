@@ -423,9 +423,8 @@ function init() {
     }
 
     if (copyBtn) {
-        const EMAIL     = 'hello@jackjohnson.fyi';
-        const copyIcon  = document.getElementById('copy-icon');
-        const copyLabel = document.getElementById('copy-label');
+        const EMAIL    = 'hello@jackjohnson.fyi';
+        const copyIcon = document.getElementById('copy-icon');
         let resetTimer;
 
         copyBtn.addEventListener('click', async () => {
@@ -442,7 +441,6 @@ function init() {
                     copyIcon.style.opacity = '';
                 }, 150);
             }
-            if (copyLabel) copyLabel.textContent = 'Copied!';
 
             clearTimeout(resetTimer);
             resetTimer = setTimeout(() => {
@@ -455,7 +453,6 @@ function init() {
                         copyIcon.style.opacity = '';
                     }, 150);
                 }
-                if (copyLabel) copyLabel.textContent = 'Copy email';
                 copyBtn.disabled = false;
             }, 2000);
         });
