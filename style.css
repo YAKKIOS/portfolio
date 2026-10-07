@@ -111,8 +111,12 @@ section { margin-top: 8rem; }
 
 p {font-weight: 420;}
 
-.name, .section-title, .card-title, .writing-title {
+.name, .card-title, .writing-title {
     color: var(--text-main);
+}
+
+.section-title {
+    color: var(--text-muted);
 }
 
 .name { font-weight: 500; }
