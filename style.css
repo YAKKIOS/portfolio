@@ -116,6 +116,12 @@ p {font-weight: 420;}
 }
 
 .section-title {
+    color: var(--text-main);
+}
+
+.writing .section-title,
+.side-projects .section-title,
+.contact .section-title {
     color: var(--text-muted);
 }
 
