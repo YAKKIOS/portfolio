@@ -545,7 +545,7 @@ p {font-weight: 420;}
 /* Homepage featured work: flagship full-width, then 2 side by side */
 .work-grid--home {
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 2rem 1rem;
 }
 .work-grid--home .work-card:first-child {
     grid-column: 1 / -1;
