@@ -490,8 +490,28 @@ p {font-weight: 420;}
 .btn .material-symbols-rounded {
     font-size: 20px;
     line-height: 1;
-    font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20; 
+    font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20;
 }
+
+.copy-icon-wrap {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.copy-icon {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    filter: blur(0);
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.copy-icon--check { opacity: 0; filter: blur(4px); }
+
+#copy-email-btn.is-copied .copy-icon--copy { opacity: 0; filter: blur(4px); }
+#copy-email-btn.is-copied .copy-icon--check { opacity: 1; filter: blur(0); }
 
 .btn-avatar {
     width: 20px;

@@ -423,30 +423,16 @@ function init() {
     }
 
     if (copyBtn) {
-        const EMAIL    = 'hello@jackjohnson.fyi';
-        const copyIcon = document.getElementById('copy-icon');
+        const EMAIL = 'hello@jackjohnson.fyi';
         let resetTimer;
-
-        function blurSwap(icon, newText) {
-            icon.style.transition = 'filter 0.1s ease, opacity 0.1s ease';
-            icon.getBoundingClientRect();
-            icon.style.filter  = 'blur(3px)';
-            icon.style.opacity = '0';
-            setTimeout(() => {
-                icon.textContent = newText;
-                icon.getBoundingClientRect();
-                icon.style.filter  = 'blur(0px)';
-                icon.style.opacity = '1';
-            }, 100);
-        }
 
         copyBtn.addEventListener('click', async () => {
             try { await navigator.clipboard.writeText(EMAIL); } catch { return; }
             copyBtn.disabled = true;
-            if (copyIcon) blurSwap(copyIcon, 'check');
+            copyBtn.classList.add('is-copied');
             clearTimeout(resetTimer);
             resetTimer = setTimeout(() => {
-                if (copyIcon) blurSwap(copyIcon, 'content_copy');
+                copyBtn.classList.remove('is-copied');
                 copyBtn.disabled = false;
             }, 2000);
         });
