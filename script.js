@@ -423,10 +423,41 @@ function init() {
     }
 
     if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText('hello@jackjohnson.fyi');
-            copyBtn.classList.add('is-copied');
-            setTimeout(() => { copyBtn.classList.remove('is-copied'); }, 2000);
+        const EMAIL     = 'hello@jackjohnson.fyi';
+        const copyIcon  = document.getElementById('copy-icon');
+        const copyLabel = document.getElementById('copy-label');
+        let resetTimer;
+
+        copyBtn.addEventListener('click', async () => {
+            try { await navigator.clipboard.writeText(EMAIL); } catch { return; }
+
+            copyBtn.disabled = true;
+            if (copyIcon) {
+                copyIcon.style.transition = 'filter 0.15s ease, opacity 0.15s ease';
+                copyIcon.style.filter = 'blur(4px)';
+                copyIcon.style.opacity = '0';
+                setTimeout(() => {
+                    copyIcon.textContent = 'check';
+                    copyIcon.style.filter = '';
+                    copyIcon.style.opacity = '';
+                }, 150);
+            }
+            if (copyLabel) copyLabel.textContent = 'Copied!';
+
+            clearTimeout(resetTimer);
+            resetTimer = setTimeout(() => {
+                if (copyIcon) {
+                    copyIcon.style.filter = 'blur(4px)';
+                    copyIcon.style.opacity = '0';
+                    setTimeout(() => {
+                        copyIcon.textContent = 'content_copy';
+                        copyIcon.style.filter = '';
+                        copyIcon.style.opacity = '';
+                    }, 150);
+                }
+                if (copyLabel) copyLabel.textContent = 'Copy email';
+                copyBtn.disabled = false;
+            }, 2000);
         });
     }
 
