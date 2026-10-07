@@ -427,32 +427,30 @@ function init() {
         const copyIcon = document.getElementById('copy-icon');
         let resetTimer;
 
+        const BLUR_DUR = 220;
+
+        function blurSwap(icon, newText) {
+            icon.style.transition = `filter ${BLUR_DUR}ms cubic-bezier(0.4,0,0.2,1), opacity ${BLUR_DUR}ms cubic-bezier(0.4,0,0.2,1)`;
+            requestAnimationFrame(() => {
+                icon.style.filter  = 'blur(8px)';
+                icon.style.opacity = '0';
+            });
+            setTimeout(() => {
+                icon.textContent = newText;
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    icon.style.filter  = 'blur(0px)';
+                    icon.style.opacity = '1';
+                }));
+            }, BLUR_DUR);
+        }
+
         copyBtn.addEventListener('click', async () => {
             try { await navigator.clipboard.writeText(EMAIL); } catch { return; }
-
             copyBtn.disabled = true;
-            if (copyIcon) {
-                copyIcon.style.transition = 'filter 0.15s ease, opacity 0.15s ease';
-                copyIcon.style.filter = 'blur(4px)';
-                copyIcon.style.opacity = '0';
-                setTimeout(() => {
-                    copyIcon.textContent = 'check';
-                    copyIcon.style.filter = '';
-                    copyIcon.style.opacity = '';
-                }, 150);
-            }
-
+            if (copyIcon) blurSwap(copyIcon, 'check');
             clearTimeout(resetTimer);
             resetTimer = setTimeout(() => {
-                if (copyIcon) {
-                    copyIcon.style.filter = 'blur(4px)';
-                    copyIcon.style.opacity = '0';
-                    setTimeout(() => {
-                        copyIcon.textContent = 'content_copy';
-                        copyIcon.style.filter = '';
-                        copyIcon.style.opacity = '';
-                    }, 150);
-                }
+                if (copyIcon) blurSwap(copyIcon, 'content_copy');
                 copyBtn.disabled = false;
             }, 2000);
         });
