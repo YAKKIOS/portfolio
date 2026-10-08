@@ -490,7 +490,7 @@ function init() {
             }
 
         } catch (e) {
-            if (spoonsInlineText) spoonsInlineText.textContent = 'not currently at a Spoons';
+            if (spoonsInlineText) spoonsInlineText.textContent = 'not at a Spoons';
             if (spoonsBottomPill) spoonsBottomPill.style.display = 'none';
             console.log('Spoons radar offline', e);
         }
