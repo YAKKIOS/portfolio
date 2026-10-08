@@ -502,6 +502,40 @@ function init() {
         if (document.visibilityState === 'visible') checkSpoonsStatus();
     });
 
+    /* =========================================
+       11. Ghost (Dark Mode Toggle Easter Egg)
+       ========================================= */
+    // Call spawnGhost(toggleEl) from your dark mode toggle handler.
+    // The ghost spawns near the element, floats up, and removes itself.
+    window.spawnGhost = function spawnGhost(nearEl) {
+        const BODY_PATH  = 'M 5,34 C 5,6 35,6 35,34 C 35,41 31,45 28,41 C 25,37 15,37 12,41 C 9,45 5,41 5,34 Z';
+        const BODY_PATH2 = 'M 5,34 C 5,6 35,6 35,34 C 35,42 30,44 27,40 C 24,36 16,36 13,40 C 10,44 5,42 5,34 Z';
+
+        let startX = window.innerWidth / 2;
+        let startY = window.innerHeight / 2;
+        if (nearEl) {
+            const r = nearEl.getBoundingClientRect();
+            startX = r.left + r.width / 2;
+            startY = r.top + r.height / 4;
+        }
+
+        const wrap = document.createElement('div');
+        wrap.style.cssText = `position:fixed;left:${startX}px;top:${startY}px;pointer-events:none;z-index:99998;animation:ghost-rise 1.5s ease-out forwards`;
+
+        wrap.innerHTML = `<svg width="44" height="54" viewBox="0 0 40 50" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="display:block;animation:ghost-squish 0.55s ease-in-out infinite;transform-origin:center 68%">
+            <path fill="white" d="${BODY_PATH}">
+                <animate attributeName="d" dur="0.55s" repeatCount="indefinite"
+                    values="${BODY_PATH};${BODY_PATH2};${BODY_PATH}"/>
+            </path>
+            <ellipse cx="14" cy="21" rx="3" ry="3.5" fill="#1a1a1a"/>
+            <ellipse cx="26" cy="21" rx="3" ry="3.5" fill="#1a1a1a"/>
+        </svg>`;
+
+        document.body.appendChild(wrap);
+        setTimeout(() => wrap.remove(), 1550);
+    };
+
 } // end init
 
 if (document.readyState === 'loading') {
