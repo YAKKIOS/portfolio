@@ -73,20 +73,20 @@
 
         <main>
 <div class="case-study-image">
-        <img src="../../assets/images/projects/NGED/psr-01.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
+        <video src="../../assets/images/projects/NGED/psr-checker.mp4" autoplay muted loop playsinline style="width:100%;height:auto;display:block;"></video>
     </div>
 
             <article class="case-study-content">
 
-            <h3 class="section-title">Don’t have time to read it all?</h3>
+            <h3 class="section-title">Don't have time to read it all?</h3>
                 <p>
-                    I led the design of an eligibility checker for National Grid’s Priority Services Register, helping vulnerable customers quickly find out if they qualify for extra support. The tool can provide some customers with an answer within 2 clicks 
+                    I led the design of an eligibility checker for National Grid's Priority Services Register, helping vulnerable customers quickly find out if they qualify for extra support. The tool can provide some customers with an answer within 2 clicks 
                 </p>
                 
                                 <ul class="case-study-list">
     <li>Lightweight tool providing quick eligibility results to customers.
 </li>
-    <li>A chance to align with Ofgem’s objective of increasing awareness and uptake in PSR registrations.</li>
+    <li>A chance to align with Ofgem's objective of increasing awareness and uptake in PSR registrations.</li>
     <li>2507 interactions within a week of launch and 34,965 across 3 months.</li>
 </ul>
 
@@ -109,7 +109,7 @@
 
 <p><span class="rn-highlight">Nearly 72,000 PSR applications were submitted online to National Grid</span> in a single year,<sup class="footnote-ref"><a href="#fn:2" id="fnref:2">2</a></sup> but we didn't know how many more eligible customers weren't applying. </p>
 
-<p>National Grid's current PSR form wasn’t helping. It was vague about who actually qualified, and that vagueness was contributing to eligible customers choosing not to apply.</p>
+<p>National Grid's current PSR form wasn't helping. It was vague about who actually qualified, and that vagueness was contributing to eligible customers choosing not to apply.</p>
 
 <figure class="case-study-figure">
 
@@ -177,14 +177,14 @@
     
 </figure>
 
-<p>However, "unsure" sitting amongst the health conditions felt like it didn’t truly fit. It was essentially a help option dressed up as a choice, and I didn’t want somebody to feel they have to be unsure about one specific category.</p>
+<p>However, "unsure" sitting amongst the health conditions felt like it didn't truly fit. It was essentially a help option dressed up as a choice, and I didn't want somebody to feel they have to be unsure about one specific category.</p>
 
 <p>I chose to move "unsure" out of the options entirely and, instead, made it a permanent help link anchored at the bottom. This way it was always visible, and never in the way of the other PSR options.</p> 
 <div class="case-study-image">
         <img src="../../assets/images/projects/NGED/psr-04.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
     </div>
 
-<p>This decision also simplified the back-end logic. Reducing the decision tree by 50%. That was because selecting unsure created a split in the decision tree where the system had to understand if the user moving on has flagged unsure at any point which would eventually lead them to a ‘you may be eligible’ screen.</p>
+<p>This decision also simplified the back-end logic. Reducing the decision tree by 50%. That was because selecting unsure created a split in the decision tree where the system had to understand if the user moving on has flagged unsure at any point which would eventually lead them to a 'you may be eligible' screen.</p>
 
     <p class="section-eyebrow">Rapid Testing</p>
     <h3 class="section-title">Validating the flow internally on a tight timeline</h3>
@@ -224,7 +224,7 @@
     
 </figure>
 
-<p>One big change was removing the ‘unsure’ question from every page. Having it visible right from the start created uncertainty. People weren’t sure whether to exit via that link before they’d progressed through all the options. We wanted them to go through the entire flow first, leaving ‘unsure’ as a last resort at the very end. If they click ‘no’ at that final stage, then we know for sure they aren’t eligible.</p>
+<p>One big change was removing the 'unsure' question from every page. Having it visible right from the start created uncertainty. People weren't sure whether to exit via that link before they'd progressed through all the options. We wanted them to go through the entire flow first, leaving 'unsure' as a last resort at the very end. If they click 'no' at that final stage, then we know for sure they aren't eligible.</p>
                 
 <figure class="case-study-figure">
 
@@ -240,7 +240,7 @@
     <h3 class="section-title">Deploying in pre-production to test live system architecture</h3>
 
 <p>
-    While we reused a significant amount of existing components, the new flow required some custom elements and styling. We built and deployed the tool in a pre-prod environment. It gave us a direct understanding of exactly what backend or front-end changes were required to align our new flow with National Grid’s existing architecture before pushing to production.
+    While we reused a significant amount of existing components, the new flow required some custom elements and styling. We built and deployed the tool in a pre-prod environment. It gave us a direct understanding of exactly what backend or front-end changes were required to align our new flow with National Grid's existing architecture before pushing to production.
 </p>
 
 <figure class="case-study-figure">
@@ -303,7 +303,7 @@
 
                     <p class="section-eyebrow">Next Steps</p>
                     <h3 class="section-title">Aligning the core registration form with the new logic</h3>
-<p>Breaking the PSR needs into logical groups for the checker created a conflict with the existing registration form. We identified that the form would need to be updated to match the checker’s grouping. Luckily, there’s already a project running in tandem to improve the PSR content across NGED, so these new groupings will be introduced as part of that work.</p>
+<p>Breaking the PSR needs into logical groups for the checker created a conflict with the existing registration form. We identified that the form would need to be updated to match the checker's grouping. Luckily, there's already a project running in tandem to improve the PSR content across NGED, so these new groupings will be introduced as part of that work.</p>
 
             </article>
 
