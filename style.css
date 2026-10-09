@@ -558,13 +558,10 @@ p {font-weight: 420;}
     gap: 4rem;
 }
 
-/* Homepage featured work: flagship full-width, then 2 side by side */
+/* Homepage featured work: two full-width stacked cards */
 .work-grid--home {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-}
-.work-grid--home .work-card:first-child {
-    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+    gap: 4rem;
 }
 .featured-work-actions {
     text-align: center;
@@ -602,7 +599,7 @@ p {font-weight: 420;}
 .card-image-wrapper {
     background-color: var(--bg);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 1rem;
     aspect-ratio: 4 / 3;
     overflow: hidden;
     display: block;
