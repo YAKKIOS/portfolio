@@ -606,7 +606,8 @@ p {font-weight: 420;}
     transition: box-shadow 0.35s ease;
 }
 
-.card-image-wrapper img {
+.card-image-wrapper img,
+.card-image-wrapper video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -618,7 +619,8 @@ p {font-weight: 420;}
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
 }
 
-.work-card:hover .card-image-wrapper img {
+.work-card:hover .card-image-wrapper img,
+.work-card:hover .card-image-wrapper video {
     transform: scale(1.04);
 }
 
@@ -1023,13 +1025,13 @@ blockquote p {
     overflow: hidden; /* THE FIX: Clips the sharp corners of the image */
 }
 
-.case-study-image img {
-    width: 100%; /* Forces the image to fill the entire container */
+.case-study-image img,
+.case-study-image video {
+    width: 100%;
     height: auto;
-    display: block; /* Removes the tiny native gap beneath images */
-    cursor: pointer; 
+    display: block;
+    cursor: pointer;
     transition: opacity 0.2s ease;
-    /* Removed the inner border-radius, as the parent handles it now */
 }
 
 .case-study-image img:hover {
