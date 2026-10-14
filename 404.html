@@ -34,49 +34,32 @@
     <link rel="icon" href="/assets/images/about/favicon.png" type="image/png">
 
     <style>
-        .nf-code   { margin: 0; font-size: var(--text-14); color: var(--text-muted); }
-        .nf-title  { margin: 2px 0 2rem; font-size: var(--text-18); font-weight: 500; color: var(--text-main); }
-        #nf-canvas { width: 100%; height: 440px; display: block; cursor: none; touch-action: none; }
-        .nf-row    { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 6px; }
-        .nf-progress { margin: 0; font-size: var(--text-14); color: var(--text-muted); }
+        .nf-code     { margin: 0; font-size: var(--text-14); color: var(--text-muted); text-align: center; }
+        .nf-title    { margin: 2px 0 2rem; font-size: var(--text-18); font-weight: 500; color: var(--text-main); text-align: center; }
+        #nf-canvas   { width: 100%; height: 400px; display: block; cursor: none; touch-action: none; }
+        .nf-bottom   { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
+        .nf-progress { margin: 0; font-size: var(--text-14); color: var(--text-muted); text-align: center; min-height: 1.2em; }
         .nf-actions  { display: flex; gap: 8px; align-items: center; }
-        #nf-home   { display: none; }
-        @media (max-width: 480px) { #nf-canvas { height: 380px; } }
+        #nf-home.btn-disabled { pointer-events: none; opacity: 0.38; }
+        @media (max-width: 480px) { #nf-canvas { height: 340px; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="case-study-header">
-            <nav class="breadcrumbs" aria-label="Breadcrumb">
-                <a href="/" class="inline-link">Home</a>
-                <span class="material-symbols-rounded separator">chevron_right</span>
-                <span class="current" aria-current="page">404</span>
-            </nav>
-        </header>
-
-        <main>
+        <main style="margin-top: 2.5rem; margin-bottom: 4rem;">
             <p class="nf-code">404</p>
             <h1 class="nf-title">This page doesn't exist, but you've earned a drink</h1>
 
             <canvas id="nf-canvas" aria-label="A margarita glass with a chilli-salted rim. Move your cursor, or drag on mobile, to lick the salt off."></canvas>
 
-            <div class="nf-row">
+            <div class="nf-bottom">
                 <p id="nf-progress" class="nf-progress" aria-live="polite"></p>
                 <div class="nf-actions">
-                    <a id="nf-home" href="/" class="btn btn-secondary">Take me home</a>
+                    <a id="nf-home" href="/" class="btn btn-primary btn-disabled" aria-disabled="true">Take me home</a>
                     <button id="nf-reset" type="button" class="btn btn-secondary">Re-salt</button>
                 </div>
             </div>
         </main>
-
-        <footer class="site-footer">
-            <div class="footer-time-wrapper">
-                <p class="footer-time">
-                    <span id="local-time">--:--</span>, <span id="local-weather">--°C</span> in Gateshead, England
-                </p>
-            </div>
-            <p class="footer-tagline">Good wine and good design</p>
-        </footer>
     </div>
 
 <script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
@@ -123,7 +106,8 @@
         gone: false
       });
     }
-    home.style.display = 'none';
+    home.classList.add('btn-disabled');
+    home.setAttribute('aria-disabled', 'true');
   }
   salt();
   document.getElementById('nf-reset').onclick = salt;
@@ -218,8 +202,13 @@
     const pct = Math.min(100, Math.round(cleared / grains.length * 100 / 0.97));
     if (pct !== lastPct) {
       lastPct = pct;
-      if (pct >= 100) { prog.textContent = 'Rim clean. Cheers.'; home.style.display = 'inline'; }
-      else prog.textContent = (pct === 0 ? hint : '') + 'Rim ' + pct + '% licked';
+      if (pct >= 100) {
+        prog.textContent = 'Rim clean. Cheers.';
+        home.classList.remove('btn-disabled');
+        home.removeAttribute('aria-disabled');
+      } else {
+        prog.textContent = (pct === 0 ? hint : '') + 'Rim ' + pct + '% licked';
+      }
     }
   }
 
