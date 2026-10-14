@@ -1,0 +1,360 @@
+<!--
+
+       _            __     _       __                              ____      _ 
+      (_)___ ______/ /__  (_)___  / /_  ____  _________  ____    / __/_  __(_)
+     / / __ `/ ___/ //_/ / / __ \/ __ \/ __ \/ ___/ __ \/ __ \  / /_/ / / / /
+    / / /_/ / /__/ ,<   / / /_/ / / / / / / (__  ) /_/ / / / / / __/ /_/ / / 
+ __/ /\__,_/\___/_/|_|_/ /\____/_/ /_/_/ /_/____/\____/_/ /_(_)_/  \__, /_/  
+/___/               /___/                                          /____/     
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEFJ35C3CN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GEFJ35C3CN');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found | Jack Johnson</title>
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,500,0,0" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/assets/images/about/favicon.png" type="image/png">
+
+    <style>
+        .nf-code   { margin: 0; font-size: var(--text-14); color: var(--text-muted); }
+        .nf-title  { margin: 2px 0 2rem; font-size: var(--text-18); font-weight: 500; color: var(--text-main); }
+        #nf-canvas { width: 100%; height: 440px; display: block; cursor: none; touch-action: none; }
+        .nf-row    { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 6px; }
+        .nf-progress { margin: 0; font-size: var(--text-14); color: var(--text-muted); }
+        .nf-actions  { display: flex; gap: 8px; align-items: center; }
+        #nf-home   { display: none; }
+        @media (max-width: 480px) { #nf-canvas { height: 380px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="case-study-header">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/" class="inline-link">Home</a>
+                <span class="material-symbols-rounded separator">chevron_right</span>
+                <span class="current" aria-current="page">404</span>
+            </nav>
+        </header>
+
+        <main>
+            <p class="nf-code">404</p>
+            <h1 class="nf-title">This page doesn't exist, but you've earned a drink</h1>
+
+            <canvas id="nf-canvas" aria-label="A margarita glass with a chilli-salted rim. Move your cursor, or drag on mobile, to lick the salt off."></canvas>
+
+            <div class="nf-row">
+                <p id="nf-progress" class="nf-progress" aria-live="polite"></p>
+                <div class="nf-actions">
+                    <a id="nf-home" href="/" class="btn btn-secondary">Take me home</a>
+                    <button id="nf-reset" type="button" class="btn btn-secondary">Re-salt</button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-time-wrapper">
+                <p class="footer-time">
+                    <span id="local-time">--:--</span>, <span id="local-weather">--°C</span> in Gateshead, England
+                </p>
+            </div>
+            <p class="footer-tagline">Good wine and good design</p>
+        </footer>
+    </div>
+
+<script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
+<script src="/script.js"></script>
+
+<script>
+(function () {
+  const cv = document.getElementById('nf-canvas');
+  const ctx = cv.getContext('2d');
+  const prog = document.getElementById('nf-progress');
+  const home = document.getElementById('nf-home');
+
+  const coarse = matchMedia('(pointer: coarse)').matches;
+  const hint = coarse ? 'Drag the tongue to lick the rim. ' : 'Lick the rim. ';
+
+  // ---------- Layout ----------
+  let W, H, dpr = window.devicePixelRatio || 1, cx, cy, rx, ry;
+  function size() {
+    W = cv.clientWidth;
+    H = cv.clientHeight;
+    cv.width = W * dpr;
+    cv.height = H * dpr;
+    rx = Math.min(165, W * 0.3); // rim radius
+    ry = rx * 0.22;              // rim seen from slightly above
+    cx = W / 2;
+    cy = H * 0.36;
+  }
+  size();
+  addEventListener('resize', size);
+
+  // ---------- Salt ----------
+  const SALT = ['#C2412B', '#D9572F', '#A8321F', '#E87A3E'];
+  let grains = [], falling = [], cleared = 0, lastPct = -1;
+
+  function salt() {
+    grains = []; falling = []; cleared = 0; lastPct = -1;
+    for (let i = 0; i < 460; i++) {
+      grains.push({
+        a: Math.random() * Math.PI * 2,   // angle around the rim
+        o: (Math.random() - 0.5) * 9,     // spread across the rim's thickness
+        j: (Math.random() - 0.5) * 3,     // small vertical jitter
+        s: 1.3 + Math.random() * 1.6,     // grain size
+        c: SALT[i % 4],
+        gone: false
+      });
+    }
+    home.style.display = 'none';
+  }
+  salt();
+  document.getElementById('nf-reset').onclick = salt;
+
+  const grainPos = g => [
+    cx + (rx + g.o) * Math.cos(g.a),
+    cy + (ry + g.o * 0.35) * Math.sin(g.a) + g.j
+  ];
+
+  // ---------- Tongue (verlet rope) ----------
+  const N = 12, SEG = 5.5, pts = [];
+  let tx, ty;
+  function rest() { tx = cx + rx + 70; ty = cy + 90; }
+  rest();
+  for (let i = 0; i < N; i++) pts.push({ x: tx, y: ty + i * SEG, px: tx, py: ty + i * SEG });
+
+  // Touch: tip sits 45px above the finger so it isn't hidden
+  function setTarget(e) {
+    const r = cv.getBoundingClientRect();
+    tx = e.clientX - r.left;
+    ty = e.clientY - r.top - (e.pointerType === 'mouse' ? 0 : 45);
+  }
+  cv.addEventListener('pointerdown', setTarget);
+  cv.addEventListener('pointermove', e => {
+    if (e.pointerType === 'mouse' || e.buttons || e.pressure > 0) setTarget(e);
+  });
+  cv.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') rest(); });
+
+  let time = 0, flinch = 0, sour = 0, squash = 0, tvx = 0, tvy = 0, last = performance.now();
+
+  function limePos() {
+    const a = -0.45;
+    return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)];
+  }
+
+  function update() {
+    // Tip eases towards the pointer
+    const t = pts[0], ox = t.x, oy = t.y;
+    t.x += (tx - t.x) * 0.5;
+    t.y += (ty - t.y) * 0.5;
+    tvx = t.x - ox; tvy = t.y - oy;
+
+    // Verlet integration. DAMPING: .87 (higher = floppier, ~.84–.9 is the sweet spot)
+    for (let i = 1; i < N; i++) {
+      const p = pts[i];
+      const vx = (p.x - p.px) * 0.87, vy = (p.y - p.py) * 0.87;
+      p.px = p.x; p.py = p.y;
+      p.x += vx; p.y += vy + 0.4; // gravity
+    }
+
+    // Idle wiggle when still
+    if (Math.hypot(tvx, tvy) < 0.6) pts[1].x += Math.sin(time * 7) * 0.4;
+
+    // Constraints: keep segment lengths, plus gentle stiffness.
+    // Don't push the stiffness values much higher or it gets jittery.
+    for (let k = 0; k < 8; k++) {
+      for (let i = 0; i < N - 1; i++) {
+        const a = pts[i], b = pts[i + 1];
+        const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 0.001, f = (d - SEG) / d;
+        if (i === 0) { b.x -= dx * f; b.y -= dy * f; }
+        else { a.x += dx * f * 0.5; a.y += dy * f * 0.5; b.x -= dx * f * 0.5; b.y -= dy * f * 0.5; }
+      }
+      for (let i = 0; i < N - 2; i++) {
+        const a = pts[i], b = pts[i + 2];
+        const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 0.001;
+        const f = (d - SEG * 2 * 0.96) / d * 0.25;
+        if (i === 0) { b.x -= dx * f * 2; b.y -= dy * f * 2; }
+        else { a.x += dx * f; a.y += dy * f; b.x -= dx * f; b.y -= dy * f; }
+      }
+    }
+
+    // Licking: clear grains near the tip (radius 15)
+    let touch = false;
+    for (const g of grains) {
+      if (g.gone) continue;
+      const [x, y] = grainPos(g);
+      if (Math.hypot(x - t.x, y - t.y) < 15) {
+        g.gone = true; cleared++; touch = true;
+        falling.push({ x, y, vx: tvx * 0.25 + (Math.random() - 0.5) * 1.6, vy: tvy * 0.2 - Math.random() * 1.5, s: g.s, c: g.c });
+      }
+    }
+    squash += ((touch ? 1 : 0) - squash) * 0.15; // smoothed so it doesn't flicker
+
+    for (const f of falling) { f.vy += 0.25; f.x += f.vx; f.y += f.vy; }
+    falling = falling.filter(f => f.y < H + 10);
+
+    // Lime: sour flinch
+    const [lx, ly] = limePos();
+    if (Math.hypot(t.x - lx, t.y - (ly - 14)) < 20 && sour <= 0) { flinch = 0.35; sour = 1.1; }
+
+    // Progress (97% counts as done so nobody hunts for stragglers)
+    const pct = Math.min(100, Math.round(cleared / grains.length * 100 / 0.97));
+    if (pct !== lastPct) {
+      lastPct = pct;
+      if (pct >= 100) { prog.textContent = 'Rim clean. Cheers.'; home.style.display = 'inline'; }
+      else prog.textContent = (pct === 0 ? hint : '') + 'Rim ' + pct + '% licked';
+    }
+  }
+
+  // ---------- Drawing ----------
+  function drawGlass() {
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(120,160,175,.9)';
+    const sb = cy + rx * 1.15, bowl = new Path2D();
+    bowl.moveTo(cx - rx, cy);
+    bowl.bezierCurveTo(cx - rx * .92, cy + rx * .38, cx - rx * .45, cy + rx * .5, cx - rx * .16, cy + rx * .58);
+    bowl.quadraticCurveTo(cx - 6, cy + rx * .64, cx - 5, cy + rx * .74);
+    bowl.lineTo(cx + 5, cy + rx * .74);
+    bowl.quadraticCurveTo(cx + 6, cy + rx * .64, cx + rx * .16, cy + rx * .58);
+    bowl.bezierCurveTo(cx + rx * .45, cy + rx * .5, cx + rx * .92, cy + rx * .38, cx + rx, cy);
+    bowl.ellipse(cx, cy, rx, ry, 0, 0, Math.PI, true);
+    bowl.closePath();
+
+    ctx.fillStyle = 'rgba(160,200,215,.12)'; ctx.fill(bowl);
+    ctx.save(); ctx.clip(bowl);
+    ctx.fillStyle = 'rgba(190,220,120,.45)'; ctx.fillRect(cx - rx, cy + ry * .55, rx * 2, rx);
+    ctx.restore();
+    ctx.beginPath(); ctx.ellipse(cx, cy + ry * .55, rx * .88, ry * .8, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(215,235,160,.6)'; ctx.fill();
+    ctx.stroke(bowl);
+
+    ctx.beginPath();
+    ctx.moveTo(cx - 4, cy + rx * .74); ctx.lineTo(cx - 3, sb);
+    ctx.moveTo(cx + 4, cy + rx * .74); ctx.lineTo(cx + 3, sb);
+    ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(cx, sb, rx * .55, ry * .5, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(160,200,215,.18)'; ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); ctx.stroke();
+  }
+
+  function drawLime() {
+    const [lx, ly] = limePos(), r = 26;
+    ctx.save(); ctx.translate(lx, ly); ctx.rotate(0.35);
+    ctx.beginPath(); ctx.arc(0, 0, r, Math.PI, 0); ctx.closePath(); ctx.fillStyle = '#4E9A2A'; ctx.fill();
+    ctx.beginPath(); ctx.arc(0, 0, r - 4, Math.PI, 0); ctx.closePath(); ctx.fillStyle = '#C7E58A'; ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = 1;
+    for (let k = 1; k < 5; k++) {
+      const a = Math.PI + k * Math.PI / 5;
+      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * (r - 6), Math.sin(a) * (r - 6)); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawTongue() {
+    ctx.save();
+    if (flinch > 0) ctx.translate((Math.random() - 0.5) * 6, (Math.random() - 0.5) * 6);
+
+    // Build outline from the rope points
+    const L = [], R = [], w = [];
+    for (let i = 0; i < N; i++) {
+      const a = pts[Math.max(0, i - 1)], b = pts[Math.min(N - 1, i + 1)];
+      let dx = b.x - a.x, dy = b.y - a.y; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
+      const s = i / (N - 1);
+      let hw = 14 + 5 * Math.sin(Math.min(1, s * 1.8) * Math.PI / 2); // half-width profile
+      if (i < 3) hw *= 1 + 0.12 * squash * (1 - i / 3);                 // tip swells on contact
+      w.push(hw);
+      const nx = -dy, ny = dx;
+      L.push([pts[i].x + nx * hw, pts[i].y + ny * hw, nx, ny]);
+      R.push([pts[i].x - nx * hw, pts[i].y - ny * hw]);
+    }
+
+    const bx = pts[N - 1].x, by = pts[N - 1].y, tx0 = pts[0].x, ty0 = pts[0].y;
+    const fill = ctx.createLinearGradient(bx, by, tx0, ty0);
+    fill.addColorStop(0, 'rgba(224,122,134,0)'); fill.addColorStop(.35, 'rgba(224,122,134,1)'); fill.addColorStop(1, '#EA8A95');
+    const edge = ctx.createLinearGradient(bx, by, tx0, ty0);
+    edge.addColorStop(0, 'rgba(184,74,90,0)'); edge.addColorStop(.4, 'rgba(184,74,90,1)');
+    const groove = ctx.createLinearGradient(bx, by, tx0, ty0);
+    groove.addColorStop(0, 'rgba(150,40,60,0)'); groove.addColorStop(.4, 'rgba(150,40,60,.4)'); groove.addColorStop(.85, 'rgba(150,40,60,0)');
+
+    // Body
+    const a0 = Math.atan2(L[0][3], L[0][2]);
+    ctx.beginPath();
+    ctx.moveTo(R[0][0], R[0][1]);
+    ctx.arc(tx0, ty0, w[0], a0 + Math.PI, a0, true); // rounded tip
+    for (let i = 1; i < N - 1; i++) {
+      const mx = (L[i][0] + L[i + 1][0]) / 2, my = (L[i][1] + L[i + 1][1]) / 2;
+      ctx.quadraticCurveTo(L[i][0], L[i][1], mx, my);
+    }
+    ctx.lineTo(L[N - 1][0], L[N - 1][1]);
+    ctx.lineTo(R[N - 1][0], R[N - 1][1]);
+    for (let i = N - 2; i > 0; i--) {
+      const mx = (R[i][0] + R[i - 1][0]) / 2, my = (R[i][1] + R[i - 1][1]) / 2;
+      ctx.quadraticCurveTo(R[i][0], R[i][1], mx, my);
+    }
+    ctx.closePath();
+    ctx.fillStyle = fill; ctx.fill();
+    ctx.strokeStyle = edge; ctx.lineWidth = 1.5; ctx.lineJoin = 'round'; ctx.stroke();
+
+    // Centre groove
+    ctx.beginPath(); ctx.moveTo(bx, by);
+    for (let i = N - 2; i >= 1; i--) ctx.lineTo(pts[i].x, pts[i].y);
+    ctx.strokeStyle = groove; ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.stroke();
+
+    // Wet highlight
+    ctx.beginPath();
+    for (let i = 1; i < 6; i++) {
+      const x = pts[i].x + L[i][2] * w[i] * 0.5, y = pts[i].y + L[i][3] * w[i] * 0.5;
+      i === 1 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = 'rgba(255,255,255,.45)'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.restore();
+  }
+
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    time += dt; flinch -= dt; sour -= dt;
+    update();
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    drawGlass();
+    for (const g of grains) {
+      if (g.gone) continue;
+      const [x, y] = grainPos(g);
+      ctx.fillStyle = g.c; ctx.fillRect(x - g.s / 2, y - g.s / 2, g.s, g.s);
+    }
+    drawLime();
+    for (const f of falling) { ctx.fillStyle = f.c; ctx.fillRect(f.x - f.s / 2, f.y - f.s / 2, f.s, f.s); }
+    drawTongue();
+
+    if (sour > 0) {
+      const [lx, ly] = limePos();
+      ctx.globalAlpha = Math.min(1, sour * 2);
+      ctx.fillStyle = '#D85A30'; ctx.font = '500 16px system-ui, sans-serif';
+      ctx.fillText('Sour!', lx + 20, ly - 34 - (1.1 - sour) * 20);
+      ctx.globalAlpha = 1;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
