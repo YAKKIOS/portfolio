@@ -136,7 +136,7 @@
   });
   cv.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') rest(); });
 
-  let time = 0, flinch = 0, sour = 0, squash = 0, tvx = 0, tvy = 0, last = performance.now();
+  let time = 0, sour = 0, squash = 0, tvx = 0, tvy = 0, last = performance.now();
 
   function limePos() {
     const a = -0.45;
@@ -196,7 +196,7 @@
 
     // Lime: sour flinch
     const [lx, ly] = limePos();
-    if (Math.hypot(t.x - lx, t.y - (ly - 14)) < 20 && sour <= 0) { flinch = 0.35; sour = 1.1; }
+    if (Math.hypot(t.x - lx, t.y - (ly - 14)) < 20 && sour <= 0) { sour = 1.1; }
 
     // Progress (97% counts as done so nobody hunts for stragglers)
     const pct = Math.min(100, Math.round(cleared / grains.length * 100 / 0.97));
@@ -258,7 +258,6 @@
 
   function drawTongue() {
     ctx.save();
-    if (flinch > 0) ctx.translate((Math.random() - 0.5) * 6, (Math.random() - 0.5) * 6);
 
     // Build outline from the rope points
     const L = [], R = [], w = [];
@@ -318,7 +317,7 @@
 
   function frame(now) {
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
-    time += dt; flinch -= dt; sour -= dt;
+    time += dt; sour -= dt;
     update();
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
