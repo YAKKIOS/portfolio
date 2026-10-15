@@ -119,9 +119,9 @@
 
   // ---------- Tongue (verlet rope) ----------
   const N = 12, SEG = 5.5, pts = [];
-  let tx, ty;
-  function rest() { tx = cx + rx + 70; ty = cy + 90; }
-  rest();
+  let tx, ty, easeToRest = false;
+  function restPos() { return [cx + rx + 70, cy + 90]; }
+  const [rtx, rty] = restPos(); tx = rtx; ty = rty;
   for (let i = 0; i < N; i++) pts.push({ x: tx, y: ty + i * SEG, px: tx, py: ty + i * SEG });
 
   // Touch: tip sits 45px above the finger so it isn't hidden
@@ -130,11 +130,11 @@
     tx = e.clientX - r.left;
     ty = e.clientY - r.top - (e.pointerType === 'mouse' ? 0 : 45);
   }
-  cv.addEventListener('pointerdown', setTarget);
+  cv.addEventListener('pointerdown', e => { easeToRest = false; setTarget(e); });
   cv.addEventListener('pointermove', e => {
-    if (e.pointerType === 'mouse' || e.buttons || e.pressure > 0) setTarget(e);
+    if (e.pointerType === 'mouse' || e.buttons || e.pressure > 0) { easeToRest = false; setTarget(e); }
   });
-  cv.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') rest(); });
+  cv.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') easeToRest = true; });
 
   let time = 0, sour = 0, squash = 0, tvx = 0, tvy = 0, last = performance.now();
 
@@ -144,6 +144,7 @@
   }
 
   function update() {
+    if (easeToRest) { const [rx0, ry0] = restPos(); tx += (rx0 - tx) * 0.04; ty += (ry0 - ty) * 0.04; }
     // Tip eases towards the pointer
     const t = pts[0], ox = t.x, oy = t.y;
     t.x += (tx - t.x) * 0.5;
