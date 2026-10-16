@@ -570,9 +570,11 @@ function init() {
         const isDiscoOn = () => document.body.classList.contains('disco-mode');
 
         const setTheme = (theme) => {
+            document.documentElement.classList.add('theme-transitioning');
             document.documentElement.setAttribute('data-theme', theme);
             try { localStorage.setItem('theme', theme); } catch {}
             syncStates();
+            setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 400);
         };
 
         const syncStates = () => {
