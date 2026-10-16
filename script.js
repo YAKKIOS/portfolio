@@ -2,7 +2,7 @@
 
        _            __     _       __                              ____      _ 
       (_)___ ______/ /__  (_)___  / /_  ____  _________  ____    / __/_  __(_)
-     / / __ `/ ___/ //_/ / / __ `/ __ \/ __ \/ ___/ __ \/ __ \  / /_/ / / / /
+     / / __ `/ ___/ //_/ / / __ \/ __ \/ __ \/ ___/ __ \/ __ \  / /_/ / / / /
     / / /_/ / /__/ ,<   / / /_/ / / / / / / (__  ) /_/ / / / / / __/ /_/ / / 
  __/ /\__,_/\___/_/|_|_/ /\____/_/ /_/_/ /_/____/\____/_/ /_(_)_/  \__, /_/  
 /___/               /___/                                          /____/     
@@ -544,11 +544,16 @@ function init() {
     (function initSettings() {
         const wrap = document.createElement('div');
         wrap.className = 'settings-fab-wrap';
+        const CHECK_SVG = `<svg class="settings-check" viewBox="0 -960 960 960" aria-hidden="true" fill="currentColor"><path d="m382-354 339-339q12-12 28-12t28 12q12 12 12 28.5T777-636L410-268q-12 12-28 12t-28-12L182-440q-12-12-11.5-28.5T183-497q12-12 28.5-12t28.5 12l142 143Z"/></svg>`;
         wrap.innerHTML = `
             <div class="settings-menu" id="settings-menu" aria-hidden="true">
-                <button class="settings-option" data-action="light">Light</button>
-                <button class="settings-option" data-action="dark">Dark</button>
-                <button class="settings-option" data-action="disco">Disco</button>
+                <button class="settings-option" data-action="light"><span class="settings-option-label">Light</span>${CHECK_SVG}</button>
+                <button class="settings-option" data-action="dark"><span class="settings-option-label">Dark</span>${CHECK_SVG}</button>
+                <div class="settings-divider"></div>
+                <button class="settings-option settings-option--disco" data-action="disco">
+                    <span class="settings-option-label">Disco</span>
+                    <span class="settings-toggle" aria-hidden="true"><span class="settings-toggle-thumb"></span></span>
+                </button>
             </div>
             <button class="btn btn-secondary settings-fab" id="settings-fab" aria-label="Customise">
                 <span class="material-symbols-rounded">tune</span>
