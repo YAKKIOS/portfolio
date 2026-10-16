@@ -56,6 +56,17 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Smooth theme transitions — class added/removed by JS around setTheme() */
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease,
+        border-color 0.35s ease,
+        fill 0.35s ease !important;
+}
+
 /* =========================================
    Page Transitions — overlay div handles the white cover (JS).
    Slide-up is on .container only — progress bar is outside .container
@@ -1674,7 +1685,7 @@ blockquote p {
 }
 
 .settings-fab {
-    padding: 0.35rem 0.75rem;
+    padding: 0.5rem;
 }
 
 .settings-fab .material-symbols-rounded {
@@ -1737,18 +1748,13 @@ blockquote p {
     flex: 1;
 }
 
-/* Checkmark for light/dark active state */
+/* Checkmark for light/dark active state — visibility driven by JS syncStates() */
 .settings-check {
+    display: none;
     width: 14px;
     height: 14px;
     flex-shrink: 0;
-    opacity: 0;
     color: var(--text-main);
-    transition: opacity 0.15s ease;
-}
-
-.settings-option.is-active .settings-check {
-    opacity: 1;
 }
 
 /* Divider between theme + disco */
