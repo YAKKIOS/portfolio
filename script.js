@@ -27,8 +27,8 @@ const ICONS = {
     try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch {}
 })();
 
-(function replaceIcons() {
-    document.querySelectorAll('.material-symbols-rounded').forEach(span => {
+function replaceIcons(root) {
+    (root || document).querySelectorAll('.material-symbols-rounded').forEach(span => {
         const name = span.textContent.trim();
         const d = ICONS[name];
         if (!d) return;
@@ -42,9 +42,10 @@ const ICONS = {
         span.textContent = '';
         span.appendChild(svg);
     });
-})();
+}
 
 function init() {
+    replaceIcons(document);
 
     /* =========================================
        0. Page Transitions
@@ -544,7 +545,7 @@ function init() {
     (function initSettings() {
         const wrap = document.createElement('div');
         wrap.className = 'settings-fab-wrap';
-        const CHECK_SVG = `<svg class="settings-check" viewBox="0 -960 960 960" aria-hidden="true" fill="currentColor"><path d="m382-354 339-339q12-12 28-12t28 12q12 12 12 28.5T777-636L410-268q-12 12-28 12t-28-12L182-440q-12-12-11.5-28.5T183-497q12-12 28.5-12t28.5 12l142 143Z"/></svg>`;
+        const CHECK_SVG = `<svg class="settings-check" width="14" height="14" viewBox="0 -960 960 960" aria-hidden="true" fill="currentColor"><path d="m382-354 339-339q12-12 28-12t28 12q12 12 12 28.5T777-636L410-268q-12 12-28 12t-28-12L182-440q-12-12-11.5-28.5T183-497q12-12 28.5-12t28.5 12l142 143Z"/></svg>`;
         wrap.innerHTML = `
             <div class="settings-menu" id="settings-menu" aria-hidden="true">
                 <button class="settings-option" data-action="light"><span class="settings-option-label">Light</span>${CHECK_SVG}</button>
@@ -560,21 +561,7 @@ function init() {
             </button>`;
         document.body.appendChild(wrap);
 
-        // Replace icons in newly injected markup
-        wrap.querySelectorAll('.material-symbols-rounded').forEach(span => {
-            const name = span.textContent.trim();
-            const d = ICONS[name];
-            if (!d) return;
-            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svg.setAttribute('viewBox', '0 -960 960 960');
-            svg.setAttribute('aria-hidden', 'true');
-            svg.setAttribute('fill', 'currentColor');
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', d);
-            svg.appendChild(path);
-            span.textContent = '';
-            span.appendChild(svg);
-        });
+        replaceIcons(wrap);
 
         const fab  = document.getElementById('settings-fab');
         const menu = document.getElementById('settings-menu');
@@ -592,9 +579,10 @@ function init() {
             const theme = getTheme();
             menu.querySelectorAll('.settings-option').forEach(btn => {
                 const a = btn.dataset.action;
-                btn.classList.toggle('is-active',
-                    (a === 'light' || a === 'dark') ? a === theme : isDiscoOn()
-                );
+                const active = (a === 'light' || a === 'dark') ? a === theme : isDiscoOn();
+                btn.classList.toggle('is-active', active);
+                const check = btn.querySelector('.settings-check');
+                if (check) check.style.display = active ? 'block' : 'none';
             });
         };
 

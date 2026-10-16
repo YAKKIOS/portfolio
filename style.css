@@ -1737,18 +1737,13 @@ blockquote p {
     flex: 1;
 }
 
-/* Checkmark for light/dark active state */
+/* Checkmark for light/dark active state — visibility driven by JS syncStates() */
 .settings-check {
+    display: none;
     width: 14px;
     height: 14px;
     flex-shrink: 0;
-    opacity: 0;
     color: var(--text-main);
-    transition: opacity 0.15s ease;
-}
-
-.settings-option.is-active .settings-check {
-    opacity: 1;
 }
 
 /* Divider between theme + disco */
