@@ -702,13 +702,14 @@ function init() {
 
         function frame(now) {
             const dt = Math.min(.05, (now - last) / 1000); last = now; time += dt;
+            rot += dt * 0.5;
             drop = Math.max(0, Math.min(1, drop + (on ? dt/1.8 : -dt/1.2)));
             dark += ((on ? 1 : 0) - dark) * Math.min(1, dt * 2.5);
 
             ctx.setTransform(dpr,0,0,dpr,0,0);
             ctx.globalCompositeOperation = 'source-over';
             ctx.clearRect(0, 0, W, H);
-            ctx.fillStyle = `rgba(8,8,18,${dark * 0.82})`;
+            ctx.fillStyle = `rgba(8,8,18,${dark * 0.35})`;
             ctx.fillRect(0, 0, W, H);
 
             if (drop > 0) {
