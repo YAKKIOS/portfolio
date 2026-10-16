@@ -38,6 +38,22 @@
     --text-faint: #999999;
 }
 
+/* =========================================
+   Dark Mode
+   ========================================= */
+[data-theme="dark"] {
+    --text-main:        #efefef;
+    --text-body:        #a0a0a0;
+    --text-muted:       #666666;
+    --bg-hover:         #1a1a1a;
+    --border-color:     #2b2b2b;
+    --placeholder-grey: #1a1a1a;
+    --dotted-grey:      #484848;
+    --bg:               #111111;
+    --text-faint:       #383838;
+    color-scheme: dark;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* =========================================
@@ -646,6 +662,7 @@ p {font-weight: 420;}
 .card-title {
     font-size: var(--text-16);
     font-weight: 400;
+    margin-bottom: 0.25rem;
 }
 
 .card-desc { font-size: var(--text-16); color: var(--text-muted); }
@@ -657,7 +674,7 @@ p {font-weight: 420;}
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .writing-item {
@@ -1655,4 +1672,89 @@ blockquote p {
     .contact-card {
         transform: none !important;
     }
+}
+
+/* =========================================
+   Settings FAB
+   ========================================= */
+.settings-fab-wrap {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 98;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.settings-fab {
+    padding: 0.35rem 0.75rem;
+}
+
+.settings-fab .material-symbols-rounded {
+    font-size: 18px;
+}
+
+.settings-menu {
+    background: var(--bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.10),
+        0 1px 3px rgba(0, 0, 0, 0.06);
+    padding: 0.375rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    min-width: 8.5rem;
+}
+
+.settings-menu.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.settings-option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.375rem 0.625rem 0.375rem 1.375rem;
+    border-radius: 6px;
+    font: inherit;
+    font-size: var(--text-14);
+    font-weight: 480;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    position: relative;
+    transition: background 0.1s ease, color 0.1s ease;
+}
+
+.settings-option:hover {
+    background: var(--bg-hover);
+    color: var(--text-main);
+}
+
+.settings-option.is-active {
+    color: var(--text-main);
+}
+
+.settings-option.is-active::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    background: var(--text-main);
+    border-radius: 50%;
 }
