@@ -646,7 +646,6 @@ p {font-weight: 420;}
 .card-title {
     font-size: var(--text-16);
     font-weight: 400;
-    margin-bottom: 0.25rem;
 }
 
 .card-desc { font-size: var(--text-16); color: var(--text-muted); }
@@ -658,7 +657,7 @@ p {font-weight: 420;}
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .writing-item {
