@@ -641,8 +641,8 @@ function init() {
             if (action === 'light' || action === 'dark') {
                 setTheme(action);
             } else if (action === 'disco') {
-                document.body.classList.toggle('disco-mode');
-                // TODO: wire disco ball code here — check document.body.classList.contains('disco-mode')
+                const discoOn = document.body.classList.toggle('disco-mode');
+                window._discoSetOn && window._discoSetOn(discoOn);
                 syncStates();
             }
         });
@@ -651,6 +651,128 @@ function init() {
         document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) closeMenu(); });
 
         syncStates();
+    })();
+
+    /* =========================================
+       13. Disco Ball
+       ========================================= */
+    (function initDisco() {
+        const cv = document.createElement('canvas');
+        cv.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:97;pointer-events:none';
+        document.body.appendChild(cv);
+        const ctx = cv.getContext('2d');
+
+        let W, H, dpr = window.devicePixelRatio || 1;
+        function resize() { W = window.innerWidth; H = window.innerHeight; cv.width = W * dpr; cv.height = H * dpr; }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const norm = v => { const l = Math.hypot(...v); return v.map(x => x / l); };
+        const lights = [
+            { L: norm([-0.55,  0.55, 0.62]), c: [255, 248, 235] },
+            { L: norm([ 0.85,  0.15, 0.35]), c: [190, 150, 255] },
+            { L: norm([ 0.1,  -0.3,  0.7 ]), c: [120, 220, 255] },
+        ];
+
+        function makeSprite(c, soft) {
+            const s = document.createElement('canvas'); s.width = s.height = 64;
+            const g = s.getContext('2d'), gr = g.createRadialGradient(32,32,0,32,32,32), k = c.join(',');
+            if (soft) { gr.addColorStop(0,`rgba(${k},.55)`); gr.addColorStop(.5,`rgba(${k},.25)`); gr.addColorStop(1,`rgba(${k},0)`); }
+            else       { gr.addColorStop(0,`rgba(${k},1)`);  gr.addColorStop(.45,`rgba(${k},.9)`); gr.addColorStop(.62,`rgba(${k},.15)`); gr.addColorStop(1,`rgba(${k},0)`); }
+            g.fillStyle = gr; g.fillRect(0,0,64,64); return s;
+        }
+        lights.forEach(l => { l.sharp = makeSprite(l.c, false); l.soft = makeSprite(l.c, true); });
+
+        const R = 72, rows = 18, facets = [];
+        for (let i = 0; i < rows; i++) {
+            const p0 = -Math.PI/2 + i*Math.PI/rows, p1 = p0 + Math.PI/rows, pc = (p0+p1)/2;
+            const n = Math.max(6, Math.round(40*Math.cos(pc)));
+            for (let j = 0; j < n; j++) facets.push({ p0, p1, pc, t0: j*2*Math.PI/n, t1: (j+1)*2*Math.PI/n, tc: (j+.5)*2*Math.PI/n, rnd: Math.random() });
+        }
+
+        let rot = 0, drop = 0, dark = 0, last = performance.now(), time = 0, on = false;
+
+        function bounce(x) {
+            const n = 7.5625, d = 2.75;
+            if (x < 1/d)   return n*x*x;
+            if (x < 2/d)   return n*(x -= 1.5/d)*x + .75;
+            if (x < 2.5/d) return n*(x -= 2.25/d)*x + .9375;
+            return n*(x -= 2.625/d)*x + .984375;
+        }
+
+        function frame(now) {
+            const dt = Math.min(.05, (now - last) / 1000); last = now; time += dt;
+            drop = Math.max(0, Math.min(1, drop + (on ? dt/1.8 : -dt/1.2)));
+            dark += ((on ? 1 : 0) - dark) * Math.min(1, dt * 2.5);
+
+            ctx.setTransform(dpr,0,0,dpr,0,0);
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = `rgba(8,8,18,${dark * 0.82})`;
+            ctx.fillRect(0, 0, W, H);
+
+            if (drop > 0) {
+                const cx = W/2, cy = -R - 30 + (150 + R + 30) * (on ? bounce(drop) : drop*drop);
+                ctx.strokeStyle = `rgba(160,160,170,${.4 + .4*dark})`; ctx.lineWidth = 1.5;
+                ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, cy - R); ctx.stroke();
+
+                const D = 520;
+                if (dark > .05) {
+                    ctx.globalCompositeOperation = 'lighter';
+                    for (const f of facets) {
+                        const c = Math.cos(f.pc), th = f.tc + rot, nv = [c*Math.sin(th), Math.sin(f.pc), c*Math.cos(th)];
+                        for (const l of lights) {
+                            const nl = nv[0]*l.L[0] + nv[1]*l.L[1] + nv[2]*l.L[2]; if (nl <= 0) continue;
+                            const r = [2*nl*nv[0]-l.L[0], 2*nl*nv[1]-l.L[1], 2*nl*nv[2]-l.L[2]]; if (r[2] > -.06) continue;
+                            const t = D/-r[2], px = cx + nv[0]*R + r[0]*t, py = cy - nv[1]*R - r[1]*t;
+                            if (px < -80 || px > W+80 || py < -80 || py > H+80) continue;
+                            const sz = 3 + t*.0055, str = Math.min(3.2, 1/Math.max(.31,-r[2])), ang = Math.atan2(-r[1], r[0]);
+                            const blur = Math.min(1, Math.max(0,(t-450)/1600)), a = dark * nl * Math.min(1, 520/t) * .9;
+                            const co = Math.cos(ang), si = Math.sin(ang), sx = sz*str, sy = sz;
+                            ctx.setTransform(dpr*co*sx, dpr*si*sx, -dpr*si*sy, dpr*co*sy, dpr*px, dpr*py);
+                            ctx.globalAlpha = a*(1-blur); ctx.drawImage(l.sharp,-1,-1,2,2);
+                            ctx.setTransform(dpr*co*sx*2.2, dpr*si*sx*2.2, -dpr*si*sy*2.2, dpr*co*sy*2.2, dpr*px, dpr*py);
+                            ctx.globalAlpha = a*blur*.9; ctx.drawImage(l.soft,-1,-1,2,2);
+                        }
+                    }
+                    ctx.globalAlpha = 1; ctx.setTransform(dpr,0,0,dpr,0,0);
+                }
+
+                ctx.globalCompositeOperation = 'source-over';
+                const glints = [];
+                for (const f of facets) {
+                    const c = Math.cos(f.pc), th = f.tc + rot, nv = [c*Math.sin(th), Math.sin(f.pc), c*Math.cos(th)]; if (nv[2] < .03) continue;
+                    const P = (p, t) => { const q = Math.cos(p), a = t + rot; return [cx + R*q*Math.sin(a), cy - R*Math.sin(p)]; };
+                    let spec = 0, col = [0,0,0];
+                    for (const l of lights) {
+                        const nl = nv[0]*l.L[0] + nv[1]*l.L[1] + nv[2]*l.L[2]; if (nl <= 0) continue;
+                        const s = Math.pow(Math.max(0, 2*nl*nv[2] - l.L[2]), 60) * dark; spec += s; col = col.map((v,k) => v + l.c[k]*s);
+                    }
+                    const b = 40 + 50*f.rnd + (-nv[1]*.5+.5)*30, sh = Math.min(1, .45 + .55*nv[2]);
+                    ctx.fillStyle = `rgb(${Math.min(255,b*sh+col[0])|0},${Math.min(255,b*sh+col[1])|0},${Math.min(255,(b+12)*sh+col[2])|0})`;
+                    ctx.beginPath();
+                    ctx.moveTo(...P(f.p0,f.t0)); ctx.lineTo(...P(f.p0,f.t1)); ctx.lineTo(...P(f.p1,f.t1)); ctx.lineTo(...P(f.p1,f.t0));
+                    ctx.closePath(); ctx.fill();
+                    ctx.strokeStyle = 'rgba(10,10,15,.8)'; ctx.lineWidth = .7; ctx.stroke();
+                    if (spec > .5) glints.push([cx + R*nv[0], cy - R*nv[1], spec, f.rnd]);
+                }
+
+                ctx.globalCompositeOperation = 'lighter';
+                for (const [gx, gy, s, rn] of glints) {
+                    const k = Math.min(1.4, s) * (.7 + .3*Math.sin(time*9 + rn*40)), L = 18*k;
+                    ctx.strokeStyle = `rgba(255,255,255,${.8*k})`; ctx.lineWidth = 1.2;
+                    ctx.beginPath();
+                    ctx.moveTo(gx-L,gy); ctx.lineTo(gx+L,gy); ctx.moveTo(gx,gy-L); ctx.lineTo(gx,gy+L);
+                    ctx.moveTo(gx-L*.4,gy-L*.4); ctx.lineTo(gx+L*.4,gy+L*.4); ctx.moveTo(gx-L*.4,gy+L*.4); ctx.lineTo(gx+L*.4,gy-L*.4);
+                    ctx.stroke();
+                    ctx.globalAlpha = .7*k; ctx.drawImage(lights[0].sharp, gx-6, gy-6, 12, 12); ctx.globalAlpha = 1;
+                }
+            }
+            requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+
+        window._discoSetOn = v => { on = v; };
     })();
 
 } // end init
