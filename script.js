@@ -20,7 +20,12 @@ const ICONS = {
     code:            'm193-479 155 155q11 11 11 28t-11 28q-11 11-28 11t-28-11L108-452q-6-6-8.5-13T97-480q0-8 2.5-15t8.5-13l184-184q12-12 28.5-12t28.5 12q12 12 12 28.5T349-635L193-479Zm574-2L612-636q-11-11-11-28t11-28q11-11 28-11t28 11l184 184q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L668-268q-12 12-28 11.5T612-269q-12-12-12-28.5t12-28.5l155-155Z',
     checklist:       'm221-313 142-142q12-12 28-11.5t28 12.5q11 12 11 28t-11 28L250-228q-12 12-28 12t-28-12l-86-86q-11-11-11-28t11-28q11-11 28-11t28 11l57 57Zm0-320 142-142q12-12 28-11.5t28 12.5q11 12 11 28t-11 28L250-548q-12 12-28 12t-28-12l-86-86q-11-11-11-28t11-28q11-11 28-11t28 11l57 57Zm339 353q-17 0-28.5-11.5T520-320q0-17 11.5-28.5T560-360h280q17 0 28.5 11.5T880-320q0 17-11.5 28.5T840-280H560Zm0-320q-17 0-28.5-11.5T520-640q0-17 11.5-28.5T560-680h280q17 0 28.5 11.5T880-640q0 17-11.5 28.5T840-600H560Z',
     design_services: 'm352-522 86-87-56-57-16 16q-11 11-27.5 11.5T310-650q-12-12-12-28.5t12-28.5l15-15-45-45-87 87 159 158Zm328 329 87-87-45-45-16 15q-12 12-28 12t-28-12q-12-12-12-28t12-28l15-16-57-56-86 86 158 159Zm24-567 57 57-57-57ZM160-120q-17 0-28.5-11.5T120-160v-113q0-8 3-15.5t9-13.5l163-163-173-173q-17-17-17-42t17-42l116-116q17-17 42-16.5t42 17.5l174 173 151-152q12-12 27-18t31-6q16 0 31 6t27 18l53 54q12 12 18 27t6 31q0 16-6 30.5T816-647L665-495l173 173q17 17 17 42t-17 42L722-122q-17 17-42 17t-42-17L465-295 302-132q-6 6-13.5 9t-15.5 3H160Zm40-80h56l392-391-57-57-391 392v56Zm420-419-29-29 57 57-28-28Z',
+    tune:            'M440-120v-240h80v80h320v80H520v80h-80Zm-320-80v-80h240v80H120Zm160-160v-80H120v-80h160v-80h80v240h-80Zm160-80v-80h400v80H440Zm160-160v-240h80v80h160v80H680v80h-80Zm-480-80v-80h400v80H120Z',
 };
+
+(function applyStoredTheme() {
+    try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch {}
+})();
 
 (function replaceIcons() {
     document.querySelectorAll('.material-symbols-rounded').forEach(span => {
@@ -44,10 +49,10 @@ function init() {
     /* =========================================
        0. Page Transitions
        ========================================= */
-    // Fixed white overlay — avoids touching body opacity which breaks position:fixed
+    // Fixed overlay — avoids touching body opacity which breaks position:fixed
     const overlay = document.createElement('div');
     overlay.style.cssText = [
-        'position:fixed', 'inset:0', 'background:#fff',
+        'position:fixed', 'inset:0', 'background:var(--bg)',
         'z-index:99999', 'pointer-events:none',
         'opacity:1', 'transition:opacity 0.35s ease'
     ].join(';');
@@ -566,6 +571,87 @@ function init() {
         document.body.appendChild(wrap);
         setTimeout(() => wrap.remove(), 1550);
     };
+
+    /* =========================================
+       12. Settings FAB (Theme + Disco)
+       ========================================= */
+    (function initSettings() {
+        const wrap = document.createElement('div');
+        wrap.className = 'settings-fab-wrap';
+        wrap.innerHTML = `
+            <div class="settings-menu" id="settings-menu" aria-hidden="true">
+                <button class="settings-option" data-action="light">Light</button>
+                <button class="settings-option" data-action="dark">Dark</button>
+                <button class="settings-option" data-action="disco">Disco</button>
+            </div>
+            <button class="btn btn-secondary settings-fab" id="settings-fab" aria-label="Customise">
+                <span class="material-symbols-rounded">tune</span>
+            </button>`;
+        document.body.appendChild(wrap);
+
+        // Replace icons in newly injected markup
+        wrap.querySelectorAll('.material-symbols-rounded').forEach(span => {
+            const name = span.textContent.trim();
+            const d = ICONS[name];
+            if (!d) return;
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('viewBox', '0 -960 960 960');
+            svg.setAttribute('aria-hidden', 'true');
+            svg.setAttribute('fill', 'currentColor');
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', d);
+            svg.appendChild(path);
+            span.textContent = '';
+            span.appendChild(svg);
+        });
+
+        const fab  = document.getElementById('settings-fab');
+        const menu = document.getElementById('settings-menu');
+
+        const getTheme  = () => document.documentElement.getAttribute('data-theme') || 'light';
+        const isDiscoOn = () => document.body.classList.contains('disco-mode');
+
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            try { localStorage.setItem('theme', theme); } catch {}
+            if (theme === 'dark') window.spawnGhost && window.spawnGhost(fab);
+            syncStates();
+        };
+
+        const syncStates = () => {
+            const theme = getTheme();
+            menu.querySelectorAll('.settings-option').forEach(btn => {
+                const a = btn.dataset.action;
+                btn.classList.toggle('is-active',
+                    (a === 'light' || a === 'dark') ? a === theme : isDiscoOn()
+                );
+            });
+        };
+
+        let open = false;
+        const openMenu  = () => { open = true;  menu.classList.add('is-open');    menu.setAttribute('aria-hidden', 'false'); syncStates(); };
+        const closeMenu = () => { open = false; menu.classList.remove('is-open'); menu.setAttribute('aria-hidden', 'true'); };
+
+        fab.addEventListener('click', e => { e.stopPropagation(); open ? closeMenu() : openMenu(); });
+
+        menu.addEventListener('click', e => {
+            const btn = e.target.closest('.settings-option');
+            if (!btn) return;
+            const action = btn.dataset.action;
+            if (action === 'light' || action === 'dark') {
+                setTheme(action);
+            } else if (action === 'disco') {
+                document.body.classList.toggle('disco-mode');
+                // TODO: wire disco ball code here — check document.body.classList.contains('disco-mode')
+                syncStates();
+            }
+        });
+
+        document.addEventListener('click', e => { if (open && !wrap.contains(e.target)) closeMenu(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) closeMenu(); });
+
+        syncStates();
+    })();
 
 } // end init
 
