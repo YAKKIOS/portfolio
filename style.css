@@ -1352,6 +1352,22 @@ blockquote p {
         width: 100%;
     }
 
+    /* Writing items: date drops below title */
+    .writing-item {
+        flex-direction: column;
+        gap: 0.1rem;
+        align-items: flex-start;
+    }
+
+    .writing-item a {
+        flex: none;
+        width: 100%;
+    }
+
+    .writing-date {
+        order: 2;
+    }
+
 }
 
 /* On small screens, cancel the breakout positioning — width is already padded by base styles */
