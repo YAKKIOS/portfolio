@@ -22,8 +22,8 @@
     --lh-base: 1.625rem;        
     
     /* Layout */
-    --container-width: 40rem;
-    --container-padding: 1.5rem;
+    --container-width: 640px;
+    --container-padding: 24px;
     
     /* Colors */
     --text-main: #111111; 
@@ -160,8 +160,8 @@ p {font-weight: 420;}
 .writing-title {
     text-decoration-line: underline;
     text-decoration-style: solid;
-    text-decoration-color: var(--border-color);
-    text-underline-offset: 4px;
+    text-decoration-color: var(--dotted-grey);
+    text-underline-offset: 5px;
     transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
@@ -1222,6 +1222,27 @@ blockquote p {
     margin-bottom: 4rem;
     font-size: var(--text-14);
     color: var(--text-muted);
+    position: sticky;
+    top: 24px;
+    z-index: 50;
+}
+
+/* Fade overlay — injected by JS, only visible once breadcrumb is sticky */
+.page-fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: linear-gradient(to bottom, var(--bg) 0%, var(--bg) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 49;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+body.breadcrumb-is-sticky .page-fade {
+    opacity: 1;
 }
 
 .breadcrumbs .separator {
