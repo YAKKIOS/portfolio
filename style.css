@@ -160,8 +160,8 @@ p {font-weight: 420;}
 .writing-title {
     text-decoration-line: underline;
     text-decoration-style: solid;
-    text-decoration-color: var(--dotted-grey);
-    text-underline-offset: 5px;
+    text-decoration-color: var(--border-color);
+    text-underline-offset: 4px;
     transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
@@ -517,6 +517,10 @@ p {font-weight: 420;}
         inset 0 1px 0 var(--bg),
         0 1px 3px rgba(0, 0, 0, 0.07),
         0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.material-symbols-rounded:not(:has(svg)) {
+    visibility: hidden;
 }
 
 .material-symbols-rounded {
@@ -938,7 +942,7 @@ blockquote p {
    Case Study Layout
    ========================================= */
 .case-study-header {
-    margin-top: 2.5rem;
+    margin-top: 0;
     margin-bottom: 4rem;
 }
 
@@ -1219,6 +1223,7 @@ blockquote p {
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    margin-top: 2.5rem;
     margin-bottom: 4rem;
     font-size: var(--text-14);
     color: var(--text-muted);
@@ -1233,7 +1238,7 @@ blockquote p {
     top: 0;
     left: 0;
     right: 0;
-    height: 64px;
+    height: 80px;
     background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
     pointer-events: none;
     z-index: 49;
