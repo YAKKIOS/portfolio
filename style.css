@@ -482,7 +482,7 @@ p {font-weight: 420;}
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 4px;
     padding: 0.25rem 0.875rem;
     border-radius: 9999px;
     font: inherit;
@@ -541,8 +541,8 @@ p {font-weight: 420;}
 
 .copy-icon-wrap {
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
 }
 
