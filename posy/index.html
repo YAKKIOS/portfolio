@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEFJ35C3CN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GEFJ35C3CN');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posy | Jack Johnson</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="/assets/images/about/favicon.png" type="image/png">
+    <meta property="og:image" content="https://jackjohnson.fyi/assets/images/shared/margarita.webp">
+    <meta property="og:title" content="Posy | Jack Johnson">
+    <meta property="og:description" content="A pixel-art garden you can grow in your browser.">
+    <meta property="og:url" content="https://jackjohnson.fyi/posy/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://jackjohnson.fyi/assets/images/shared/margarita.webp">
+</head>
+<body>
+    <div class="container">
+        <header class="case-study-header">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="/" class="inline-link">Home</a>
+                <span class="material-symbols-rounded separator">chevron_right</span>
+                <span class="current" aria-current="page">Posy</span>
+            </nav>
+            <h1 class="case-study-title">Posy</h1>
+            <p class="case-study-description">A pixel-art garden you can grow in your browser</p>
+        </header>
+
+        <main>
+            <article class="case-study-content">
+
+                <p>Gardening is a love of mine — but for most of the British season it's not exactly fun in freezing rain. So I decided to build something that captures those warm spring and summer days spent outside. Posy is a small 3D garden on a floating plot of land. You place plants, vegetables, ponds, hedges, fences, and a whole host of other items to build your own little space.</p>
+                <p>Cosy games are a crowded market, but I wanted a reason to dabble in game creation, and this felt like the right excuse.</p>
+
+                <section class="reveal">
+                    <h2 class="section-title">Asset creation</h2>
+                    <p>The biggest obstacle was assets. Posy was meant to offer me a small break in the day — something I could chip away at without it becoming a slog. Creating 3D models through tools like Meshy would have introduced a blocker early on when I knew the mechanics needed the most attention. Pixel art turned out to be the obvious fit. Cosy, cute and pixel art go hand in hand, and working at that scale kept the whole thing moving.</p>
+                    <p>Joinable assets — hedges, fences, walls — are generated in code. Everything else is built through a custom workbench: I describe an asset (a small wooden shed with clay tiles, say) and Claude generates it. I can then edit the colours, dimensions, windows, height, and roof angle before publishing it into the game.</p>
+                </section>
+
+                <section class="reveal">
+                    <h2 class="section-title">Sharing your garden</h2>
+                    <p>You can export your garden as a plain PNG or as a postcard. Shareability was always a big part of the idea — I hoped people would enjoy their gardens enough to post them. Still in development.</p>
+                </section>
+
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-time-wrapper">
+                <p class="footer-time">
+                    <span id="local-time">--:--</span>, <span id="local-weather">--°C</span> in Gateshead, England
+                </p>
+            </div>
+            <p class="footer-tagline">Good wine and good design</p>
+        </footer>
+    </div>
+
+<script src="../script.js"></script>
+</body>
+</html>
