@@ -736,6 +736,26 @@ function init() {
         window._discoSetOn = v => { on = v; };
     })();
 
+    /* =========================================
+       11. Sticky Breadcrumb + Page Fade
+       ========================================= */
+    (function initStickyBreadcrumb() {
+        const bc = document.querySelector('.breadcrumbs');
+        if (!bc) return;
+
+        const fade = document.createElement('div');
+        fade.className = 'page-fade';
+        document.body.prepend(fade);
+
+        const sentinel = document.createElement('div');
+        bc.parentNode.insertBefore(sentinel, bc);
+
+        new IntersectionObserver(
+            ([entry]) => document.body.classList.toggle('breadcrumb-is-sticky', !entry.isIntersecting),
+            { rootMargin: '-24px 0px 0px 0px', threshold: 0 }
+        ).observe(sentinel);
+    })();
+
 } // end init
 
 if (document.readyState === 'loading') {
