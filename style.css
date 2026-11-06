@@ -18,8 +18,8 @@
     --text-16: 15px;
     --text-14: 0.875rem;
     --text-12: 0.75rem;
-    /* Mathematically perfect 24px line height (1.5 * 16px) */
-    --lh-base: 1.625rem;        
+    /* 24px line height — 1.6× 15px body text */
+    --lh-base: 24px;        
     
     /* Layout */
     --container-width: 640px;
