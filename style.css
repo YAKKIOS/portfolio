@@ -98,7 +98,7 @@
 }
 
 html {
-    font-size: 15px;
+    font-size: 16px;
     font-family: 'Inter', sans-serif;
     color: var(--text-body);
     background-color: var(--bg);
@@ -111,7 +111,7 @@ html {
     overflow-x: hidden; /* Prevent any absolutely-positioned element causing horizontal scroll */
 }
 
-body { font-size: var(--text-16); }
+body { font-size: 15px; }
 
 .name,
 .section-title,
