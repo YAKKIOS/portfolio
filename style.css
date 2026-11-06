@@ -15,7 +15,7 @@
     /* Strict 3-tier Font Size System (16px base) */
     --text-24: 1.5rem;
     --text-18: 1.125rem;
-    --text-16: 1rem;
+    --text-16: 15px;
     --text-14: 0.875rem;
     --text-12: 0.75rem;
     /* Mathematically perfect 24px line height (1.5 * 16px) */
