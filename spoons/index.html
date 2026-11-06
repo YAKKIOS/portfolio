@@ -14,11 +14,12 @@
 </head>
 <body>
     <div class="container">
-                    <nav class="breadcrumbs" aria-label="Breadcrumb">
-                <a href="/" class="inline-link">Home</a>
-                <span class="material-symbols-rounded separator">chevron_right</span>
-                <span class="current" aria-current="page">Spoons Tracker</span>
-            </nav>
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="/" class="inline-link">Home</a>
+            <span class="material-symbols-rounded separator">chevron_right</span>
+            <span class="current" aria-current="page">Spoons Tracker</span>
+        </nav>
+
         <header class="case-study-header">
             <h1 class="case-study-title">Spoons Tracker</h1>
             <p class="case-study-description">Tracking my visits to the UK's most notorious pub chain</p>
@@ -30,48 +31,38 @@
                 <h2 class="section-title">What is Wetherspoons?</h2>
                 <p>'Spoons' is short for Wetherspoons, a pub chain in the UK. Why would I make such an effort to highlight my visits to a chain of pubs? Well, if you're from the UK you would know how much of a cultural and political talking point it is. Whilst they are known for cheap pints and cheap food, they also attract colourful characters and are generally known for not being the best presented pubs.</p>
 
-                <section>
-                    <h2 class="section-title">Stats</h2>
+                <h2 class="section-title">Stats</h2>
 
-                    <div class="spoons-stats-grid">
-
-                        <div class="spoons-stat">
-                            <span class="spoons-stat-value" id="stat-total-visits">—</span>
-                            <span class="spoons-stat-label">Total visits</span>
-                        </div>
-
-                        <div class="spoons-stat">
-                            <span class="spoons-stat-value" id="stat-total-hours">—</span>
-                            <span class="spoons-stat-label">Total time spent</span>
-                        </div>
-
-                        <div class="spoons-stat">
-                            <span class="spoons-stat-value" id="stat-avg-duration">—</span>
-                            <span class="spoons-stat-label">Avg visit duration</span>
-                        </div>
-
-                        <div class="spoons-stat">
-                            <span class="spoons-stat-value" id="stat-longest">—</span>
-                            <span class="spoons-stat-label">Longest visit</span>
-                        </div>
-
+                <div class="spoons-stats-grid">
+                    <div class="spoons-stat">
+                        <span class="spoons-stat-value" id="stat-total-visits">—</span>
+                        <span class="spoons-stat-label">Total visits</span>
                     </div>
-                </section>
-
-                <section>
-                    <h2 class="section-title">Leaderboard</h2>
-                    <div id="leaderboard">
-                        <p class="spoons-empty">Loading...</p>
+                    <div class="spoons-stat">
+                        <span class="spoons-stat-value" id="stat-total-hours">—</span>
+                        <span class="spoons-stat-label">Total time spent</span>
                     </div>
-                </section>
+                    <div class="spoons-stat">
+                        <span class="spoons-stat-value" id="stat-avg-duration">—</span>
+                        <span class="spoons-stat-label">Avg visit duration</span>
+                    </div>
+                    <div class="spoons-stat">
+                        <span class="spoons-stat-value" id="stat-longest">—</span>
+                        <span class="spoons-stat-label">Longest visit</span>
+                    </div>
+                </div>
 
-                <section class="reveal">
-                    <h2 class="section-title">How it works</h2>
-                    <p>I have an iOS Shortcut on my phone. I tap it when I arrive, enter the pub name, and it sends a JSON file to a Supabase table with the location and check-in time. It also tracks my longitude and latitude… but that's for later.</p>
-                    <p>I tap the shortcut again when I leave and it marks the checkout time. My GitHub Pages site polls Supabase directly from the browser. That then gets reflected in my status that I'm at the pub automatically.</p>
-                    <h2 class="section-title">Next steps</h2>
-                    <p>I will be using a 3rd party platform to take my longitude and latitude from Supabase and cross reference that to Wetherspoons pubs. That will then get added to the table without the need for my input.</p>
-                </section>
+                <h2 class="section-title">Leaderboard</h2>
+                <div id="leaderboard">
+                    <p class="spoons-empty">Loading...</p>
+                </div>
+
+                <h2 class="section-title">How it works</h2>
+                <p>I have an iOS Shortcut on my phone. I tap it when I arrive, enter the pub name, and it sends a JSON file to a Supabase table with the location and check-in time. It also tracks my longitude and latitude… but that's for later.</p>
+                <p>I tap the shortcut again when I leave and it marks the checkout time. My GitHub Pages site polls Supabase directly from the browser. That then gets reflected in my status that I'm at the pub automatically.</p>
+
+                <h2 class="section-title">Next steps</h2>
+                <p>I will be using a 3rd party platform to take my longitude and latitude from Supabase and cross reference that to Wetherspoons pubs. That will then get added to the table without the need for my input.</p>
 
             </article>
         </main>
