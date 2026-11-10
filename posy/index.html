@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch{}</script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEFJ35C3CN"></script>
     <script>
@@ -15,8 +16,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" href="/assets/images/about/favicon.png" type="image/png">
     <meta property="og:image" content="https://jackjohnson.fyi/assets/images/shared/margarita.webp">
@@ -28,11 +28,12 @@
 </head>
 <body>
     <div class="container">
-                    <nav class="breadcrumbs" aria-label="Breadcrumb">
-                <a href="/" class="inline-link">Home</a>
-                <span class="material-symbols-rounded separator">chevron_right</span>
-                <span class="current" aria-current="page">Posy</span>
-            </nav>
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="/" class="inline-link">Home</a>
+            <span class="material-symbols-rounded separator">chevron_right</span>
+            <span class="current" aria-current="page">Posy</span>
+        </nav>
+
         <header class="case-study-header">
             <h1 class="case-study-title">Posy</h1>
             <p class="case-study-description">A pixel-art garden you can grow in your browser</p>
@@ -42,9 +43,8 @@
             <article class="case-study-content">
 
                 <p>Posy is still in early development.</p>
-                <p>Gardening is a love of mine, but for most of the British season it’s not exactly fun in freezing rain. So I decided to build something that captures those warm spring and summer days spent in the garden. Posy is a small 3D garden on a floating plot of land. You can place plants, vegetables, ponds, hedges, fences, and a whole host of other items to build your own little space.</p>
+                <p>Gardening is a love of mine, but for most of the British season it's not exactly fun in freezing rain. So I decided to build something that captures those warm spring and summer days spent in the garden. Posy is a small 3D garden on a floating plot of land. You can place plants, vegetables, ponds, hedges, fences, and a whole host of other items to build your own little space.</p>
                 <p>Cosy games are a crowded market, but I wanted a reason to dabble in game creation, and this felt like the right excuse.</p>
-                
 
                 <div class="case-study-image">
                     <video src="../assets/images/projects/Posy/posy-intro.mp4" autoplay loop muted playsinline></video>
@@ -59,7 +59,6 @@
 
                 <p>Joinable assets like hedges, fences, walls are all generated in code. All of the other assets are built through a custom 'workbench'. I describe an asset (ie a small wooden shed with clay tiles) and Claude generates it for me. I can then edit the colours, dimensions, windows, height, and roof angle before publishing it into the game.</p>
 
-                
                 <div class="case-study-image">
                     <img src="../assets/images/projects/Posy/posy-02.webp" class="lightbox-trigger" alt="Posy garden" loading="lazy">
                 </div>
