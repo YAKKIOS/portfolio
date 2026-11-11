@@ -84,7 +84,7 @@
     <li>Lightweight tool providing quick eligibility results to customers.
 </li>
     <li>A chance to align with Ofgem's objective of increasing awareness and uptake in PSR registrations.</li>
-    <li>2507 interactions within a week of launch.</li>
+    <li>Around 2,500 people used the checker in its first week, but use dropped off sharply, with under 3,000 in the first two months.</li>
 </ul>
 
 
@@ -108,6 +108,8 @@
 
 <p>National Grid's current PSR form wasn't helping. It was vague about who actually qualified, and that vagueness was contributing to eligible customers choosing not to apply.</p>
 
+                   <p>With the over 65 population up 52% since 2013/14, getting this right matters more every year.<sup class="footnote-ref"><a href="#fn:3" id="fnref:3">3</a></sup></p>
+
 <figure class="case-study-figure">
 
 <div class="case-study-image">
@@ -118,22 +120,6 @@
     
 </figure>
 
-
-
-                <p class="section-eyebrow">Demographic Shift</p>
-                <h3 class="section-title">Designing for a rapidly aging population</h3>
-                <p>
-                    The older population in England is getting larger. In the last 40 years, the number of people aged 65 and over has increased by over 3.5 million (a 52% increase).<sup class="footnote-ref"><a href="#fn:3" id="fnref:3">3</a></sup>
-</p>
-                <p>
-                    In the 10 years since 2013/14, the estimated number of disabled people has increased by 4.9 million (+41%).<sup class="footnote-ref"><a href="#fn:4" id="fnref:4">4</a></sup>
-</p>
-
-                <p>
-                    These statistics show with an ever ageing population, and disability prevalence rising, it's important to provide the correct support to those who need it.  
-
- 
-</p>
 
                 <hr class="section-break">
 
@@ -150,9 +136,15 @@
 
 <p>Rather than presenting every option at once, I reorganised the flow into a metaphorical funnel. The tool leads with broad and generalist questions first (age, life circumstances), because these cast the widest net and would provide most people with the fastest answer. Medical needs came next, then communication needs and lastly temporary needs. The idea was simple, lead with options most likely to apply and work inward from there.</p>
 
+                   <figure class="case-study-figure">
+
 <div class="case-study-image">
         <img src="../../assets/images/projects/NGED/psr-02.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
     </div>
+
+                       <figcaption class="image-caption">Questions run from broad (age, circumstances) to specific (medical, communication).</figcaption>
+</figure>
+
 
 <p>A customer may well have 5 options apply to them but this tool was designed to supply them with an answer fastest by selecting the first option that applies. The more detailed form can capture those other health needs later in the process.</p>
 
@@ -170,16 +162,23 @@
         <img src="../../assets/images/projects/NGED/psr-03.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
     </div>
     
-    <figcaption class="image-caption">Previous iteration showing unsure sitting amongst the other options</figcaption>
+    <figcaption class="image-caption">Version 1: ‘Unsure’ sat among the answers.</figcaption>
     
 </figure>
 
 <p>However, "unsure" sitting amongst the health conditions felt like it didn't truly fit. It was essentially a help option dressed up as a choice, and I didn't want somebody to feel they have to be unsure about one specific category.</p>
 
 <p>I chose to move "unsure" out of the options entirely and, instead, made it a permanent help link anchored at the bottom. This way it was always visible, and never in the way of the other PSR options.</p> 
-<div class="case-study-image">
+
+                   <figure class="case-study-figure">
+
+                   <div class="case-study-image">
         <img src="../../assets/images/projects/NGED/psr-04.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
     </div>
+                              <figcaption class="image-caption">Version 2: ‘Unsure’ moved to a help link</figcaption>
+
+                          </figure>
+
 
 <p>This decision also simplified the back-end logic. Reducing the decision tree by 50%. That was because selecting unsure created a split in the decision tree where the system had to understand if the user moving on has flagged unsure at any point which would eventually lead them to a 'you may be eligible' screen.</p>
 
@@ -195,8 +194,7 @@
     </div>
 
 <p>
-    To validate the UX, I ran sessions with colleagues from across the business, specifically including those who were already on a PSR themselves. Their feedback was incredibly consistent and helped us quickly pinpoint the main friction points while saving significant time and budget.
-</p>
+    To validate the UX, I ran 6 internal sessions with colleagues, including 2 who are current PSR customers. All 6 sessions raised the same three points: Ambiguous wording for 'None of the abpve', they missed the in-line tips and the unsure help link.</p>
 
 <ul class="case-study-list">
     <li>Many participants completely missed the "unsure" help provider.</li>
@@ -221,7 +219,7 @@
     
 </figure>
 
-<p>One big change was removing the 'unsure' question from every page. Having it visible right from the start created uncertainty. People weren't sure whether to exit via that link before they'd progressed through all the options. We wanted them to go through the entire flow first, leaving 'unsure' as a last resort at the very end. If they click 'no' at that final stage, then we know for sure they aren't eligible.</p>
+<p>One big change was removing the 'unsure' question from every page. Having it visible right from the start created uncertainty. People weren't sure whether to exit via that link before they'd progressed through all the options. We wanted them to go through the entire flow first, leaving 'unsure' as a last resort at the very end. If they click 'no' at that final stage, the answers indicate they aren't eligible.</p>
                 
 <figure class="case-study-figure">
 
@@ -229,12 +227,12 @@
         <img src="../../assets/images/projects/NGED/psr-07.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
     </div>
     
-    <figcaption class="image-caption">Unsure instead became a precursor to the 'you aren't eligible' result</figcaption>
+    <figcaption class="image-caption">Version 3: Unsure became the final step before a “not eligible” result</figcaption>
     
 </figure>
 
     <p class="section-eyebrow">Engineering Alignment</p>
-    <h3 class="section-title">Deploying in pre-production to test live system architecture</h3>
+    <h3 class="section-title">Testing on pre-production</h3>
 
 <p>
     While we reused a significant amount of existing components, the new flow required some custom elements and styling. We built and deployed the tool in a pre-prod environment. It gave us a direct understanding of exactly what backend or front-end changes were required to align our new flow with National Grid's existing architecture before pushing to production.
@@ -253,7 +251,7 @@
                 <hr class="section-break">
 
                     <p class="section-eyebrow">Interface &amp; Tone</p>
-                    <h3 class="section-title">Shifting the color palette to reduce user anxiety</h3>
+                    <h3 class="section-title">Shifting the colour palette to reduce user anxiety</h3>
 <p>The users coming to this tool may be managing chronic illness, caring for a vulnerable relative, or dealing with a difficult diagnosis. The design had to feel approachable without feeling patronising.</p>
 
 <div class="case-study-image">
@@ -271,7 +269,7 @@
 
                     <p class="section-eyebrow">Content Design</p>
                     <h3 class="section-title">Setting clear expectations for self-service and carers</h3>
-<p>I worked closely with our content designer to manage expectations clearly. National Grid flagged early that customers often assumed PSR offered more than it does, and with high anticipated usage, that expectation needed addressing in the content.</p>
+<p>National Grid flagged early that customers often assumed PSR offered more than it does, and with high anticipated usage, that expectation needed addressing in the content.</p>
 
 <p>The tool reflected the PSR form of being able to submit a claim for yourself or on behalf of somebody else. The language reflected that to ensure there was no confusion about the journey taken by customers.</p>
 
@@ -284,7 +282,7 @@
 
                     <p class="section-eyebrow">Growth &amp; Impact</p>
                     <h3 class="section-title">Getting users to an eligibility answer within two clicks</h3>
-<p>Most users can find out if they are eligible for PSR within two clicks. Given the old experience required completing an entire form before finding out if you even qualified. This felt like a meaningful shift towards Ofgems goal of getting more customers, who are eligible, onto the register. </p>
+<p>Many eligible customers can get an answer in two clicks. Given the old experience required completing an entire form before finding out if you even qualified. This felt like a meaningful shift towards Ofgem's goal of getting more customers, who are eligible, onto the register. </p>
 
 <p>We defined success for this tool by looking beyond a 'you are eligible' result. <span class="rn-highlight">The ultimate goal was driving those users to the PSR application</span>. Due to system tracking limitations, we cannot directly attribute final application completions to this tool. Instead, we established increased traffic to the main application form as our primary success metric. We are actively tracking this data to see if reducing that up front complexity translates to a long term increase in sign ups.</p>
 
