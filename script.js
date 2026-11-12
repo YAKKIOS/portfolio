@@ -275,7 +275,6 @@ function init() {
        6. Random Lore
        ========================================= */
     const loreFacts = [
-        "I was once choked in a pub by a Newcastle fan after mistaking me for a Sunderland supporter (I'm a Chelsea fan) 😵",
         "I ran the Great North Run half marathon in 2023 in under 2 hours 🏃",
         "I met and spoke with Jeremy Corbyn (British politician) on a street in Newcastle after bottomless brunch with my wife 🥂",
         "I used to play with tiger cubs as a child because my best friends dad was the head tiger keeper at Port Lympne zoo in Kent 🐅",
@@ -290,11 +289,9 @@ function init() {
         "I once drank an entire pitcher of raspberry mojito and I turned red like a scene from Charlie and the Chocolate Factory 😳",
         "I was pushed away by royal security whilst petting a horse at York races because Queen Camilla also wanted to pet the horse 😅",
         "I applied to audition for Peaky Blinders season 3 - I did not receive a callback 😅",
-         "I was once photographed by an abscure Chinese fashion magazine in London for their on the street fashion segment 👖",
-         "I dyed my hair blonde for Euro 2020 using Holly Willoughby's Garnier hair dye 💇🏻‍♂️",
-           "I have a margarita tattooed on my ankle 🍸",
-        
-        
+        "I was once photographed by an abscure Chinese fashion magazine in London for their on the street fashion segment 👖",
+        "I dyed my hair blonde for Euro 2020 using Holly Willoughby's Garnier hair dye 💇🏻‍♂️",
+        "I have a margarita tattooed on my ankle 🍸",
     ];
 
     const loreBtn  = document.getElementById('lore-btn');
