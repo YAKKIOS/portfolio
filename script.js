@@ -215,7 +215,7 @@ function init() {
     const _initRoughNotation = () => {
         if (typeof RoughNotation === 'undefined') return;
         const styles = [
-            { selector: '.rn-highlight', type: 'highlight', color: '#F4B3F8', strokeWidth: 1.5 },
+            { selector: '.rn-highlight', type: 'underline', color: '#157CFF', strokeWidth: 2 },
             { selector: '.rn-underline', type: 'underline', color: '#157CFF', strokeWidth: 2 },
             { selector: '.rn-circle',    type: 'circle',    color: '#FF9800', strokeWidth: 1.5 },
             { selector: '.rn-box',       type: 'box',       color: '#F44336', strokeWidth: 1.5 }
