@@ -537,6 +537,26 @@ function init() {
     });
 
     /* =========================================
+       11. Sticky Breadcrumb + Page Fade
+       ========================================= */
+    (function initStickyBreadcrumb() {
+        const bc = document.querySelector('.breadcrumbs');
+        if (!bc) return;
+
+        const fade = document.createElement('div');
+        fade.className = 'page-fade';
+        document.body.prepend(fade);
+
+        const sentinel = document.createElement('div');
+        bc.parentNode.insertBefore(sentinel, bc);
+
+        new IntersectionObserver(
+            ([entry]) => document.body.classList.toggle('breadcrumb-is-sticky', !entry.isIntersecting),
+            { rootMargin: '-24px 0px 0px 0px', threshold: 0 }
+        ).observe(sentinel);
+    })();
+
+    /* =========================================
        12. Settings FAB (Theme + Disco)
        ========================================= */
     (function initSettings() {
@@ -734,24 +754,21 @@ function init() {
     })();
 
     /* =========================================
-       11. Sticky Breadcrumb + Page Fade
+       14. Footnote Navigation
+       Overrides native anchor jump with a fixed-offset scroll so footnotes
+       at the bottom of the page land correctly regardless of remaining scroll room.
        ========================================= */
-    (function initStickyBreadcrumb() {
-        const bc = document.querySelector('.breadcrumbs');
-        if (!bc) return;
-
-        const fade = document.createElement('div');
-        fade.className = 'page-fade';
-        document.body.prepend(fade);
-
-        const sentinel = document.createElement('div');
-        bc.parentNode.insertBefore(sentinel, bc);
-
-        new IntersectionObserver(
-            ([entry]) => document.body.classList.toggle('breadcrumb-is-sticky', !entry.isIntersecting),
-            { rootMargin: '-24px 0px 0px 0px', threshold: 0 }
-        ).observe(sentinel);
-    })();
+    document.querySelectorAll('a[href^="#fn"], a[href^="#fnref"]').forEach(link => {
+        link.addEventListener('click', e => {
+            const target = document.getElementById(link.getAttribute('href').slice(1));
+            if (!target) return;
+            e.preventDefault();
+            window.scrollTo({
+                top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - 80),
+                behavior: 'smooth'
+            });
+        });
+    });
 
 } // end init
 
