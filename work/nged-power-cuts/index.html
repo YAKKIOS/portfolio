@@ -48,12 +48,18 @@
             align-items: flex-end;
             gap: 72px;
             overflow: hidden;
-            width: 100%;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(48rem, calc(100vw - 3rem));
             margin-bottom: 2rem;
-               position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(48rem, calc(100vw - 3rem));
+        }
+        @media (max-width: 600px) {
+            .pc-phones-wrap {
+                left: auto;
+                transform: none;
+                width: 100%;
+            }
         }
         @media (max-width: 680px) {
             .pc-phones-wrap {
@@ -206,11 +212,20 @@
             <p>Ofgem's customer survey showed people were struggling to find the postcode search on National Grid's power cut website. I redesigned the Power Cuts homepage to fix that. We cut a lot of content, reordered the page and built new panels in the updated brand style. It went live in October 2026.</p>
 
             <h3 class="section-title">The team</h3>
-            <ul class="case-study-list icon-list">
-                <li><span class="material-symbols-rounded list-icon">design_services</span>Lead Product Designer: Me</li>
-                <li><span class="material-symbols-rounded list-icon">checklist</span>Content Designer</li>
-                <li><span class="material-symbols-rounded list-icon">code</span>Developer</li>
-            </ul>
+            <div class="case-study-meta">
+                <div class="meta-col">
+                    <span class="meta-label">My role</span>
+                    <span class="meta-value">Lead designer</span>
+                </div>
+                <div class="meta-col">
+                    <span class="meta-label">Team</span>
+                    <span class="meta-value">Content designer<br>Developer</span>
+                </div>
+                <div class="meta-col">
+                    <span class="meta-label">Year</span>
+                    <span class="meta-value">2026</span>
+                </div>
+            </div>
 
             <p class="section-eyebrow">The Problem</p>
             <h3 class="section-title">The search was there, people just didn't know it was for them</h3>
