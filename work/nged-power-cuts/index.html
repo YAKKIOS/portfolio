@@ -48,6 +48,7 @@
             align-items: flex-end;
             gap: 72px;
             overflow: hidden;
+            width: 100%;
             margin-bottom: 2rem;
         }
         @media (max-width: 680px) {
@@ -72,7 +73,6 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 20px 50px rgba(0,0,0,.45);
         }
         .pc-status-bar {
             flex: none;
@@ -155,49 +155,48 @@
     </header>
 
     <main>
-
-        <!-- ── Scrolling phones hero ─────────────────────────── -->
-        <div class="pc-phones-wrap">
-            <figure class="pc-phone">
-                <div class="pc-phone-screen">
-                    <div class="pc-status-bar" aria-hidden="true">
-                        <span>9:41</span>
-                        <span class="pc-status-icons">
-                            <svg width="16" height="11" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
-                            <svg width="14" height="11" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0z"/><path d="M3.4 6.8a6.5 6.5 0 0 1 9.2 0l-1.4 1.4a4.5 4.5 0 0 0-6.4 0z"/><path d="M1.1 4.5a9.8 9.8 0 0 1 13.8 0l-1.4 1.4a7.8 7.8 0 0 0-11 0z"/></svg>
-                            <svg width="23" height="11" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#000" opacity=".4"/><rect x="2" y="2" width="19" height="8" rx="1.8"/><rect x="23.5" y="4" width="1.8" height="4" rx=".9" opacity=".4"/></svg>
-                        </span>
-                    </div>
-                    <div class="pc-viewport">
-                        <img class="pc-phone-img" id="pc-img-before"
-                             src="../../assets/images/projects/nged-pc-old.webp"
-                             alt="Old National Grid Power Cuts homepage, full page">
-                    </div>
-                </div>
-                <figcaption class="pc-label">Before</figcaption>
-            </figure>
-
-            <figure class="pc-phone">
-                <div class="pc-phone-screen">
-                    <div class="pc-status-bar" aria-hidden="true">
-                        <span>9:41</span>
-                        <span class="pc-status-icons">
-                            <svg width="16" height="11" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
-                            <svg width="14" height="11" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0z"/><path d="M3.4 6.8a6.5 6.5 0 0 1 9.2 0l-1.4 1.4a4.5 4.5 0 0 0-6.4 0z"/><path d="M1.1 4.5a9.8 9.8 0 0 1 13.8 0l-1.4 1.4a7.8 7.8 0 0 0-11 0z"/></svg>
-                            <svg width="23" height="11" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#000" opacity=".4"/><rect x="2" y="2" width="19" height="8" rx="1.8"/><rect x="23.5" y="4" width="1.8" height="4" rx=".9" opacity=".4"/></svg>
-                        </span>
-                    </div>
-                    <div class="pc-viewport">
-                        <img class="pc-phone-img" id="pc-img-after"
-                             src="../../assets/images/projects/nged-pc-new.webp"
-                             alt="New National Grid Power Cuts homepage, full page">
-                    </div>
-                </div>
-                <figcaption class="pc-label">After</figcaption>
-            </figure>
-        </div>
-
         <article class="case-study-content">
+
+            <!-- ── Scrolling phones hero — inside article to match image width ── -->
+            <div class="pc-phones-wrap">
+                <figure class="pc-phone">
+                    <div class="pc-phone-screen">
+                        <div class="pc-status-bar" aria-hidden="true">
+                            <span>9:41</span>
+                            <span class="pc-status-icons">
+                                <svg width="16" height="11" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                                <svg width="14" height="11" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0z"/><path d="M3.4 6.8a6.5 6.5 0 0 1 9.2 0l-1.4 1.4a4.5 4.5 0 0 0-6.4 0z"/><path d="M1.1 4.5a9.8 9.8 0 0 1 13.8 0l-1.4 1.4a7.8 7.8 0 0 0-11 0z"/></svg>
+                                <svg width="23" height="11" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#000" opacity=".4"/><rect x="2" y="2" width="19" height="8" rx="1.8"/><rect x="23.5" y="4" width="1.8" height="4" rx=".9" opacity=".4"/></svg>
+                            </span>
+                        </div>
+                        <div class="pc-viewport">
+                            <img class="pc-phone-img" id="pc-img-before"
+                                 src="../../assets/images/projects/nged-pc-old.webp"
+                                 alt="Old National Grid Power Cuts homepage, full page">
+                        </div>
+                    </div>
+                    <figcaption class="pc-label">Before</figcaption>
+                </figure>
+
+                <figure class="pc-phone">
+                    <div class="pc-phone-screen">
+                        <div class="pc-status-bar" aria-hidden="true">
+                            <span>9:41</span>
+                            <span class="pc-status-icons">
+                                <svg width="16" height="11" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                                <svg width="14" height="11" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0z"/><path d="M3.4 6.8a6.5 6.5 0 0 1 9.2 0l-1.4 1.4a4.5 4.5 0 0 0-6.4 0z"/><path d="M1.1 4.5a9.8 9.8 0 0 1 13.8 0l-1.4 1.4a7.8 7.8 0 0 0-11 0z"/></svg>
+                                <svg width="23" height="11" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#000" opacity=".4"/><rect x="2" y="2" width="19" height="8" rx="1.8"/><rect x="23.5" y="4" width="1.8" height="4" rx=".9" opacity=".4"/></svg>
+                            </span>
+                        </div>
+                        <div class="pc-viewport">
+                            <img class="pc-phone-img" id="pc-img-after"
+                                 src="../../assets/images/projects/nged-pc-new.webp"
+                                 alt="New National Grid Power Cuts homepage, full page">
+                        </div>
+                    </div>
+                    <figcaption class="pc-label">After</figcaption>
+                </figure>
+            </div>
 
             <h3 class="section-title">Don't have time to read it all?</h3>
             <p>Ofgem's customer survey showed people were struggling to find the postcode search on National Grid's power cut website. I redesigned the Power Cuts homepage to fix that. We cut a lot of content, reordered the page and built new panels in the updated brand style. It went live in October 2026.</p>
@@ -344,10 +343,10 @@
 <script>
 /* Scrolling phones — scoped to this page */
 (function () {
-    const SPEED    = 140;   /* px/s */
-    const HOLD_TOP = 1200;  /* ms pause at top */
-    const HOLD_END = 1600;  /* ms pause once both reach bottom */
-    const RETURN   = 1000;  /* ms ease back to top */
+    const SPEED    = 140;
+    const HOLD_TOP = 1200;
+    const HOLD_END = 1600;
+    const RETURN   = 1000;
 
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const imgs = [
