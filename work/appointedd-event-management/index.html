@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch{}</script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEFJ35C3CN"></script>
     <script>
@@ -86,9 +87,8 @@
                 </p>
 
 <ul class="case-study-list">
-    <li>We became a much bigger competitor and viable option to Eventbrite.</li>
-    <li><span class="rn-highlight">37%</span> of our target high-volume event clients, including Harrods and Charlotte Tilbury, adopted ticketing within the first month.<sup class="footnote-ref"><a href="#fn:1" id="fnref:1">1</a></sup></li>
-    <li>Enterprise clients including Harrods, Liberty London and Victoria's Secret had expressed eagerness of using the new features for all upcoming events.</li>
+    <li>We closed a key gap with Eventbrite. Clients could now run ticketed events and check-in without a separate tool.</li>
+    <li>Adopted by <span class="rn-highlight">37%</span> of target high-volume clients in the first month, including Harrods and Charlotte Tilbury.<sup class="footnote-ref"><a href="#fn:1" id="fnref:1">1</a></sup></li>
 </ul>
                 
                             <h3 class="section-title">The team</h3>
@@ -115,11 +115,11 @@
                 <p>
                     Appointedd is an enterprise online booking and scheduling platform. <a href="https://www.mva.org.uk/news/eventbrite-pricing-changes-and-a-look-at-alternative-event-platforms-autumn-2023" class="inline-link" target="_blank">In late 2023 Eventbrite removed the ability to host events for free</a>, which created a market gap. 
                     
-                    We wanted to capitalize on this shift by improving Appointedd's core event functionality to capture enterprise clients looking to move. 
+                    We wanted to capitalise on this shift by improving Appointedd's core event functionality to capture enterprise clients looking to move. 
 
                 </p>
-                
-                
+
+                <p>I ran a competitor review and SWOT analysis across Eventbrite, AllEvents, Ticketmaster, Luma and many more. We already had enterprise reliability, but we lacked simplicity. We set out to make it as lightweight as Luma.</p>
 
                 <p class="section-eyebrow">Operational Friction</p>
                 <h3 class="section-title">Why manual tracking led to bad event data</h3>
@@ -147,34 +147,14 @@
 
                 <hr class="section-break">
 
-                <p class="section-eyebrow">Team Leadership</p>
-                <h3 class="section-title">Setting early expectations for a remote-first squad</h3>
-
-                <p>
-                    We started the project as a newly formed and fully remote team. This led to communication not being where it needed to be. It was my first project at Appointedd, and the lead developer's first time leading on the dev side. To fix this, <span class="rn-underline">I facilitated a mini ways of working workshop</span> to help set some expectations early on. We established a regular meeting cadence. These meetings included ticket refinements, open design feedback and daily check-ins. 
-                </p>
-
-                <p class="section-eyebrow">Market Research</p>
-                <h3 class="section-title">Finding our sweet spot between enterprise and lightweight tools</h3>
-
-                <p>
-                    I analysed the leading competitors in the sector including Eventbrite, AllEvents, Ticketmaster, Luma and many more. Enterprise clients needed data reliability and platform robustness, but delivered with the effortless simplicity of newer tools like Luma. That became our design north star for everything that followed.
-                </p>
-
-                <figure class="case-study-figure">
-
-<div class="case-study-image">
-        <img src="../../assets/images/projects/Appointedd/appointedd-graph.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
-    </div>
-    
-    <figcaption class="image-caption">Mapping the gap between clunky enterprise giants and lightweight social tools to identify our 'sweet spot'.</figcaption>
-    
-</figure>
-
                 <p class="section-eyebrow">User Discovery</p>
                 <h3 class="section-title">Testing my hardware assumptions through client interviews</h3>
 
-                <p>I held moderated user interviews with companies across retail, luxury, and finance including AND Agency, Society Matters, Holyrood Communications and White and Mackay to map their workflows and frustrations. User interviews confirmed that zero onboarding was a non negotiable. While I initially assumed scanning would happen via a laptop and webcam, interviews revealed staff needed the flexibility to scan on any device, including tablets and personal phones. This insight made a browser based scanner the only viable solution. It ensured that anyone could be ready to scan in seconds using hardware already available, without the friction of a download or a complex setup.</p>
+                <p>I ran moderated interviews with event teams across retail, luxury and finance, including AND Agency and Victoria's Secret.</p>
+
+                   <p>Two points came out clearly. First, zero onboarding was non-negotiable. Whoever was on the door for an event had to be able to scan without training. Second, I'd assumed staff would scan on store laptops, since most retail teams have them. I learnt the person on the door could be anyone and using whatever device was to hand, often their own phone.
+</p>
+                <p>It was designed mobile-first using the phone's camera as the scanner, and no setup beyond logging in.</p>
 
                 <p class="section-eyebrow">Interaction Design</p>
                 <h3 class="section-title">Borrowing familiar mental models from travel tickets</h3>
@@ -201,16 +181,30 @@
         <img src="../../assets/images/projects/Appointedd/appointedd-04.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
     </div>
     
-    <figcaption class="image-caption">Appointedd's new mobile forward ticket that borrows mental models from train tickets.</figcaption>
+    <figcaption class="image-caption">Appointedd's new mobile-first ticket that borrows mental models from train tickets.</figcaption>
     
 </figure>
+
+<figure class="case-study-figure">
+
+                       <p>The confirmation email includes the ticket as an attachment and lets attendees add the event to their phone's calendar in one tap.</p>
+
+    
+    <div class="case-study-image">
+        <img src="../../assets/images/projects/Appointedd/appointedd-09.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
+    </div>
+    
+    <figcaption class="image-caption">iOS add to calendar functionality.</figcaption>
+    
+</figure>
+
 
                 <p class="section-eyebrow">Release Strategy</p>
                 <h3 class="section-title">Slotting functionality into the live product to ship faster</h3>
 
 
                 <p>
-                    The new ticketing functionality slotted directly into the existing event creation journey. This approach meant we could ship the feature and get it into users hands immediately while the larger event management overhaul was still being built in the background.
+                    Rather than wait for the wider events overhaul, we added ticketing to the current event creation flow. This consisted of a toggle to turn tickets on for an event, and a link in the menu to open the scanner. This got it out to users months earlier.
                 </p>
 
 
@@ -224,6 +218,12 @@
     
 </figure>
 
+                   
+                                   <p>
+                    The downside was that Appointedd is a legacy platform, and the rest of the app wasn't mobile responsive. The scanner itself worked well on a phone, but organisers had to zoom in to reach the menu link to it. Improving the platform's responsiveness was a much bigger job than this release, but the scanner was one of the first features built mobile-first.
+
+                </p>
+
 <figure class="case-study-figure">
     
     <div class="case-study-image">
@@ -234,15 +234,6 @@
     
 </figure>
 
-                <hr class="section-break">
-
-                    <h3 class="section-title">Introducing digital ticket and scanning</h3>
-
-                <p>
-                    Clients could now issue automatic tickets directly via Appointedd. With unique QR-coded tickets, attendees can be quickly verified and checked in, helping to reduce wait times and keep entry smooth and efficient.
-
-
-                </p>
 
 
 <figure class="case-study-figure">
@@ -334,39 +325,13 @@
     
 </figure>
 
-
-
-                <p class="section-eyebrow">Detail &amp; Craft</p>
-                <h3 class="section-title">Eliminating traveler confusion with device calendar syncs</h3>
-
-                <p>
-                    I maintained the platform's standard Europe/London (GMT) formatting for the digital tickets. This kept the ticket information consistent with confirmation emails. 
-                </p>
-
-                <p>
-                    Those emails also feature an "Add To Calendar" integration which adds the event to your device calendar and handles the automatic local time conversion. This approach provided a static source of truth on the ticket without losing the convenience of local scheduling for attendees. 
-                </p>
-
-<figure class="case-study-figure">
-    
-    <div class="case-study-image">
-        <img src="../../assets/images/projects/Appointedd/appointedd-09.webp" class="lightbox-trigger" alt="UI Design" loading="lazy">
-    </div>
-    
-    <figcaption class="image-caption">iOS add to calendar functionality.</figcaption>
-    
-</figure>
-
-
-
                 <hr class="section-break">
-
 
                 <p class="section-eyebrow">Product Scoping</p>
                 <h3 class="section-title">Deferring nice-to-haves to secure the launch date</h3>
 
                 <p>
-                    To ensure we stayed on track for the launch date, I consciously deferred features like custom ticket design and digital wallet integration to Phase 2, trading 'nice to have' features for project quickness.
+                    As a team, we moved Apple and Google Wallet support and ticket customisation (brand colours and logos) to Phase 2 to ensure we met the launch date.
                 </p>
 
 <figure class="case-study-figure">
@@ -379,16 +344,12 @@
     
 </figure>
 
-<h3 class="section-title">Afterword</h3>
-
-<p>This project was just one part of a bigger overhaul for events on the Appointedd platform. I was unfortunately made redundant before we could get Phase 2 out the door, but I'm glad I oversaw the first release of the ticketing and scanning tools. Functionality that is still live and helping customers today.</p>
-
                 <p class="section-eyebrow">Retrospective</p>
                 <h3 class="section-title">What I'd have done differently</h3>
 
-                <p>One thing that would have really benefitted the scanner is a context-based prompt. A simple toast or timed modal that surfaced when an event was live, with a quick button taking you straight to it. It's something I didn't think about until after we shipped.</p>
+                <p>I left before Phase 2 shipped but the ticketing release is still live and in use today.</p>
 
-                <p>As the designs show, much of the platform wasn't mobile responsive at this point, including the header. That left organisers on their phones having to zoom in just to tap the scanner link. Not ideal when you have a queue forming at the door.</p>
+                <p>One thing that would have really benefitted the scanner is a context-based prompt. A simple toast or timed modal that surfaced when an event was live, with a quick button taking you straight to it.</p>
 
                 <p>I also think we should have pushed harder for Apple and Google Wallet in the first release. For most customers buying tickets on mobile it's probably an expected feature, not a nice to have.</p>
 

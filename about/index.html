@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch{}</script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEFJ35C3CN"></script>
     <script>
@@ -25,8 +26,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" href="/assets/images/about/favicon.png" type="image/png">
     <meta property="og:image" content="https://jackjohnson.fyi/assets/images/shared/margarita.webp">
@@ -87,7 +87,7 @@
     <ul class="experience-list">
         <li class="experience-item">
             <div class="experience-details">
-                <span class="experience-company"><a href="https://www.enigma-interactive.co.uk/intro" class="inline-link"><img src="../assets/images/shared/enigma_logo.svg" class="company-icon" alt="">Enigma Interactive</a></span>
+                <span class="experience-company"><a href="https://www.enigma-interactive.co.uk/intro" class="inline-link">Enigma Interactive</a></span>
                 <span class="experience-role">Lead User Experience Designer</span>
             </div>
             <span class="experience-date">2025 - Present</span>
@@ -95,7 +95,7 @@
 
         <li class="experience-item">
             <div class="experience-details">
-                <span class="experience-company"><a href="https://www.appointedd.com/" class="inline-link"><img src="../assets/images/shared/appointedd_logo.svg" class="company-icon" alt="">Appointedd</a></span>
+                <span class="experience-company"><a href="https://www.appointedd.com/" class="inline-link">Appointedd</a></span>
                 <span class="experience-role">Senior Product Designer</span>
             </div>
             <span class="experience-date">2024 - 2025</span>
@@ -103,7 +103,7 @@
 
         <li class="experience-item">
             <div class="experience-details">
-                <span class="experience-company"><a href="https://www.oak.com/" class="inline-link"><img src="../assets/images/shared/oak_engage_logo.svg" class="company-icon" alt="">Oak Engage</a></span>
+                <span class="experience-company"><a href="https://www.oak.com/" class="inline-link">Oak Engage</a></span>
                 <span class="experience-role">Lead Product Designer</span>
             </div>
             <span class="experience-date">2020 - 2024</span>
@@ -111,7 +111,7 @@
         
         <li class="experience-item">
             <div class="experience-details">
-                <span class="experience-company"><a href="https://www.komododigital.co.uk/" class="inline-link"><img src="../assets/images/shared/komodo_logo.svg" class="company-icon" alt="">Komodo Digital</a></span>
+                <span class="experience-company"><a href="https://www.komododigital.co.uk/" class="inline-link">Komodo Digital</a></span>
                 <span class="experience-role">Digital Designer</span>
             </div>
             <span class="experience-date">2017 - 2019</span>
@@ -172,8 +172,11 @@
             <span class="contact-email">hello@jackjohnson.fyi</span>
             <div class="contact-footer">
                 <button class="btn btn-copy-email" id="copy-email-btn">
-                    <span class="material-symbols-rounded" id="copy-icon">content_copy</span>
-                    <span id="copy-label">Copy email</span>
+                    <span class="copy-icon-wrap">
+                        <span class="material-symbols-rounded copy-icon copy-icon--copy">content_copy</span>
+                        <span class="material-symbols-rounded copy-icon copy-icon--check">check</span>
+                    </span>
+                    Copy email
                 </button>
             </div>
         </div>
@@ -219,7 +222,6 @@
 
 <div id="picture-tooltip" class="picture-tooltip" aria-hidden="true"></div>
 
-<script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
 <script src="../script.js"></script>
 </body>
 </html>

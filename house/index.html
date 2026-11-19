@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch{}</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEFJ35C3CN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GEFJ35C3CN');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Render | Jack Johnson</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="/assets/images/about/favicon.png" type="image/png">
+    <meta property="og:image" content="https://jackjohnson.fyi/assets/images/shared/margarita.webp">
+    <meta property="og:title" content="House Render | Jack Johnson">
+    <meta property="og:description" content="A 3D tool to map problem areas and track fixes on my 1940s house.">
+    <meta property="og:url" content="https://jackjohnson.fyi/house/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://jackjohnson.fyi/assets/images/shared/margarita.webp">
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <a href="/" class="inline-link">Home</a>
+            <span class="material-symbols-rounded separator">chevron_right</span>
+            <span class="current" aria-current="page">House Render</span>
+        </nav>
+
+        <header class="case-study-header">
+            <h1 class="case-study-title">House Render</h1>
+            <p class="case-study-description">A 3D render of my house</p>
+        </header>
+
+        <main>
+            <article class="case-study-content">
+
+                <p>I recently bought a 1940s house that came with a list of issues outlined in the homebuyer's report. I found the 80-page report incredibly difficult to digest. Sections also lacked visual context so I had to keep going back and forth to understand what they were referring to.</p>
+
+                <p>I built this 3D tool to map out the problem areas and track what we've fixed. The house is rendered in 3D so I can visually see where the problems lie. The problems, marked 1 to 3 with 3 being severe, are colour-coded to highlight the areas needing the most attention. When I click on an area of the house the problems are shown in the side menu with the exact wording from the buyer's report.</p>
+
+                <figure class="case-study-figure">
+                    <div class="case-study-image">
+                        <video src="../assets/images/projects/house-model.mp4" autoplay loop muted playsinline></video>
+                    </div>
+                    <figcaption class="image-caption">Data shown is placeholder</figcaption>
+                </figure>
+
+                <p>The tool also acts as a general to-do list. I can add my own issues like restoring the door frames. It works on mobile so I'm able to take pictures of the tasks I add. I added Claude's API so it can analyse the task and any attached imagery and offer a step-by-step guide including warnings such as lead paint.</p>
+
+                <p>Whilst I pretty much doxxed myself by posting this publicly on LinkedIn and Twitter, I knew the site needed to be secure and only accessible to me. Login uses my email with verification codes. I can invite anyone else who may need it.</p>
+
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-time-wrapper">
+                <p class="footer-time">
+                    <span id="local-time">--:--</span>, <span id="local-weather">--°C</span> in Gateshead, England
+                </p>
+            </div>
+            <p class="footer-tagline">Good wine and good design</p>
+        </footer>
+    </div>
+
+<script src="../script.js"></script>
+
+<div class="lightbox-modal" aria-hidden="true">
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous image"><span class="material-symbols-rounded">chevron_left</span></button>
+    <img class="lightbox-content" src="" alt="Expanded view">
+    <button class="lightbox-nav lightbox-next" aria-label="Next image"><span class="material-symbols-rounded">chevron_right</span></button>
+</div>
+
+</body>
+</html>

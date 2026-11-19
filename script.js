@@ -215,7 +215,7 @@ function init() {
     const _initRoughNotation = () => {
         if (typeof RoughNotation === 'undefined') return;
         const styles = [
-            { selector: '.rn-highlight', type: 'highlight', color: '#F4B3F8', strokeWidth: 1.5 },
+            { selector: '.rn-highlight', type: 'underline', color: '#157CFF', strokeWidth: 2 },
             { selector: '.rn-underline', type: 'underline', color: '#157CFF', strokeWidth: 2 },
             { selector: '.rn-circle',    type: 'circle',    color: '#FF9800', strokeWidth: 1.5 },
             { selector: '.rn-box',       type: 'box',       color: '#F44336', strokeWidth: 1.5 }
@@ -275,7 +275,6 @@ function init() {
        6. Random Lore
        ========================================= */
     const loreFacts = [
-        "I was once choked in a pub by a Newcastle fan after mistaking me for a Sunderland supporter (I'm a Chelsea fan) 😵",
         "I ran the Great North Run half marathon in 2023 in under 2 hours 🏃",
         "I met and spoke with Jeremy Corbyn (British politician) on a street in Newcastle after bottomless brunch with my wife 🥂",
         "I used to play with tiger cubs as a child because my best friends dad was the head tiger keeper at Port Lympne zoo in Kent 🐅",
@@ -290,11 +289,9 @@ function init() {
         "I once drank an entire pitcher of raspberry mojito and I turned red like a scene from Charlie and the Chocolate Factory 😳",
         "I was pushed away by royal security whilst petting a horse at York races because Queen Camilla also wanted to pet the horse 😅",
         "I applied to audition for Peaky Blinders season 3 - I did not receive a callback 😅",
-         "I was once photographed by an abscure Chinese fashion magazine in London for their on the street fashion segment 👖",
-         "I dyed my hair blonde for Euro 2020 using Holly Willoughby's Garnier hair dye 💇🏻‍♂️",
-           "I have a margarita tattooed on my ankle 🍸",
-        
-        
+        "I was once photographed by an abscure Chinese fashion magazine in London for their on the street fashion segment 👖",
+        "I dyed my hair blonde for Euro 2020 using Holly Willoughby's Garnier hair dye 💇🏻‍♂️",
+        "I have a margarita tattooed on my ankle 🍸",
     ];
 
     const loreBtn  = document.getElementById('lore-btn');
@@ -540,6 +537,26 @@ function init() {
     });
 
     /* =========================================
+       11. Sticky Breadcrumb + Page Fade
+       ========================================= */
+    (function initStickyBreadcrumb() {
+        const bc = document.querySelector('.breadcrumbs');
+        if (!bc) return;
+
+        const fade = document.createElement('div');
+        fade.className = 'page-fade';
+        document.body.prepend(fade);
+
+        const sentinel = document.createElement('div');
+        bc.parentNode.insertBefore(sentinel, bc);
+
+        new IntersectionObserver(
+            ([entry]) => document.body.classList.toggle('breadcrumb-is-sticky', !entry.isIntersecting),
+            { rootMargin: '-24px 0px 0px 0px', threshold: 0 }
+        ).observe(sentinel);
+    })();
+
+    /* =========================================
        12. Settings FAB (Theme + Disco)
        ========================================= */
     (function initSettings() {
@@ -737,24 +754,21 @@ function init() {
     })();
 
     /* =========================================
-       11. Sticky Breadcrumb + Page Fade
+       14. Footnote Navigation
+       Overrides native anchor jump with a fixed-offset scroll so footnotes
+       at the bottom of the page land correctly regardless of remaining scroll room.
        ========================================= */
-    (function initStickyBreadcrumb() {
-        const bc = document.querySelector('.breadcrumbs');
-        if (!bc) return;
-
-        const fade = document.createElement('div');
-        fade.className = 'page-fade';
-        document.body.prepend(fade);
-
-        const sentinel = document.createElement('div');
-        bc.parentNode.insertBefore(sentinel, bc);
-
-        new IntersectionObserver(
-            ([entry]) => document.body.classList.toggle('breadcrumb-is-sticky', !entry.isIntersecting),
-            { rootMargin: '-24px 0px 0px 0px', threshold: 0 }
-        ).observe(sentinel);
-    })();
+    document.querySelectorAll('a[href^="#fn"], a[href^="#fnref"]').forEach(link => {
+        link.addEventListener('click', e => {
+            const target = document.getElementById(link.getAttribute('href').slice(1));
+            if (!target) return;
+            e.preventDefault();
+            window.scrollTo({
+                top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - 80),
+                behavior: 'smooth'
+            });
+        });
+    });
 
 } // end init
 
