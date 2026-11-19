@@ -866,7 +866,8 @@ blockquote p {
 /* =========================================
    Case Study Lists
    ========================================= */
-.case-study-content ul.case-study-list {
+.case-study-content ul.case-study-list,
+.case-study-content ol.case-study-list {
     list-style: none;
     padding-left: 0;
     margin-bottom: 1.5rem;
@@ -878,19 +879,19 @@ blockquote p {
     font-size: var(--text-16);
     margin-bottom: 0.75rem;
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 2rem;
     line-height: var(--lh-base);
     counter-increment: cs-list;
 }
 
-.case-study-content ul.case-study-list li::before {
-    content: '';
+.case-study-content ul.case-study-list li::before,
+.case-study-content ol.case-study-list li::before {
+    content: counter(cs-list);
     position: absolute;
-    left: 0.25rem;
-    top: 0.65rem;
-    width: 6px;
-    height: 6px;
-    background-color: var(--dotted-grey);
+    left: 0;
+    top: 2px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--bg);
     border: 1px solid var(--border-color);
