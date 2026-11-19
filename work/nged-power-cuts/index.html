@@ -46,15 +46,15 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 56px;
+            gap: 48px;
             overflow: hidden;
             margin-bottom: 2rem;
         }
-        @media (max-width: 600px) {
+        @media (max-width: 680px) {
             .pc-phones-wrap {
                 flex-direction: column;
                 align-items: center;
-                gap: 32px;
+                gap: 28px;
                 padding: 32px 20px;
             }
         }
@@ -65,10 +65,10 @@
             gap: 20px;
         }
         .pc-phone-screen {
-            width: 260px;
-            height: 538px;
+            width: 300px;
+            height: 620px;
             background: #fff;
-            border-radius: 38px;
+            border-radius: 40px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -111,7 +111,7 @@
         /* ── Side-by-side image pair ──────────────────────────── */
         .image-pair {
             display: flex;
-            gap: 12px;
+            gap: 16px;
         }
         .image-pair img {
             flex: 1;
@@ -121,7 +121,10 @@
             border-radius: 8px;
             cursor: zoom-in;
         }
-        @media (max-width: 540px) {
+        .image-pair + figcaption.image-caption {
+            margin-top: 12px;
+        }
+        @media (max-width: 680px) {
             .image-pair {
                 flex-direction: column;
             }
@@ -154,7 +157,7 @@
     <main>
 
         <!-- ── Scrolling phones hero ─────────────────────────── -->
-        <!-- Images needed: nged-pc-before.webp + nged-pc-after.webp (clean full-page screenshots, no annotations) -->
+        <!-- Images: nged-pc-old.webp + nged-pc-new.webp (clean full-page screenshots, no annotations) -->
         <div class="pc-phones-wrap">
             <figure class="pc-phone">
                 <div class="pc-phone-screen">
@@ -168,7 +171,7 @@
                     </div>
                     <div class="pc-viewport">
                         <img class="pc-phone-img" id="pc-img-before"
-                             src="../../assets/images/projects/nged-pc-before.webp"
+                             src="../../assets/images/projects/nged-pc-old.webp"
                              alt="Old National Grid Power Cuts homepage, full page">
                     </div>
                 </div>
@@ -187,7 +190,7 @@
                     </div>
                     <div class="pc-viewport">
                         <img class="pc-phone-img" id="pc-img-after"
-                             src="../../assets/images/projects/nged-pc-after.webp"
+                             src="../../assets/images/projects/nged-pc-new.webp"
                              alt="New National Grid Power Cuts homepage, full page">
                     </div>
                 </div>
@@ -282,7 +285,7 @@
                     <img src="../../assets/images/projects/nged-pc-05.webp" class="lightbox-trigger" alt="Normal page mode" loading="lazy">
                     <img src="../../assets/images/projects/nged-pc-06.webp" class="lightbox-trigger" alt="Storm mode" loading="lazy">
                 </div>
-                <figcaption class="image-caption">Normal and storm mode.</figcaption>
+                <figcaption class="image-caption">Storm modes.</figcaption>
             </figure>
 
             <hr class="section-break">
