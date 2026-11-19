@@ -1,0 +1,417 @@
+<!--
+
+       _            __     _       __                              ____      _ 
+      (_)___ ______/ /__  (_)___  / /_  ____  _________  ____    / __/_  __(_)
+     / / __ `/ ___/ //_/ / / __ \/ __ \/ __ \/ ___/ __ \/ __ \  / /_/ / / / /
+    / / /_/ / /__/ ,<   / / /_/ / / / / / / (__  ) /_/ / / / / / __/ /_/ / / 
+ __/ /\__,_/\___/_/|_|_/ /\____/_/ /_/_/ /_/____/\____/_/ /_(_)_/  \__, /_/  
+/___/               /___/                                          /____/     
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch{}</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GEFJ35C3CN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GEFJ35C3CN');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Grid | Jack Johnson</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" href="/assets/images/about/favicon.png" type="image/png">
+    <meta property="og:image" content="https://jackjohnson.fyi/assets/images/margarita.webp">
+    <meta property="og:title" content="Jack Johnson">
+    <meta property="og:description" content="Eight years designing digital products.">
+    <meta property="og:url" content="https://jackjohnson.fyi">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://jackjohnson.fyi/assets/images/margarita.webp">
+
+    <style>
+        /* ── Scrolling phones component ───────────────────────── */
+        .pc-phones-wrap {
+            background: #00148C;
+            border-radius: 12px;
+            padding: 40px 32px 32px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 72px;
+            overflow: hidden;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(48rem, calc(100vw - 3rem));
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 600px) {
+            .pc-phones-wrap {
+                left: auto;
+                transform: none;
+                width: 100%;
+            }
+        }
+        @media (max-width: 680px) {
+            .pc-phones-wrap {
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+                padding: 28px 20px;
+            }
+        }
+        .pc-phone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        .pc-phone-screen {
+            width: 200px;
+            height: 414px;
+            background: #fff;
+            border-radius: 32px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .pc-status-bar {
+            flex: none;
+            height: 40px;
+            padding: 0 22px 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: -.01em;
+            color: #000;
+            background: #fff;
+            font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        }
+        .pc-status-bar svg { display: block; }
+        .pc-status-icons { display: flex; gap: 5px; align-items: center; }
+        .pc-viewport {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+        .pc-phone-img {
+            width: 100%;
+            display: block;
+            will-change: transform;
+        }
+        .pc-label {
+            color: rgba(255,255,255,.85);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .02em;
+            font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* ── Side-by-side image pair ──────────────────────────── */
+        .image-pair {
+            display: flex;
+            gap: 16px;
+        }
+        .image-pair img {
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            cursor: zoom-in;
+        }
+        .image-pair + figcaption.image-caption {
+            margin-top: 12px;
+        }
+        @media (max-width: 680px) {
+            .image-pair {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="mobile-progress-bar" aria-hidden="true"></div>
+
+<div class="progress-scrollbar" aria-hidden="true">
+    <div class="progress-track">
+        <div class="progress-fill"></div>
+    </div>
+</div>
+
+<div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="../../" class="inline-link">Home</a>
+        <span class="material-symbols-rounded separator">chevron_right</span>
+        <a href="../../work/" class="inline-link">Work</a>
+        <span class="material-symbols-rounded separator">chevron_right</span>
+        <span class="current" aria-current="page">National Grid: Power Cuts</span>
+    </nav>
+
+    <header class="case-study-header">
+        <h1 class="case-study-title">National Grid: Power Cuts</h1>
+        <p class="case-study-description">Helping customers find the power cut search</p>
+    </header>
+
+    <main>
+        <article class="case-study-content">
+
+            <!-- ── Scrolling phones hero — inside article to match image width ── -->
+            <div class="pc-phones-wrap">
+                <figure class="pc-phone">
+                    <div class="pc-phone-screen">
+                        <div class="pc-status-bar" aria-hidden="true">
+                            <span>9:41</span>
+                            <span class="pc-status-icons">
+                                <svg width="16" height="11" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                                <svg width="14" height="11" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0z"/><path d="M3.4 6.8a6.5 6.5 0 0 1 9.2 0l-1.4 1.4a4.5 4.5 0 0 0-6.4 0z"/><path d="M1.1 4.5a9.8 9.8 0 0 1 13.8 0l-1.4 1.4a7.8 7.8 0 0 0-11 0z"/></svg>
+                                <svg width="23" height="11" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#000" opacity=".4"/><rect x="2" y="2" width="19" height="8" rx="1.8"/><rect x="23.5" y="4" width="1.8" height="4" rx=".9" opacity=".4"/></svg>
+                            </span>
+                        </div>
+                        <div class="pc-viewport">
+                            <img class="pc-phone-img" id="pc-img-before"
+                                 src="../../assets/images/projects/nged-pc-old.webp"
+                                 alt="Old National Grid Power Cuts homepage, full page">
+                        </div>
+                    </div>
+                    <figcaption class="pc-label">Before</figcaption>
+                </figure>
+
+                <figure class="pc-phone">
+                    <div class="pc-phone-screen">
+                        <div class="pc-status-bar" aria-hidden="true">
+                            <span>9:41</span>
+                            <span class="pc-status-icons">
+                                <svg width="16" height="11" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                                <svg width="14" height="11" viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0z"/><path d="M3.4 6.8a6.5 6.5 0 0 1 9.2 0l-1.4 1.4a4.5 4.5 0 0 0-6.4 0z"/><path d="M1.1 4.5a9.8 9.8 0 0 1 13.8 0l-1.4 1.4a7.8 7.8 0 0 0-11 0z"/></svg>
+                                <svg width="23" height="11" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#000" opacity=".4"/><rect x="2" y="2" width="19" height="8" rx="1.8"/><rect x="23.5" y="4" width="1.8" height="4" rx=".9" opacity=".4"/></svg>
+                            </span>
+                        </div>
+                        <div class="pc-viewport">
+                            <img class="pc-phone-img" id="pc-img-after"
+                                 src="../../assets/images/projects/nged-pc-new.webp"
+                                 alt="New National Grid Power Cuts homepage, full page">
+                        </div>
+                    </div>
+                    <figcaption class="pc-label">After</figcaption>
+                </figure>
+            </div>
+
+            <h3 class="section-title">Don't have time to read it all?</h3>
+            <p>Ofgem's customer survey showed people were struggling to find the postcode search on National Grid's power cut website. I redesigned the Power Cuts homepage to fix that. We cut a lot of content, reordered the page and built new panels in the updated brand style. It went live in October 2026.</p>
+
+            <h3 class="section-title">The team</h3>
+            <ul class="case-study-list icon-list">
+                <li><span class="material-symbols-rounded list-icon">design_services</span>Lead Product Designer: Me</li>
+                <li><span class="material-symbols-rounded list-icon">checklist</span>Content Designer</li>
+                <li><span class="material-symbols-rounded list-icon">code</span>Developer</li>
+            </ul>
+
+            <p class="section-eyebrow">The Problem</p>
+            <h3 class="section-title">The search was there, people just didn't know it was for them</h3>
+            <p>The page gets over 2 million visits a year, mostly on mobile. Ofgem's customer satisfaction survey (BMCS), which comes with financial rewards and penalties, flagged that people couldn't find the search.<sup class="footnote-ref"><a href="#fn:1" id="fnref:1">1</a></sup> In customer workshops, people also told us there was too much 'waffle'.</p>
+            <p>The problem boiled down to 2 main issues:</p>
+            <ol class="case-study-list">
+                <li>The search was labelled "Track your power cut", which only speaks to people who've already reported one.</li>
+                <li>The very next thing on the page told customers to phone.</li>
+            </ol>
+
+            <figure class="case-study-figure">
+                <div class="case-study-image">
+                    <img src="../../assets/images/projects/nged-pc-01.webp" class="lightbox-trigger" alt="The old National Grid Power Cuts page on mobile, showing the misleading label and phone prompt" loading="lazy">
+                </div>
+                <figcaption class="image-caption">The old page on mobile.</figcaption>
+            </figure>
+
+            <p>The project goals were to make the search easier to find, cut the content back and apply the new brand guidelines, all within the existing CMS.</p>
+
+            <p class="section-eyebrow">Search Panel Redesign</p>
+            <h3 class="section-title">One panel for everything</h3>
+            <p>I redesigned the search panel to make it clearly the main action on the page. It now sits in its own white card, separate from the rest of the hero, and the label says it's for finding, tracking and reporting a power cut, not just tracking one. I also added a proper Search button.</p>
+            <p>We removed the "call us" section that came straight after the hero, so the page no longer points people to the phone first. The 105 number is still there as a small badge inside the panel.</p>
+
+            <figure class="case-study-figure">
+                <div class="case-study-image">
+                    <img src="../../assets/images/projects/nged-pc-hero.webp" class="lightbox-trigger" alt="The new National Grid Power Cuts page on mobile, showing the redesigned search panel" loading="lazy">
+                </div>
+                <figcaption class="image-caption">The new page on mobile.</figcaption>
+            </figure>
+
+            <p class="section-eyebrow">Accessibility &amp; Language</p>
+            <h3 class="section-title">Accessible and bilingual by design</h3>
+            <p>The new design also had to work with Recite Me, the accessibility toolbar behind the "Speak or translate" button, which lets people have the page read aloud, translate it, or change the font and colours. And because NGED covers South Wales, it had to work in Welsh too, where text often runs longer than in English.</p>
+
+            <figure class="case-study-figure">
+                <div class="case-study-image">
+                    <img src="../../assets/images/projects/nged-pc-02.webp" class="lightbox-trigger" alt="The Power Cuts page with Recite Me accessibility toolbar active" loading="lazy">
+                </div>
+            </figure>
+
+            <p class="section-eyebrow">Page Structure</p>
+            <h3 class="section-title">Putting the important things first</h3>
+            <p>I reordered the rest of the page by priority. The Priority Services Register and storm updates moved up. Lower-priority content moved down or was removed.</p>
+
+            <figure class="case-study-figure">
+                <div class="case-study-image">
+                    <img src="../../assets/images/projects/nged-pc-03.webp" class="lightbox-trigger" alt="The full page before and after as thin strips side by side, labelled moved up, moved down and removed" loading="lazy">
+                </div>
+                <figcaption class="image-caption">The full page, before and after.</figcaption>
+            </figure>
+
+            <p class="section-eyebrow">Content Reduction</p>
+            <h3 class="section-title">Cutting it back</h3>
+            <p>We cut the copy down to what people need during a power cut. After that we kept asking what else could go. Early versions kept the panel images on mobile, but they weren't adding anything, so we took them out.</p>
+
+            <p class="section-eyebrow">Working within the CMS</p>
+            <h3 class="section-title">New panels built for reuse</h3>
+            <p>The Power Cuts pages had square corners, but the incident pages had moved to rounded corners and a different gradient. The incident page panels were built only for incidents, so we made new ones in the updated style. Those panels and styles can now be reused across the Power Cuts site. They have already been adopted by planned power cuts.</p>
+
+            <figure class="case-study-figure">
+                <div class="case-study-image">
+                    <img src="../../assets/images/projects/nged-pc-04.webp" class="lightbox-trigger" alt="Old and new page panels side by side" loading="lazy">
+                </div>
+                <figcaption class="image-caption">Old and new panels. Our developer also added a "gradient stop" panel so editors can choose where the background gradient ends.</figcaption>
+            </figure>
+
+            <p class="section-eyebrow">Storm Mode</p>
+            <h3 class="section-title">Storm mode</h3>
+            <p>In severe weather the page switches to storm mode, with a different header colour, changes to content and a live feed of updates. Those at NGED with the correct CMS permissions can toggle the page mode easily and amend any content as required. Most recently Storm Austen and Boelo triggered that mode change.</p>
+
+            <figure class="case-study-figure">
+                <div class="image-pair">
+                    <img src="../../assets/images/projects/nged-pc-05.webp" class="lightbox-trigger" alt="Normal page mode" loading="lazy">
+                    <img src="../../assets/images/projects/nged-pc-06.webp" class="lightbox-trigger" alt="Storm mode" loading="lazy">
+                </div>
+                <figcaption class="image-caption">Storm modes.</figcaption>
+            </figure>
+
+            <hr class="section-break">
+
+            <p class="section-eyebrow">The Reporting Form</p>
+            <h3 class="section-title">The reporting form</h3>
+            <p>I also worked on the power cut reporting form, which is where people go next. Another designer created the UI. I designed the flow around it and tested it with the public.</p>
+
+            <figure class="case-study-figure">
+                <div class="case-study-image">
+                    <img src="../../assets/images/projects/nged-pc-07.webp" class="lightbox-trigger" alt="Testing the reporting form with the public in Newcastle" loading="lazy">
+                </div>
+                <figcaption class="image-caption">Testing the form in Newcastle.</figcaption>
+            </figure>
+
+            <p>Since launch I've pushed back on changes that would make the form longer for everyone just to suit a few edge cases:</p>
+            <ul class="case-study-list">
+                <li>Help text for international numbers, instead of a country-code dropdown for everyone</li>
+                <li>A separate route for out-of-area addresses, instead of redesigning the main form</li>
+            </ul>
+            <p>The new form saves 30 seconds per report. In its first month a storm brought 13,000 reports through it, which works out at roughly 100 hours saved.</p>
+
+            <p class="section-eyebrow">What's Next</p>
+            <h3 class="section-title">What's next</h3>
+            <p>We'll compare online and phone reports, and the BMCS feedback, against the year before launch.</p>
+
+            <p class="section-eyebrow">Retrospective</p>
+            <h3 class="section-title">What I'd do differently</h3>
+            <p>I'd test the new panel with customers before launch, and agree how we'd measure the shift to online reporting from the start.</p>
+
+        </article>
+
+        <div class="footnotes">
+            <hr class="footnotes-sep">
+            <ol>
+                <li id="fn:1" class="footnote-item">
+                    Ofgem, <a href="https://www.ofgem.gov.uk/sites/default/files/2025-04/RIIO-2%20Electricity%20Distribution%20Annual%20Report%202023%20to%202024.pdf" class="inline-link" target="_blank" rel="noopener noreferrer">RIIO-2 Electricity Distribution Annual Report 2023 to 2024</a> <a href="#fnref:1" class="footnote-back-link">↩</a>
+                </li>
+            </ol>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-time-wrapper">
+            <p class="footer-time">
+                <span id="local-time">--:--</span>, <span id="local-weather">--°C</span> in Gateshead, England
+            </p>
+        </div>
+        <p class="footer-tagline">Good wine and good design</p>
+    </footer>
+</div>
+
+<script src="https://unpkg.com/rough-notation/lib/rough-notation.iife.js"></script>
+<script src="../../script.js"></script>
+
+<script>
+/* Scrolling phones — scoped to this page */
+(function () {
+    const SPEED    = 140;
+    const HOLD_TOP = 1200;
+    const HOLD_END = 1600;
+    const RETURN   = 1000;
+
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const imgs = [
+        document.getElementById('pc-img-before'),
+        document.getElementById('pc-img-after')
+    ];
+
+    function maxScroll(img) {
+        if (!img) return 0;
+        const vp = img.closest('.pc-viewport');
+        return vp ? Math.max(0, img.getBoundingClientRect().height - vp.clientHeight) : 0;
+    }
+
+    const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+    function start() {
+        if (reduceMotion) return;
+        const dists = imgs.map(maxScroll);
+        const scrollMs = Math.max(...dists) / SPEED * 1000;
+        const cycle = HOLD_TOP + scrollMs + HOLD_END + RETURN;
+        const t0 = performance.now();
+
+        function frame(now) {
+            const t = (now - t0) % cycle;
+            imgs.forEach((img, i) => {
+                if (!img) return;
+                let y;
+                if (t < HOLD_TOP) {
+                    y = 0;
+                } else if (t < HOLD_TOP + scrollMs + HOLD_END) {
+                    y = Math.min((t - HOLD_TOP) / 1000 * SPEED, dists[i]);
+                } else {
+                    const p = (t - HOLD_TOP - scrollMs - HOLD_END) / RETURN;
+                    y = dists[i] * (1 - ease(p));
+                }
+                img.style.transform = `translateY(${-y}px)`;
+            });
+            requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+    }
+
+    Promise.all(
+        imgs.map(img => img && (img.complete
+            ? Promise.resolve()
+            : new Promise(r => { img.onload = r; img.onerror = r; })))
+    ).then(start);
+})();
+</script>
+
+<div class="lightbox-modal" aria-hidden="true">
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous image"><span class="material-symbols-rounded">chevron_left</span></button>
+    <img class="lightbox-content" src="" alt="Expanded view">
+    <button class="lightbox-nav lightbox-next" aria-label="Next image"><span class="material-symbols-rounded">chevron_right</span></button>
+</div>
+
+</body>
+</html>
