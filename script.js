@@ -272,47 +272,6 @@ function init() {
     }
 
     /* =========================================
-       6. Random Lore
-       ========================================= */
-    const loreFacts = [
-        "I ran the Great North Run half marathon in 2023 in under 2 hours 🏃",
-        "I met and spoke with Jeremy Corbyn (British politician) on a street in Newcastle after bottomless brunch with my wife 🥂",
-        "I used to play with tiger cubs as a child because my best friends dad was the head tiger keeper at Port Lympne zoo in Kent 🐅",
-        "I used to play competitive division 1 volleyball for Hartlepool 🏐",
-        "I was featured in a news article for The Chronicle over a pedestrian crossing because I've almost been hit there 4 times 🚗",
-        "My dad was the mayor of Hawkinge from 2023-2024, which is a small town in Kent 🤴🏻",
-        "I used to work as a car mechanic for fun whilst I studied at college 🔧",
-        "I was featured in Sketch's best designs of 2022 ✏️",
-        "I was an avid horse rider until my sister was thrown from her horse and shattered her shoulder which made me give up the sport 🐎",
-        "I started an Onlyfans page for margaritas called OnlyMargs but it has since been deprecated 🍸",
-        "Whilst at Komodo Digital I accidentally had the office Christmas cards printed upside down and it's still talked about to this day 🎄",
-        "I once drank an entire pitcher of raspberry mojito and I turned red like a scene from Charlie and the Chocolate Factory 😳",
-        "I was pushed away by royal security whilst petting a horse at York races because Queen Camilla also wanted to pet the horse 😅",
-        "I applied to audition for Peaky Blinders season 3 - I did not receive a callback 😅",
-        "I was once photographed by an abscure Chinese fashion magazine in London for their on the street fashion segment 👖",
-        "I dyed my hair blonde for Euro 2020 using Holly Willoughby's Garnier hair dye 💇🏻‍♂️",
-        "I have a margarita tattooed on my ankle 🍸",
-    ];
-
-    const loreBtn  = document.getElementById('lore-btn');
-    const loreBody = document.getElementById('lore-body');
-    const loreText = document.getElementById('lore-text');
-
-    if (loreBtn) {
-        let currentLoreIndex = 0;
-        loreBtn.addEventListener('click', () => {
-            loreBody.classList.add('is-rolling');
-            setTimeout(() => {
-                let next = currentLoreIndex;
-                while (next === currentLoreIndex) next = Math.floor(Math.random() * loreFacts.length);
-                currentLoreIndex = next;
-                loreText.textContent = loreFacts[currentLoreIndex];
-            }, 200);
-            setTimeout(() => loreBody.classList.remove('is-rolling'), 400);
-        });
-    }
-
-    /* =========================================
        7. Live Weather (Gateshead, UK)
        ========================================= */
     const weatherDisplay = document.querySelector('#local-weather');
@@ -332,67 +291,102 @@ function init() {
     }
 
     /* =========================================
-       8. About Page Picture Tooltips
+       8. About Page Picture Stack — Drag & Mobile Tap
        ========================================= */
     const stackedPics = document.querySelectorAll('.stacked-pic');
-    const tooltip = document.getElementById('picture-tooltip');
 
-    if (stackedPics.length > 0 && tooltip) {
-        const positionTooltip = (pic) => {
-            const rect = pic.getBoundingClientRect();
-            tooltip.style.top  = `${rect.top - 16}px`;
-            tooltip.style.left = `${rect.left + rect.width / 2}px`;
-        };
-
+    if (stackedPics.length > 0) {
         const canHover = window.matchMedia('(hover: hover)');
 
-        let activePic = null;
-        let showTimer = null;
-        let hideTimer = null;
-        let swapTimer = null;
+        // Desktop: photos can be dragged anywhere on the page and stay where they're dropped
+        const DRAG_THRESHOLD = 4; // px of movement before a press counts as a drag rather than a click
+        let topZ = 10;
+        let suppressClick = false;
 
-        // Guards against synthetic mouseenter fired by mobile browsers on tap
+        // Stops the lightbox opening when a drag ends over the photo
+        window.addEventListener('click', (e) => {
+            if (!suppressClick) return;
+            suppressClick = false;
+            e.stopPropagation();
+            e.preventDefault();
+        }, true);
+
+        // Move/up are tracked on window rather than via pointer capture — capture retargets the
+        // click to the .stacked-pic wrapper, so the lightbox listener on the inner <img> never fired
+        let drag = null; // { pic, startX, startY, baseDx, baseDy, startRect, moved }
+
         stackedPics.forEach(pic => {
-            pic.addEventListener('mouseenter', () => {
-                if (!canHover.matches) return;
-                activePic = pic;
-                clearTimeout(hideTimer);
-                clearTimeout(showTimer);
+            pic.addEventListener('dragstart', e => e.preventDefault());
 
-                if (tooltip.classList.contains('is-visible')) {
-                    // Already visible — fade+blur out, update, fade+blur back in
-                    clearTimeout(swapTimer);
-                    tooltip.classList.add('is-swapping');
-                    swapTimer = setTimeout(() => {
-                        if (pic !== activePic) return;
-                        tooltip.textContent = pic.getAttribute('data-tooltip');
-                        positionTooltip(pic);
-                        tooltip.classList.remove('is-swapping');
-                    }, 110);
-                } else {
-                    // First reveal — animate in after short delay
-                    showTimer = setTimeout(() => {
-                        if (pic !== activePic) return;
-                        tooltip.textContent = pic.getAttribute('data-tooltip');
-                        positionTooltip(pic);
-                        tooltip.classList.add('is-visible');
-                    }, 250);
-                }
-            });
-            pic.addEventListener('mouseleave', () => {
-                if (!canHover.matches) return;
-                clearTimeout(showTimer);
-                clearTimeout(swapTimer);
-                tooltip.classList.remove('is-swapping');
-                // Short grace period — cancelled if mouse enters another card immediately
-                hideTimer = setTimeout(() => {
-                    tooltip.classList.remove('is-visible');
-                }, 80);
+            pic.addEventListener('pointerdown', (e) => {
+                if (e.pointerType === 'touch' || e.button !== 0) return;
+                e.preventDefault(); // no text selection / native image drag
+
+                drag = {
+                    pic,
+                    startX: e.pageX,
+                    startY: e.pageY,
+                    baseDx: parseFloat(pic.style.getPropertyValue('--dx')) || 0,
+                    baseDy: parseFloat(pic.style.getPropertyValue('--dy')) || 0,
+                    startRect: pic.getBoundingClientRect(),
+                    moved: false,
+                };
+
+                pic.style.zIndex = ++topZ;
+                pic.classList.add('is-dragging');
             });
         });
 
+        window.addEventListener('pointermove', (e) => {
+            if (!drag) return;
+            let dx = e.pageX - drag.startX;
+            let dy = e.pageY - drag.startY;
+            if (!drag.moved && Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
+            drag.moved = true;
+
+            // Keep the photo inside the page: viewport width horizontally, document height vertically
+            const docEl = document.documentElement;
+            const r = drag.startRect;
+            const top = r.top + window.scrollY;
+            dx = Math.min(Math.max(dx, -r.left), docEl.clientWidth - r.right);
+            dy = Math.min(Math.max(dy, -top), docEl.scrollHeight - (top + r.height));
+
+            drag.pic.style.setProperty('--dx', `${drag.baseDx + dx}px`);
+            drag.pic.style.setProperty('--dy', `${drag.baseDy + dy}px`);
+        });
+
+        const endDrag = () => {
+            if (!drag) return;
+            drag.pic.classList.remove('is-dragging');
+            if (drag.moved) {
+                suppressClick = true;
+                setTimeout(() => { suppressClick = false; }, 0);
+            }
+            drag = null;
+        };
+        window.addEventListener('pointerup', endDrag);
+        window.addEventListener('pointercancel', endDrag);
+
         // Mobile: proximity tap — picks card whose centre is closest to the touch point
         const pictureStack = document.querySelector('.picture-stack');
+
+        // Entrance: photos start as a pile in the centre, then deal out into the fan from the middle
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (pictureStack && !reduceMotion && 'IntersectionObserver' in window) {
+            pictureStack.classList.add('is-pre-reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                if (!entries.some(entry => entry.isIntersecting)) return;
+                revealObserver.disconnect();
+                pictureStack.classList.add('is-revealing');
+                // Wait for the pile state to paint before releasing it, and for the page-enter fade
+                setTimeout(() => {
+                    requestAnimationFrame(() => pictureStack.classList.remove('is-pre-reveal'));
+                }, 250);
+                // Drop the staggered timings so hover/drag respond instantly afterwards
+                setTimeout(() => pictureStack.classList.remove('is-revealing'), 250 + 1200);
+            }, { threshold: 0.2 });
+            revealObserver.observe(pictureStack);
+        }
 
         if (pictureStack && openLightboxByTrigger && !canHover.matches) {
             let touchStartX, touchStartY;
@@ -420,9 +414,6 @@ function init() {
                 openLightboxByTrigger(img);
             }, { passive: false });
         }
-
-        // position:fixed tooltips don't track scroll
-        window.addEventListener('scroll', () => tooltip.classList.remove('is-visible'), { passive: true });
     }
 
     /* =========================================
